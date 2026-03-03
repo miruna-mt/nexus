@@ -1,54 +1,88 @@
 # Nexus
 
-**Multi-sector optimization engine in C++**  
+**Multi-problem optimization engine in C++**  
 Turn business problems into optimal decisions.
 
-Built for: FMCG 🛒 | Defense 🎯 | Energy ⚡ | Banking 💰 | Industrial 🏭
+Built on a **taxonomy of optimization problems** that transcend industries:
+📦 **Allocation** | 🗺️ **Routing** | 💰 **Portfolio** | 📊 **Inventory** | 📍 **Location**
 
 ---
 
-## 🚀 What is Nexus?
+## 🧠 What is Nexus?
 
-Nexus is a **C++ optimization framework** with a web interface that solves real-world resource allocation problems across multiple industries.  
-It abstracts the common mathematical core while adapting to sector-specific constraints.
+Nexus is a **C++ optimization framework** with a web interface that solves **real-world resource allocation problems** by recognizing that the same mathematical structures appear across industries.
+
+Instead of organizing by sector, Nexus organizes by **problem type**:
+- **Allocation**: assign scarce resources (FMCG, defense, cloud)
+- **Routing**: plan routes and schedules (logistics, defense, industrial)
+- **Portfolio**: select optimal combinations under risk (finance, energy, R&D)
+- **Inventory**: manage stock levels (FMCG, defense, energy)
+- **Location**: decide where to place facilities (logistics, energy, retail)
+
+Each problem type has a **core mathematical model**, and industries are just **instances** with different data.
+
+---
 
 ## ✨ Features
 
-- 🔧 **Generic core** – Optimization engine built with Google OR-Tools  
-- 🧩 **Pluggable sectors** – Add new industries easily  
-- 🌐 **Web interface** – User-friendly frontend (HTML/JS/CSS)  
-- 📊 **5 sectors included**: FMCG, Defense, Energy, Banking, Industrial  
+- 🔧 **Generic core** – Optimization engine built with Google OR-Tools
+- 🧩 **Problem-based taxonomy** – Same code, different data
+- 🌐 **Web interface** – User-friendly frontend (HTML/JS/CSS)
+- 📊 **5 problem types × multiple industries** = 10+ instances included
+- 🔄 **Easily extensible** – Add a new instance by creating a JSON file
 
-## 🛠️ Tech Stack
+---
 
-- **Backend**: C++17, Crow (web framework), OR-Tools (optimization), nlohmann/json  
-- **Frontend**: HTML, CSS, JavaScript (vanilla)  
-- **Build**: CMake + vcpkg  
+## 🚀 Quick Start
 
-## 📦 How to run (locally)
+```bash
+git clone https://github.com/miruna-mt/nexus.git
+cd nexus/backend && mkdir build && cd build
+cmake .. && make
+./nexus
+# Then open http://localhost:8080
 
-1. Clone the repo  
-2. Install dependencies (vcpkg + OR-Tools + Crow)  
-3. Build with CMake  
-4. Run the executable  
-5. Open `http://localhost:8080` in your browser  
+---
 
-> Detailed instructions coming soon.
+🛠️ Tech Stack
+Backend: C++17, Crow (web framework), OR-Tools (optimization), nlohmann/json
 
-## 📁 Project Structure
-nexus-mtrufin.com/
-├── backend/ # C++ source code
-│ ├── src/ # Core engine and sector models
-│ └── data/ # Sample JSON inputs for each sector
-├── frontend/ # Web interface (served by backend)
-└── docs/ # Documentation (GitHub Pages)
+Frontend: HTML, CSS, JavaScript (vanilla)
 
+Build: CMake + vcpkg
 
-## 📄 License
+---
 
+📁 Project Structure
+
+nexus/
+├── backend/
+│   ├── src/
+│   │   ├── core/               # Abstract optimization engine
+│   │   ├── problems/            # Problem taxonomy
+│   │   │   ├── allocation/      # Allocation models
+│   │   │   │   └── instances/   # FMCG, defense, cloud...
+│   │   │   ├── routing/         # Routing models
+│   │   │   │   └── instances/   # Logistics, patrol...
+│   │   │   ├── portfolio/       # Portfolio models
+│   │   │   │   └── instances/   # Finance, energy...
+│   │   │   ├── inventory/       # Inventory models
+│   │   │   │   └── instances/   # FMCG, defense...
+│   │   │   └── location/        # Location models
+│   │   │       └── instances/   # Warehouses, windfarms...
+│   │   └── data/                # JSON data for each instance
+│   └── build/
+├── frontend/                     # Web interface
+└── docs/                         # GitHub Pages documentation
+
+---
+
+📄 License
 MIT License – feel free to use, modify, and distribute.
 
-## 👤 Author
+---
 
-Built by Miruna Trufin – strategy consultant who codes.  
-Adding C++ to the toolkit to build better optimization tools.
+👤 Author
+Miruna Trufin – Built by a strategist who codes.
+
+
