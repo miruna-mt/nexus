@@ -1,10 +1,10 @@
-#ifndef ALLOCATION_MODEL_H
-#define ALLOCATION_MODEL_H
+#ifndef ASSIGNMENT_MODEL_H
+#define ASSIGNMENT_MODEL_H
 
 #include "core/Model.h"
 #include <nlohmann/json.hpp>
-#include <string>
 #include <vector>
+#include <string>
 
 using json = nlohmann::json;
 
@@ -30,29 +30,23 @@ struct Demanda {
     double unidades_por_dia;
 };
 
-class AllocationModel : public Model {
+class AssignmentModel : public Model {
 public:
-    AllocationModel() = default;
-    virtual ~AllocationModel() = default;
+    AssignmentModel() = default;
+    virtual ~AssignmentModel() = default;
 
-    // Cargar datos desde JSON
     bool loadData(const std::string& filename);
-    
-    // Implementaciones de Model
     bool Build() override;
     bool Solve() override;
     std::string GetResults() const override;
 
 protected:
-    // Datos del problema
     std::vector<Product> productos;
     std::vector<Tienda> tiendas;
     std::vector<Demanda> demandas;
     int horizonte_dias;
-    
-    // Variables de decisión (se crearán en Build)
-    std::vector<std::vector<operations_research::MPVariable*>> x; // [producto][tienda]
-    std::vector<std::vector<operations_research::MPVariable*>> exceso; // [producto][tienda]
+    std::vector<std::vector<operations_research::MPVariable*>> x;
+    std::vector<std::vector<operations_research::MPVariable*>> exceso;
 };
 
 #endif

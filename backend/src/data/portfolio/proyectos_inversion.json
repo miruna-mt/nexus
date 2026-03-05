@@ -1,0 +1,94 @@
+{
+  "escenario": "Selección de proyectos de inversión",
+  "descripcion": "Una empresa debe elegir qué proyectos financiar con presupuesto limitado, maximizando el retorno esperado y minimizando el riesgo",
+  "tipo_problema": "portfolio",
+  "presupuesto_total": 1000000,
+  "tasa_libre_riesgo": 0.02,
+  "aversion_riesgo": 0.5,
+  "proyectos": [
+    {
+      "id": "PR001",
+      "nombre": "Expansión nacional",
+      "departamento": "Comercial",
+      "inversion_requerida": 300000,
+      "retorno_esperado_anual": 0.15,
+      "riesgo_estimado": 0.08,
+      "tiempo_retorno_anios": 3,
+      "prioridad_estrategica": 5
+    },
+    {
+      "id": "PR002",
+      "nombre": "I+D nuevo producto",
+      "departamento": "Innovación",
+      "inversion_requerida": 250000,
+      "retorno_esperado_anual": 0.25,
+      "riesgo_estimado": 0.20,
+      "tiempo_retorno_anios": 4,
+      "prioridad_estrategica": 4
+    },
+    {
+      "id": "PR003",
+      "nombre": "Digitalización",
+      "departamento": "Tecnología",
+      "inversion_requerida": 150000,
+      "retorno_esperado_anual": 0.10,
+      "riesgo_estimado": 0.03,
+      "tiempo_retorno_anios": 2,
+      "prioridad_estrategica": 3
+    },
+    {
+      "id": "PR004",
+      "nombre": "Formación empleados",
+      "departamento": "RRHH",
+      "inversion_requerida": 80000,
+      "retorno_esperado_anual": 0.05,
+      "riesgo_estimado": 0.01,
+      "tiempo_retorno_anios": 1,
+      "prioridad_estrategica": 2
+    },
+    {
+      "id": "PR005",
+      "nombre": "Internacionalización",
+      "departamento": "Expansión",
+      "inversion_requerida": 400000,
+      "retorno_esperado_anual": 0.18,
+      "riesgo_estimado": 0.15,
+      "tiempo_retorno_anios": 5,
+      "prioridad_estrategica": 5
+    },
+    {
+      "id": "PR006",
+      "nombre": "Optimización logística",
+      "departamento": "Operaciones",
+      "inversion_requerida": 200000,
+      "retorno_esperado_anual": 0.12,
+      "riesgo_estimado": 0.05,
+      "tiempo_retorno_anios": 2,
+      "prioridad_estrategica": 4
+    }
+  ],
+  "matriz_correlacion_riesgos": [
+    [1.00, 0.30, 0.10, 0.05, 0.40, 0.20],
+    [0.30, 1.00, 0.15, 0.02, 0.35, 0.25],
+    [0.10, 0.15, 1.00, 0.30, 0.10, 0.40],
+    [0.05, 0.02, 0.30, 1.00, 0.05, 0.15],
+    [0.40, 0.35, 0.10, 0.05, 1.00, 0.30],
+    [0.20, 0.25, 0.40, 0.15, 0.30, 1.00]
+  ],
+  "restricciones_adicionales": [
+    {
+      "tipo": "maximo_por_departamento",
+      "departamento": "Innovación",
+      "maximo_inversion": 300000
+    },
+    {
+      "tipo": "minimo_prioridad_estrategica",
+      "valor_minimo": 3
+    },
+    {
+      "tipo": "exclusion",
+      "proyectos": ["PR001", "PR005"],
+      "descripcion": "No se pueden elegir simultáneamente expansión nacional e internacionalización"
+    }
+  ]
+}

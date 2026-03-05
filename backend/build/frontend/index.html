@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus · Optimización multi-industria</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <img src="/assets/logo.png" alt="Nexus" class="logo">
+        </div>
+        <p class="subtitle">Motor de optimización multi-industria</p>
+        
+        <div class="selector">
+            <label for="problemType">Tipo de problema</label>
+            <select id="problemType">
+                <option value="assignment">Asignación de recursos (Resource Allocation)</option>
+                <option value="routing">Planificación de rutas (Routing & Scheduling)</option>
+                <option value="inventory">Gestión de Inventario (Inventory Management)</option>
+                <option value="portfolio">Optimización de carteras (Portfolio Optimization)</option>
+                <option value="location">Localización (Facility Location)</option>
+                <option value="stochastic">Optimización bajo incertidumbre (Stochastic Optimization)</option>
+                <option value="scheduling">Secuenciación de proyectos (Project Scheduling)</option>
+            </select>
+        </div>
+
+        <div class="selector">
+            <label for="instance">Instancia</label>
+            <select id="instance">
+                <option value="fmcg_productos_tiendas">FMCG · Productos a Tiendas</option>
+            </select>
+        </div>
+
+<div class="selector">
+    <label for="instance">Instancia</label>
+    <select id="instance">
+        <option value="fmcg_productos_tiendas">FMCG · Productos a Tiendas</option>
+    </select>
+</div>
+
+<!-- Descripción del escenario -->
+<div id="scenario-description" class="scenario-description">
+    <h4>📋 Sobre este escenario</h4>
+    <p>Una cadena de supermercados debe decidir cuántas unidades de cada producto perecedero enviar a cada tienda, maximizando el beneficio y minimizando las pérdidas por caducidad. El modelo considera:</p>
+    <ul>
+        <li><strong>Productos:</strong> Leche, pan, detergente, manzanas, agua (cada uno con su precio, coste, stock y días de caducidad).</li>
+        <li><strong>Tiendas:</strong> Hiper Centro, Super Express, Mega Outlet (cada una con capacidad limitada).</li>
+        <li><strong>Demanda estimada:</strong> Ventas diarias esperadas por producto y tienda.</li>
+    </ul>
+    <p><em>¿Tus propios datos?</em> Puedes cargar un JSON con tu propia estructura de productos, tiendas y demandas para obtener una optimización personalizada.</p>
+</div>
+
+        <button id="optimizeBtn">Optimizar</button>
+
+        <div id="results" class="results">
+            <h3>Resultados</h3>
+            <div id="output" class="output">Esperando entrada...</div>
+        </div>
+    </div>
+
+    <script src="script_v2.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+{
+  "escenario": "Ubicación de centros de distribución",
+  "descripcion": "Decidir dónde abrir almacenes para dar servicio a tiendas",
+  "tipo_problema": "location",
+  "num_almacenes_max": 3,
+  "coste_fijo_apertura_almacen": 100000,
+  "presupuesto_total": 300000,
+  "ubicaciones_candidatas": [
+    {
+      "id": "L001",
+      "nombre": "Polígono Norte",
+      "coste_apertura": 120000,
+      "capacidad_maxima": 20000,
+      "coordenadas": [40.51, -3.65]
+    },
+    {
+      "id": "L002",
+      "nombre": "Polígono Sur",
+      "coste_apertura": 95000,
+      "capacidad_maxima": 15000,
+      "coordenadas": [40.35, -3.72]
+    },
+    {
+      "id": "L003",
+      "nombre": "Polígono Este",
+      "coste_apertura": 110000,
+      "capacidad_maxima": 18000,
+      "coordenadas": [40.44, -3.58]
+    },
+    {
+      "id": "L004",
+      "nombre": "Polígono Oeste",
+      "coste_apertura": 105000,
+      "capacidad_maxima": 16000,
+      "coordenadas": [40.42, -3.82]
+    }
+  ],
+  "clientes": [
+    {
+      "id": "T001",
+      "nombre": "Tienda Centro",
+      "demanda_mensual": 5000,
+      "coordenadas": [40.4167, -3.7033]
+    },
+    {
+      "id": "T002",
+      "nombre": "Tienda Norte",
+      "demanda_mensual": 3500,
+      "coordenadas": [40.4567, -3.6833]
+    },
+    {
+      "id": "T003",
+      "nombre": "Tienda Sur",
+      "demanda_mensual": 4200,
+      "coordenadas": [40.3867, -3.7233]
+    },
+    {
+      "id": "T004",
+      "nombre": "Tienda Este",
+      "demanda_mensual": 2800,
+      "coordenadas": [40.4267, -3.6333]
+    },
+    {
+      "id": "T005",
+      "nombre": "Tienda Oeste",
+      "demanda_mensual": 3100,
+      "coordenadas": [40.4067, -3.7633]
+    }
+  ],
+  "coste_transporte_por_km_unidad": 0.02
+}

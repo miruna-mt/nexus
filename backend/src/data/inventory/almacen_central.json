@@ -1,0 +1,44 @@
+{
+  "escenario": "Gestión de inventario multi-almacén",
+  "descripcion": "Optimización de stock en almacén central con demanda incierta",
+  "tipo_problema": "inventory",
+  "horizonte_dias": 30,
+  "coste_pedido_fijo": 100,
+  "coste_mantenimiento_por_unidad_dia": 0.05,
+  "coste_rotura_stock_por_unidad": 2.50,
+  "productos": [
+    {
+      "id": "P001",
+      "nombre": "Componente A",
+      "stock_inicial": 500,
+      "stock_minimo_seguridad": 200,
+      "stock_maximo": 2000,
+      "demanda_diaria_media": 30,
+      "desviacion_demanda_diaria": 8,
+      "plazo_entrega_dias": 3,
+      "coste_unitario": 5.0
+    },
+    {
+      "id": "P002",
+      "nombre": "Componente B",
+      "stock_inicial": 300,
+      "stock_minimo_seguridad": 150,
+      "stock_maximo": 1500,
+      "demanda_diaria_media": 20,
+      "desviacion_demanda_diaria": 5,
+      "plazo_entrega_dias": 2,
+      "coste_unitario": 8.0
+    },
+    {
+      "id": "P003",
+      "nombre": "Componente C",
+      "stock_inicial": 100,
+      "stock_minimo_seguridad": 50,
+      "stock_maximo": 800,
+      "demanda_diaria_media": 10,
+      "desviacion_demanda_diaria": 3,
+      "plazo_entrega_dias": 4,
+      "coste_unitario": 12.0
+    }
+  ]
+}

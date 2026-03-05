@@ -39,3 +39,17 @@
 
 # debug information files
 *.dwo
+# Build artifacts
+backend/build/
+*.exe
+*.o
+*.out
+
+# Editor files
+*.save
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db

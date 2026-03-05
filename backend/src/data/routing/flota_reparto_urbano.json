@@ -1,0 +1,110 @@
+{
+  "escenario": "Flota de reparto urbano",
+  "descripcion": "Una flota de furgonetas reparte paquetes en una ciudad con ventanas de tiempo",
+  "tipo_problema": "routing",
+  "vehiculos": [
+    {
+      "id": "V001",
+      "nombre": "Furgoneta pequeña",
+      "capacidad_kg": 500,
+      "autonomia_km": 120,
+      "coste_por_km": 0.30,
+      "velocidad_media_kmh": 30,
+      "tiempo_maximo_conduccion_min": 480,
+      "tiempo_inicio_min": 480,
+      "tiempo_fin_min": 1080
+    },
+    {
+      "id": "V002",
+      "nombre": "Furgoneta grande",
+      "capacidad_kg": 1000,
+      "autonomia_km": 200,
+      "coste_por_km": 0.45,
+      "velocidad_media_kmh": 30,
+      "tiempo_maximo_conduccion_min": 480,
+      "tiempo_inicio_min": 480,
+      "tiempo_fin_min": 1080
+    },
+    {
+      "id": "V003",
+      "nombre": "Moto",
+      "capacidad_kg": 50,
+      "autonomia_km": 80,
+      "coste_por_km": 0.15,
+      "velocidad_media_kmh": 35,
+      "tiempo_maximo_conduccion_min": 360,
+      "tiempo_inicio_min": 540,
+      "tiempo_fin_min": 1020
+    }
+  ],
+  "clientes": [
+    {
+      "id": "C001",
+      "nombre": "Cliente A",
+      "direccion": "Calle Mayor 10",
+      "coordenadas": [40.4167, -3.7033],
+      "demanda_kg": 80,
+      "ventana_tiempo_inicio_min": 540,
+      "ventana_tiempo_fin_min": 660,
+      "tiempo_servicio_min": 10,
+      "prioridad": 1
+    },
+    {
+      "id": "C002",
+      "nombre": "Cliente B",
+      "direccion": "Gran Vía 32",
+      "coordenadas": [40.4199, -3.6985],
+      "demanda_kg": 120,
+      "ventana_tiempo_inicio_min": 600,
+      "ventana_tiempo_fin_min": 720,
+      "tiempo_servicio_min": 15,
+      "prioridad": 2
+    },
+    {
+      "id": "C003",
+      "nombre": "Cliente C",
+      "direccion": "Plaza Sol 1",
+      "coordenadas": [40.4169, -3.7035],
+      "demanda_kg": 40,
+      "ventana_tiempo_inicio_min": 660,
+      "ventana_tiempo_fin_min": 780,
+      "tiempo_servicio_min": 5,
+      "prioridad": 3
+    },
+    {
+      "id": "C004",
+      "nombre": "Cliente D",
+      "direccion": "Paseo Prado 20",
+      "coordenadas": [40.4145, -3.6921],
+      "demanda_kg": 200,
+      "ventana_tiempo_inicio_min": 720,
+      "ventana_tiempo_fin_min": 840,
+      "tiempo_servicio_min": 20,
+      "prioridad": 1
+    },
+    {
+      "id": "C005",
+      "nombre": "Cliente E",
+      "direccion": "Calle Alcalá 100",
+      "coordenadas": [40.4223, -3.6892],
+      "demanda_kg": 60,
+      "ventana_tiempo_inicio_min": 780,
+      "ventana_tiempo_fin_min": 900,
+      "tiempo_servicio_min": 8,
+      "prioridad": 2
+    }
+  ],
+  "deposito": {
+    "id": "D001",
+    "nombre": "Centro logístico",
+    "coordenadas": [40.4265, -3.7088],
+    "horario_inicio_min": 480,
+    "horario_fin_min": 1080
+  },
+  "parametros_globales": {
+    "coste_fijo_por_vehiculo": 50,
+    "penalizacion_fuera_ventana": 100,
+    "tiempo_maximo_espera_min": 30,
+    "objetivo": "minimizar_coste_total"
+  }
+}

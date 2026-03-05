@@ -1,0 +1,3 @@
+/home/miruna/nexus/backend/build/CMakeFiles/nexus.dir
+/home/miruna/nexus/backend/build/CMakeFiles/edit_cache.dir
+/home/miruna/nexus/backend/build/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,132 @@
+{
+  "escenario": "Cadena de supermercados",
+  "descripcion": "5 productos, 3 tiendas con diferentes perfiles de demanda",
+  "horizonte_dias": 7,
+  "productos": [
+    {
+      "id": "P001",
+      "nombre": "Leche (brik 1L)",
+      "categoria": "Lacteos",
+      "stock": 10000,
+      "precio": 1.20,
+      "coste": 0.80,
+      "dias_caducidad": 7,
+      "penalizacion_caducidad": 0.50,
+      "rotacion": "alta"
+    },
+    {
+      "id": "P002",
+      "nombre": "Pan de molde",
+      "categoria": "Panaderia",
+      "stock": 6000,
+      "precio": 1.50,
+      "coste": 0.90,
+      "dias_caducidad": 5,
+      "penalizacion_caducidad": 0.60,
+      "rotacion": "alta"
+    },
+    {
+      "id": "P003",
+      "nombre": "Detergente lavadora",
+      "categoria": "Limpieza",
+      "stock": 1500,
+      "precio": 6.50,
+      "coste": 3.20,
+      "dias_caducidad": 730,
+      "penalizacion_caducidad": 0.20,
+      "rotacion": "baja"
+    },
+    {
+      "id": "P004",
+      "nombre": "Manzanas (kg)",
+      "categoria": "Fruteria",
+      "stock": 4000,
+      "precio": 2.80,
+      "coste": 1.40,
+      "dias_caducidad": 10,
+      "penalizacion_caducidad": 1.00,
+      "rotacion": "media"
+    },
+    {
+      "id": "P005",
+      "nombre": "Agua mineral (6x1.5L)",
+      "categoria": "Bebidas",
+      "stock": 8000,
+      "precio": 3.20,
+      "coste": 1.50,
+      "dias_caducidad": 730,
+      "penalizacion_caducidad": 0.10,
+      "rotacion": "alta"
+    }
+  ],
+  "tiendas": [
+    {
+      "id": "T001",
+      "nombre": "Hiper Centro",
+      "tipo": "hipermercado",
+      "capacidad": 30000,
+      "ubicacion": "centro ciudad",
+      "perfil_cliente": "familiar"
+    },
+    {
+      "id": "T002",
+      "nombre": "Super Express",
+      "tipo": "supermercado",
+      "capacidad": 10000,
+      "ubicacion": "barrio residencial",
+      "perfil_cliente": "conveniencia"
+    },
+    {
+      "id": "T003",
+      "nombre": "Mega Outlet",
+      "tipo": "tienda descuento",
+      "capacidad": 25000,
+      "ubicacion": "poligono industrial",
+      "perfil_cliente": "precio"
+    }
+  ],
+  "demanda_estimada": [
+    { "producto_id": "P001", "tienda_id": "T001", "unidades_por_dia": 450 },
+    { "producto_id": "P001", "tienda_id": "T002", "unidades_por_dia": 120 },
+    { "producto_id": "P001", "tienda_id": "T003", "unidades_por_dia": 280 },
+    { "producto_id": "P002", "tienda_id": "T001", "unidades_por_dia": 380 },
+    { "producto_id": "P002", "tienda_id": "T002", "unidades_por_dia": 90 },
+    { "producto_id": "P002", "tienda_id": "T003", "unidades_por_dia": 210 },
+    { "producto_id": "P003", "tienda_id": "T001", "unidades_por_dia": 60 },
+    { "producto_id": "P003", "tienda_id": "T002", "unidades_por_dia": 15 },
+    { "producto_id": "P003", "tienda_id": "T003", "unidades_por_dia": 40 },
+    { "producto_id": "P004", "tienda_id": "T001", "unidades_por_dia": 150 },
+    { "producto_id": "P004", "tienda_id": "T002", "unidades_por_dia": 45 },
+    { "producto_id": "P004", "tienda_id": "T003", "unidades_por_dia": 80 },
+    { "producto_id": "P005", "tienda_id": "T001", "unidades_por_dia": 320 },
+    { "producto_id": "P005", "tienda_id": "T002", "unidades_por_dia": 100 },
+    { "producto_id": "P005", "tienda_id": "T003", "unidades_por_dia": 180 }
+  ],
+  "promociones": [
+    {
+      "id": "PRO001",
+      "descripcion": "3x2 en lacteos",
+      "productos": ["P001"],
+      "tiendas": ["T001", "T003"],
+      "tipo": "cantidad",
+      "parametros": {
+        "compra_minima": 3,
+        "unidades_gratis": 1
+      }
+    },
+    {
+      "id": "PRO002",
+      "descripcion": "20% descuento en detergente",
+      "productos": ["P003"],
+      "tiendas": ["T002"],
+      "tipo": "porcentaje",
+      "parametros": {
+        "descuento": 0.20
+      }
+    }
+  ],
+  "costes_operativos": {
+    "transporte_por_unidad": 0.05,
+    "almacenaje_por_dia": 0.01
+  }
+}
