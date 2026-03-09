@@ -4,7 +4,7 @@
 Turn business problems into optimal decisions.
 
 Built on a **taxonomy of optimization problems** that transcend industries:
-📦 **Allocation** | 🗺️ **Routing** | 💰 **Portfolio** | 📊 **Inventory** | 📍 **Location**
+📦 **Resource Allocation** | 🗺️ **Routing** | 💰 **Portfolio Optimization** | 📊 **Inventory Management** | 📍 **Facility Location** | 🎲 **Stochastic Optimization** | 📅 **Project Scheduling**
 
 ---
 
@@ -28,7 +28,7 @@ Each problem type has a **core mathematical model**, and industries are just **i
 - 🔧 **Generic core** – Optimization engine built with Google OR-Tools
 - 🧩 **Problem-based taxonomy** – Same code, different data
 - 🌐 **Web interface** – User-friendly frontend (HTML/JS/CSS)
-- 📊 **5 problem types × multiple industries** = 10+ instances included
+- 📊 **7 problem types × multiple industries** = 20+ instances included
 - 🔄 **Easily extensible** – Add a new instance by creating a JSON file
 
 ---
@@ -83,6 +83,6 @@ MIT License – feel free to use, modify, and distribute.
 ---
 
 👤 Author
-Miruna Trufin – Built by a strategist who codes.
+Miruna Trufin – Simplifying the impossible, one 'what if...?' at a time.
 
 
