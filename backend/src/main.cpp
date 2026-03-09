@@ -4,7 +4,10 @@
 #include <string>
 #include <sstream>
 
+// Includes de las instancias de Assignment
 #include "problems/assignment/instances/fmcg_productos_tiendas.h"
+#include "problems/assignment/instances/defense_missions.h"
+#include "problems/assignment/instances/cloud_vms.h"
 
 // Lee un archivo completo
 std::string read_file(const std::string& path) {
@@ -27,31 +30,81 @@ int main() {
     // Ruta para la optimización (POST)
     CROW_ROUTE(app, "/optimize").methods(crow::HTTPMethod::Post)([](const crow::request& req) {
         try {
-            // Crear la instancia del modelo
-            FMCGProductosTiendas modelo;
-            
-            // Ejecutar
-            if (!modelo.Build()) {
-                return crow::response(500, "Error al construir el modelo");
+            auto json = crow::json::load(req.body);
+            if (!json) {
+                return crow::response(400, "Invalid JSON");
             }
-            
-            if (!modelo.Solve()) {
-                return crow::response(500, "Error al resolver el modelo");
+
+            std::string problem_type = json["problem_type"].s();
+            std::string instance = json["instance"].s();
+
+            std::cout << "📥 Request: " << problem_type << " - " << instance << std::endl;
+
+            // Seleccionar la instancia según el tipo de problema
+            if (problem_type == "assignment") {
+                if (instance == "fmcg_productos_tiendas") {
+                    FMCGProductosTiendas modelo;
+                    
+                    if (!modelo.Build()) {
+                        return crow::response(500, "Error building FMCG model");
+                    }
+                    
+                    if (!modelo.Solve()) {
+                        return crow::response(500, "Error solving FMCG model");
+                    }
+                    
+                    std::string resultados = modelo.GetResults();
+                    crow::response res(resultados);
+                    res.set_header("Content-Type", "application/json");
+                    return res;
+                }
+                else if (instance == "defense_missions") {
+                    DefenseMissions modelo;
+                    
+                    if (!modelo.Build()) {
+                        return crow::response(500, "Error building Defense model");
+                    }
+                    
+                    if (!modelo.Solve()) {
+                        return crow::response(500, "Error solving Defense model");
+                    }
+                    
+                    std::string resultados = modelo.GetResults();
+                    crow::response res(resultados);
+                    res.set_header("Content-Type", "application/json");
+                    return res;
+                }
+
+		else if (instance == "cloud_vms") {
+		    CloudVMs modelo;
+    
+    		    if (!modelo.Build()) {
+        	    return crow::response(500, "Error building Cloud VMs model");
+    		}
+    
+    if (!modelo.Solve()) {
+        return crow::response(500, "Error solving Cloud VMs model");
+    }
+    
+    std::string resultados = modelo.GetResults();
+    crow::response res(resultados);
+    res.set_header("Content-Type", "application/json");
+    return res;
+}
+                else {
+                    return crow::response(404, "Unknown assignment instance");
+                }
             }
-            
-            // Obtener resultados
-            std::string resultados = modelo.GetResults();
-            
-            crow::response res(resultados);
-            res.set_header("Content-Type", "application/json");
-            return res;
+            else {
+                return crow::response(404, "Unknown problem type");
+            }
             
         } catch (const std::exception& e) {
             return crow::response(500, e.what());
         }
     });
 
-// Ruta raíz - redirige a index.html
+// Ruta raíz - sirve index.html
 CROW_ROUTE(app, "/")([]() {
     auto content = read_file("frontend/index.html");
     if (content.empty()) {
@@ -91,5 +144,15 @@ CROW_ROUTE(app, "/")([]() {
         return res;
     });
 
+// Ruta para archivos de descripción
+CROW_ROUTE(app, "/descriptions/<string>").methods(crow::HTTPMethod::Get)([](const crow::request& req, std::string filename) {
+    auto content = read_file("frontend/descriptions/" + filename);
+    if (content.empty()) {
+        return crow::response(404);
+    }
+    crow::response res(content);
+    res.set_header("Content-Type", "text/html");
+    return res;
+});
     app.port(8080).multithreaded().run();
 }

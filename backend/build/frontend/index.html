@@ -15,10 +15,19 @@
             <img src="/assets/logo.png" alt="Nexus" class="logo">
         </div>
         <p class="subtitle">Motor de optimización multi-industria</p>
-        
+
+        <!-- Selector de niveles -->
+        <div class="level-selector">
+            <button class="level-btn active" data-level="demo">⚡ Demo</button>
+            <button class="level-btn" data-level="parametric">🔧 Paramétrico</button>
+            <button class="level-btn" data-level="expert">📁 Experto</button>
+        </div>
+
+        <!-- Selectores de problema e instancia (siempre visibles) -->
         <div class="selector">
-            <label for="problemType">Tipo de problema</label>
+            <label for="problemType" style="font-style: italic; text-transform: none; font-weight: 400;">¿Qué problema te quita el sueño?</label>
             <select id="problemType">
+                <option value="" disabled selected>Selecciona un tipo de problema</option>
                 <option value="assignment">Asignación de recursos (Resource Allocation)</option>
                 <option value="routing">Planificación de rutas (Routing & Scheduling)</option>
                 <option value="inventory">Gestión de Inventario (Inventory Management)</option>
@@ -30,39 +39,32 @@
         </div>
 
         <div class="selector">
-            <label for="instance">Instancia</label>
+            <label for="instance" style="font-style: italic; text-transform: none; font-weight: 400;">Pongamos números a esa pesadilla</label>
             <select id="instance">
-                <option value="fmcg_productos_tiendas">FMCG · Productos a Tiendas</option>
+                <option value="" disabled selected>Selecciona un escenario</option>
+                <option value="fmcg_productos_tiendas">🛒 Supermercado · Productos a Tiendas</option>
+                <option value="defense_missions">🎯 Defensa · Asignación de Misiones</option>
+                <option value="cloud_vms">☁️ Cloud · Asignación de VMs</option>
             </select>
         </div>
 
-<div class="selector">
-    <label for="instance">Instancia</label>
-    <select id="instance">
-        <option value="fmcg_productos_tiendas">FMCG · Productos a Tiendas</option>
-    </select>
-</div>
+        <!-- Contenedor dinámico para el contenido según nivel -->
+        <div id="level-content" class="level-content">
+            <!-- Aquí se inyectará el HTML de Demo/Paramétrico/Experto -->
+        </div>
 
-<!-- Descripción del escenario -->
-<div id="scenario-description" class="scenario-description">
-    <h4>📋 Sobre este escenario</h4>
-    <p>Una cadena de supermercados debe decidir cuántas unidades de cada producto perecedero enviar a cada tienda, maximizando el beneficio y minimizando las pérdidas por caducidad. El modelo considera:</p>
-    <ul>
-        <li><strong>Productos:</strong> Leche, pan, detergente, manzanas, agua (cada uno con su precio, coste, stock y días de caducidad).</li>
-        <li><strong>Tiendas:</strong> Hiper Centro, Super Express, Mega Outlet (cada una con capacidad limitada).</li>
-        <li><strong>Demanda estimada:</strong> Ventas diarias esperadas por producto y tienda.</li>
-    </ul>
-    <p><em>¿Tus propios datos?</em> Puedes cargar un JSON con tu propia estructura de productos, tiendas y demandas para obtener una optimización personalizada.</p>
-</div>
+        <!-- Descripción del escenario (se mantiene) -->
+        <div id="scenario-description" class="scenario-description">
+            <!-- Las descripciones se cargarán dinámicamente desde config -->
+        </div>
 
-        <button id="optimizeBtn">Optimizar</button>
-
+        <!-- Resultados -->
         <div id="results" class="results">
             <h3>Resultados</h3>
-            <div id="output" class="output">Esperando entrada...</div>
+            <div id="output" class="output">Selecciona un escenario y nivel para comenzar</div>
         </div>
     </div>
 
-    <script src="script_v2.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

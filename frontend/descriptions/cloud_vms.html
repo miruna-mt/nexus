@@ -1,0 +1,8 @@
+<h4>📋 Sobre este escenario</h4>
+            <p>Optimización de centros de datos: asignar máquinas virtuales a servidores físicos minimizando el consumo energético y respetando restricciones de capacidad y afinidad.</p>
+            <ul>
+                <li><strong>Servidores:</strong> 3 tipos (High CPU, Balanced, Storage Optimized) con diferente capacidad y consumo.</li>
+                <li><strong>Máquinas virtuales:</strong> 5 VMs (web servers, database, cache, backup) con requisitos de CPU, RAM y almacenamiento.</li>
+                <li><strong>Restricciones:</strong> Capacidad de servidores, afinidad (DB y cache juntos), anti-afinidad (web servers separados).</li>
+            </ul>
+            <p><strong>Ejemplo de resultado:</strong> El modelo asigna VMs a servidores minimizando el consumo total (vatios) y cumpliendo todas las restricciones.</p>

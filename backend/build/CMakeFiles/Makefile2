@@ -81,12 +81,12 @@ clean: CMakeFiles/nexus.dir/clean
 CMakeFiles/nexus.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nexus.dir/build.make CMakeFiles/nexus.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nexus.dir/build.make CMakeFiles/nexus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/miruna/nexus/backend/build/CMakeFiles --progress-num=1,2,3,4 "Built target nexus"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/miruna/nexus/backend/build/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target nexus"
 .PHONY : CMakeFiles/nexus.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/nexus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/miruna/nexus/backend/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/miruna/nexus/backend/build/CMakeFiles 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/nexus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/miruna/nexus/backend/build/CMakeFiles 0
 .PHONY : CMakeFiles/nexus.dir/rule

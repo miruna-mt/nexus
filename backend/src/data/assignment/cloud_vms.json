@@ -1,0 +1,73 @@
+{
+  "servers": [
+    {
+      "id": "S001",
+      "name": "Server A (High CPU)",
+      "cpu_cores": 32,
+      "ram_gb": 128,
+      "storage_tb": 10,
+      "power_watt": 400
+    },
+    {
+      "id": "S002",
+      "name": "Server B (Balanced)",
+      "cpu_cores": 24,
+      "ram_gb": 64,
+      "storage_tb": 8,
+      "power_watt": 300
+    },
+    {
+      "id": "S003",
+      "name": "Server C (Storage Optimized)",
+      "cpu_cores": 16,
+      "ram_gb": 32,
+      "storage_tb": 20,
+      "power_watt": 350
+    }
+  ],
+  "vms": [
+    {
+      "id": "VM001",
+      "name": "Web Server 1",
+      "cpu_cores": 4,
+      "ram_gb": 8,
+      "storage_tb": 0.5,
+      "priority": 8
+    },
+    {
+      "id": "VM002",
+      "name": "Web Server 2",
+      "cpu_cores": 4,
+      "ram_gb": 8,
+      "storage_tb": 0.5,
+      "priority": 8,
+      "anti_affinity_with": ["VM001"]
+    },
+    {
+      "id": "VM003",
+      "name": "Database",
+      "cpu_cores": 8,
+      "ram_gb": 32,
+      "storage_tb": 2,
+      "priority": 10,
+      "affinity_with": ["VM004"]
+    },
+    {
+      "id": "VM004",
+      "name": "Cache",
+      "cpu_cores": 2,
+      "ram_gb": 16,
+      "storage_tb": 0.2,
+      "priority": 7,
+      "affinity_with": ["VM003"]
+    },
+    {
+      "id": "VM005",
+      "name": "Backup",
+      "cpu_cores": 2,
+      "ram_gb": 4,
+      "storage_tb": 5,
+      "priority": 5
+    }
+  ]
+}

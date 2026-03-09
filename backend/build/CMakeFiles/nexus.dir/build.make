@@ -111,11 +111,41 @@ CMakeFiles/nexus.dir/src/problems/assignment/instances/fmcg_productos_tiendas.cp
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/nexus.dir/src/problems/assignment/instances/fmcg_productos_tiendas.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/miruna/nexus/backend/src/problems/assignment/instances/fmcg_productos_tiendas.cpp -o CMakeFiles/nexus.dir/src/problems/assignment/instances/fmcg_productos_tiendas.cpp.s
 
+CMakeFiles/nexus.dir/src/problems/assignment/instances/defense_missions.cpp.o: CMakeFiles/nexus.dir/flags.make
+CMakeFiles/nexus.dir/src/problems/assignment/instances/defense_missions.cpp.o: /home/miruna/nexus/backend/src/problems/assignment/instances/defense_missions.cpp
+CMakeFiles/nexus.dir/src/problems/assignment/instances/defense_missions.cpp.o: CMakeFiles/nexus.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/miruna/nexus/backend/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/nexus.dir/src/problems/assignment/instances/defense_missions.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/nexus.dir/src/problems/assignment/instances/defense_missions.cpp.o -MF CMakeFiles/nexus.dir/src/problems/assignment/instances/defense_missions.cpp.o.d -o CMakeFiles/nexus.dir/src/problems/assignment/instances/defense_missions.cpp.o -c /home/miruna/nexus/backend/src/problems/assignment/instances/defense_missions.cpp
+
+CMakeFiles/nexus.dir/src/problems/assignment/instances/defense_missions.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/nexus.dir/src/problems/assignment/instances/defense_missions.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/miruna/nexus/backend/src/problems/assignment/instances/defense_missions.cpp > CMakeFiles/nexus.dir/src/problems/assignment/instances/defense_missions.cpp.i
+
+CMakeFiles/nexus.dir/src/problems/assignment/instances/defense_missions.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/nexus.dir/src/problems/assignment/instances/defense_missions.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/miruna/nexus/backend/src/problems/assignment/instances/defense_missions.cpp -o CMakeFiles/nexus.dir/src/problems/assignment/instances/defense_missions.cpp.s
+
+CMakeFiles/nexus.dir/src/problems/assignment/instances/cloud_vms.cpp.o: CMakeFiles/nexus.dir/flags.make
+CMakeFiles/nexus.dir/src/problems/assignment/instances/cloud_vms.cpp.o: /home/miruna/nexus/backend/src/problems/assignment/instances/cloud_vms.cpp
+CMakeFiles/nexus.dir/src/problems/assignment/instances/cloud_vms.cpp.o: CMakeFiles/nexus.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/miruna/nexus/backend/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/nexus.dir/src/problems/assignment/instances/cloud_vms.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/nexus.dir/src/problems/assignment/instances/cloud_vms.cpp.o -MF CMakeFiles/nexus.dir/src/problems/assignment/instances/cloud_vms.cpp.o.d -o CMakeFiles/nexus.dir/src/problems/assignment/instances/cloud_vms.cpp.o -c /home/miruna/nexus/backend/src/problems/assignment/instances/cloud_vms.cpp
+
+CMakeFiles/nexus.dir/src/problems/assignment/instances/cloud_vms.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/nexus.dir/src/problems/assignment/instances/cloud_vms.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/miruna/nexus/backend/src/problems/assignment/instances/cloud_vms.cpp > CMakeFiles/nexus.dir/src/problems/assignment/instances/cloud_vms.cpp.i
+
+CMakeFiles/nexus.dir/src/problems/assignment/instances/cloud_vms.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/nexus.dir/src/problems/assignment/instances/cloud_vms.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/miruna/nexus/backend/src/problems/assignment/instances/cloud_vms.cpp -o CMakeFiles/nexus.dir/src/problems/assignment/instances/cloud_vms.cpp.s
+
 # Object files for target nexus
 nexus_OBJECTS = \
 "CMakeFiles/nexus.dir/src/main.cpp.o" \
 "CMakeFiles/nexus.dir/src/problems/assignment/AssignmentModel.cpp.o" \
-"CMakeFiles/nexus.dir/src/problems/assignment/instances/fmcg_productos_tiendas.cpp.o"
+"CMakeFiles/nexus.dir/src/problems/assignment/instances/fmcg_productos_tiendas.cpp.o" \
+"CMakeFiles/nexus.dir/src/problems/assignment/instances/defense_missions.cpp.o" \
+"CMakeFiles/nexus.dir/src/problems/assignment/instances/cloud_vms.cpp.o"
 
 # External object files for target nexus
 nexus_EXTERNAL_OBJECTS =
@@ -123,6 +153,8 @@ nexus_EXTERNAL_OBJECTS =
 nexus: CMakeFiles/nexus.dir/src/main.cpp.o
 nexus: CMakeFiles/nexus.dir/src/problems/assignment/AssignmentModel.cpp.o
 nexus: CMakeFiles/nexus.dir/src/problems/assignment/instances/fmcg_productos_tiendas.cpp.o
+nexus: CMakeFiles/nexus.dir/src/problems/assignment/instances/defense_missions.cpp.o
+nexus: CMakeFiles/nexus.dir/src/problems/assignment/instances/cloud_vms.cpp.o
 nexus: CMakeFiles/nexus.dir/build.make
 nexus: /usr/local/lib/libortools.so.9.15.6759
 nexus: /usr/local/lib/libbz2.so
@@ -224,7 +256,7 @@ nexus: /usr/local/lib/libz.so
 nexus: /usr/local/lib/libhighs.so.1.12.0
 nexus: /usr/local/lib/libscip.so.10.0.0
 nexus: CMakeFiles/nexus.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/miruna/nexus/backend/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable nexus"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/miruna/nexus/backend/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable nexus"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/nexus.dir/link.txt --verbose=$(VERBOSE)
 	/usr/bin/cmake -E copy_directory /home/miruna/nexus/backend/../frontend /home/miruna/nexus/backend/build/frontend
 

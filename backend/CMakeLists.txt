@@ -13,6 +13,8 @@ add_executable(nexus
     src/main.cpp
     src/problems/assignment/AssignmentModel.cpp
     src/problems/assignment/instances/fmcg_productos_tiendas.cpp
+    src/problems/assignment/instances/defense_missions.cpp
+    src/problems/assignment/instances/cloud_vms.cpp
 )
 
 # SEGUNDO: añadir includes (DESPUÉS de add_executable)

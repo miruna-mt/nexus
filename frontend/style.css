@@ -162,4 +162,142 @@ button:active {
     color: #475569;
     font-style: italic;
 }
+
+/* Selector de niveles */
+.level-selector {
+    display: flex;
+    gap: 10px;
+    margin: 30px 0 20px;
+    justify-content: center;
+}
+
+.level-btn {
+    background: white;
+    border: 2px solid #e2e8f0;
+    padding: 8px 16px;  /* Reducido de 12px 24px */
+    border-radius: 100px;
+    font-size: 0.9rem;   /* Reducido de 1rem */
+    font-weight: 500;    /* Menos bold */
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: none; /* Quita mayúsculas */
+}
+
+.level-btn:hover {
+    border-color: #667eea;
+    color: #667eea;
+}
+
+.level-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: transparent;
+}
+
+/* Contenedor dinámico de nivel */
+.level-content {
+    background: #f8fafc;
+    border-radius: 16px;
+    padding: 24px;
+    margin: 20px 0;
+    border: 1px solid #e2e8f0;
+    min-height: 150px;
+}
+
+/* Estilos para parámetros (modo paramétrico) */
+.parameter-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.parameter-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.parameter-slider {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: #e2e8f0;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.parameter-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #667eea;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(102, 126, 234, 0.3);
+}
+
+.parameter-value {
+    font-weight: 700;
+    color: #667eea;
+}
+
+/* Modo experto - subida de archivos */
+.file-upload-area {
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.file-upload-area:hover {
+    border-color: #667eea;
+    background: #f0f4ff;
+}
+
+.file-upload-area.dragover {
+    border-color: #059669;
+    background: #ecfdf5;
+}
+
+.upload-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.upload-text {
+    color: #475569;
+    font-size: 0.95rem;
+}
+
+.upload-hint {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    margin-top: 8px;
+}
+
+/* Validación de formato */
+.format-valid {
+    color: #059669;
+    background: #ecfdf5;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+
+.format-error {
+    color: #dc2626;
+    background: #fee2e2;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
 /* Para los resultados JSON podemos darle formato más tarde */

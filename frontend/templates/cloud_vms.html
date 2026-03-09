@@ -1,0 +1,28 @@
+<div class="results-template">
+    <div style="background: #e0f2fe; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+        <div style="font-size: 1.2rem; color: #1e293b;">⚡ Consumo energético total</div>
+        <div style="font-size: 2.5rem; font-weight: 700; color: #0284c7; margin: 10px 0;">{{objective_value}} W</div>
+        <div style="font-size: 0.9rem; color: #64748b;">
+            minimizado respetando restricciones de capacidad y afinidad
+        </div>
+    </div>
+    
+    <h4 style="color: #1e293b; margin-bottom: 15px;">☁️ Asignación de VMs a servidores</h4>
+    
+    <table style="width: 100%; border-collapse: collapse;">
+        <tr style="background: #e2e8f0; font-weight: 600;">
+            <th style="padding: 12px; text-align: left;">VM</th>
+            <th style="padding: 12px; text-align: left;">Servidor</th>
+            <th style="padding: 12px; text-align: right;">CPU</th>
+            <th style="padding: 12px; text-align: right;">RAM</th>
+        </tr>
+        {{#each assignments}}
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+            <td style="padding: 12px;">{{vm}}</td>
+            <td style="padding: 12px;">{{server}}</td>
+            <td style="padding: 12px; text-align: right;">{{cpu}} cores</td>
+            <td style="padding: 12px; text-align: right;">{{ram}} GB</td>
+        </tr>
+        {{/each}}
+    </table>
+</div>

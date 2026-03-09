@@ -1,0 +1,26 @@
+<div class="results-template">
+    <div style="background: #f0f9ff; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+        <div style="font-size: 1.2rem; color: #1e293b;">🎯 Beneficio total esperado</div>
+        <div style="font-size: 2.5rem; font-weight: 700; color: #059669; margin: 10px 0;">{{objective_value}} €</div>
+        <div style="font-size: 0.9rem; color: #64748b;">en un horizonte de 7 días, considerando ingresos, costes y penalizaciones por caducidad</div>
+    </div>
+    
+    <h4 style="color: #1e293b; margin-bottom: 15px;">📦 Asignaciones óptimas</h4>
+    
+    <table style="width: 100%; border-collapse: collapse;">
+        <tr style="background: #e2e8f0; font-weight: 600;">
+            <th style="padding: 12px; text-align: left;">Producto</th>
+            <th style="padding: 12px; text-align: left;">Tienda</th>
+            <th style="padding: 12px; text-align: right;">Unidades</th>
+            <th style="padding: 12px; text-align: right;">Exceso</th>
+        </tr>
+        {{#each asignaciones}}
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+            <td style="padding: 12px;">{{producto}}</td>
+            <td style="padding: 12px;">{{tienda}}</td>
+            <td style="padding: 12px; text-align: right;">{{unidades}}</td>
+            <td style="padding: 12px; text-align: right; color: {{#if exceso}}#dc2626{{else}}#64748b{{/if}};">{{exceso}}</td>
+        </tr>
+        {{/each}}
+    </table>
+</div>

@@ -10,6 +10,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/miruna/nexus/backend/src/main.cpp" "CMakeFiles/nexus.dir/src/main.cpp.o" "gcc" "CMakeFiles/nexus.dir/src/main.cpp.o.d"
   "/home/miruna/nexus/backend/src/problems/assignment/AssignmentModel.cpp" "CMakeFiles/nexus.dir/src/problems/assignment/AssignmentModel.cpp.o" "gcc" "CMakeFiles/nexus.dir/src/problems/assignment/AssignmentModel.cpp.o.d"
+  "/home/miruna/nexus/backend/src/problems/assignment/instances/cloud_vms.cpp" "CMakeFiles/nexus.dir/src/problems/assignment/instances/cloud_vms.cpp.o" "gcc" "CMakeFiles/nexus.dir/src/problems/assignment/instances/cloud_vms.cpp.o.d"
+  "/home/miruna/nexus/backend/src/problems/assignment/instances/defense_missions.cpp" "CMakeFiles/nexus.dir/src/problems/assignment/instances/defense_missions.cpp.o" "gcc" "CMakeFiles/nexus.dir/src/problems/assignment/instances/defense_missions.cpp.o.d"
   "/home/miruna/nexus/backend/src/problems/assignment/instances/fmcg_productos_tiendas.cpp" "CMakeFiles/nexus.dir/src/problems/assignment/instances/fmcg_productos_tiendas.cpp.o" "gcc" "CMakeFiles/nexus.dir/src/problems/assignment/instances/fmcg_productos_tiendas.cpp.o.d"
   )
 

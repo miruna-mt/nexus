@@ -1,0 +1,27 @@
+<div class="results-template">
+    <div style="background: #fee2e2; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+        <div style="font-size: 1.2rem; color: #1e293b;">🎯 Efectividad de la misión ponderada</div>
+        <div style="font-size: 2.5rem; font-weight: 700; color: #b91c1c; margin: 10px 0;">{{objective_value}}</div>
+        <div style="font-size: 0.9rem; color: #64748b;">
+            Maximiza el valor estratégico total según prioridades asignadas 
+            <em>(metodología de la Fuerza Aérea de EE.UU.)</em>
+        </div>
+    </div>
+    
+    <h4 style="color: #1e293b; margin-bottom: 15px;">🎖️ Asignación de recursos</h4>
+    
+    <table style="width: 100%; border-collapse: collapse;">
+        <tr style="background: #e2e8f0; font-weight: 600;">
+            <th style="padding: 12px; text-align: left;">Recurso</th>
+            <th style="padding: 12px; text-align: left;">Misión</th>
+            <th style="padding: 12px; text-align: right;">Prioridad</th>
+        </tr>
+        {{#each assignments}}
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+            <td style="padding: 12px;">{{resource}}</td>
+            <td style="padding: 12px;">{{mission}}</td>
+            <td style="padding: 12px; text-align: right; font-weight: 600; color: #b91c1c;">{{priority}}</td>
+        </tr>
+        {{/each}}
+    </table>
+</div>

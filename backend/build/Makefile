@@ -177,6 +177,54 @@ src/problems/assignment/AssignmentModel.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nexus.dir/build.make CMakeFiles/nexus.dir/src/problems/assignment/AssignmentModel.cpp.s
 .PHONY : src/problems/assignment/AssignmentModel.cpp.s
 
+src/problems/assignment/instances/cloud_vms.o: src/problems/assignment/instances/cloud_vms.cpp.o
+.PHONY : src/problems/assignment/instances/cloud_vms.o
+
+# target to build an object file
+src/problems/assignment/instances/cloud_vms.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nexus.dir/build.make CMakeFiles/nexus.dir/src/problems/assignment/instances/cloud_vms.cpp.o
+.PHONY : src/problems/assignment/instances/cloud_vms.cpp.o
+
+src/problems/assignment/instances/cloud_vms.i: src/problems/assignment/instances/cloud_vms.cpp.i
+.PHONY : src/problems/assignment/instances/cloud_vms.i
+
+# target to preprocess a source file
+src/problems/assignment/instances/cloud_vms.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nexus.dir/build.make CMakeFiles/nexus.dir/src/problems/assignment/instances/cloud_vms.cpp.i
+.PHONY : src/problems/assignment/instances/cloud_vms.cpp.i
+
+src/problems/assignment/instances/cloud_vms.s: src/problems/assignment/instances/cloud_vms.cpp.s
+.PHONY : src/problems/assignment/instances/cloud_vms.s
+
+# target to generate assembly for a file
+src/problems/assignment/instances/cloud_vms.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nexus.dir/build.make CMakeFiles/nexus.dir/src/problems/assignment/instances/cloud_vms.cpp.s
+.PHONY : src/problems/assignment/instances/cloud_vms.cpp.s
+
+src/problems/assignment/instances/defense_missions.o: src/problems/assignment/instances/defense_missions.cpp.o
+.PHONY : src/problems/assignment/instances/defense_missions.o
+
+# target to build an object file
+src/problems/assignment/instances/defense_missions.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nexus.dir/build.make CMakeFiles/nexus.dir/src/problems/assignment/instances/defense_missions.cpp.o
+.PHONY : src/problems/assignment/instances/defense_missions.cpp.o
+
+src/problems/assignment/instances/defense_missions.i: src/problems/assignment/instances/defense_missions.cpp.i
+.PHONY : src/problems/assignment/instances/defense_missions.i
+
+# target to preprocess a source file
+src/problems/assignment/instances/defense_missions.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nexus.dir/build.make CMakeFiles/nexus.dir/src/problems/assignment/instances/defense_missions.cpp.i
+.PHONY : src/problems/assignment/instances/defense_missions.cpp.i
+
+src/problems/assignment/instances/defense_missions.s: src/problems/assignment/instances/defense_missions.cpp.s
+.PHONY : src/problems/assignment/instances/defense_missions.s
+
+# target to generate assembly for a file
+src/problems/assignment/instances/defense_missions.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nexus.dir/build.make CMakeFiles/nexus.dir/src/problems/assignment/instances/defense_missions.cpp.s
+.PHONY : src/problems/assignment/instances/defense_missions.cpp.s
+
 src/problems/assignment/instances/fmcg_productos_tiendas.o: src/problems/assignment/instances/fmcg_productos_tiendas.cpp.o
 .PHONY : src/problems/assignment/instances/fmcg_productos_tiendas.o
 
@@ -216,6 +264,12 @@ help:
 	@echo "... src/problems/assignment/AssignmentModel.o"
 	@echo "... src/problems/assignment/AssignmentModel.i"
 	@echo "... src/problems/assignment/AssignmentModel.s"
+	@echo "... src/problems/assignment/instances/cloud_vms.o"
+	@echo "... src/problems/assignment/instances/cloud_vms.i"
+	@echo "... src/problems/assignment/instances/cloud_vms.s"
+	@echo "... src/problems/assignment/instances/defense_missions.o"
+	@echo "... src/problems/assignment/instances/defense_missions.i"
+	@echo "... src/problems/assignment/instances/defense_missions.s"
 	@echo "... src/problems/assignment/instances/fmcg_productos_tiendas.o"
 	@echo "... src/problems/assignment/instances/fmcg_productos_tiendas.i"
 	@echo "... src/problems/assignment/instances/fmcg_productos_tiendas.s"

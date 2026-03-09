@@ -1,0 +1,84 @@
+{
+  "resources": [
+    {
+      "id": "H001",
+      "type": "helicopter",
+      "capacity": 12,
+      "range_km": 500,
+      "speed_kph": 250,
+      "available": true,
+      "compatible_mission_types": ["rescue", "transport", "surveillance"]
+    },
+    {
+      "id": "H002",
+      "type": "helicopter",
+      "capacity": 8,
+      "range_km": 400,
+      "speed_kph": 240,
+      "available": true,
+      "compatible_mission_types": ["rescue", "surveillance"]
+    },
+    {
+      "id": "D001",
+      "type": "drone",
+      "capacity": 2,
+      "range_km": 150,
+      "speed_kph": 120,
+      "available": true,
+      "compatible_mission_types": ["surveillance", "reconnaissance"]
+    },
+    {
+      "id": "D002",
+      "type": "drone",
+      "capacity": 3,
+      "range_km": 200,
+      "speed_kph": 130,
+      "available": true,
+      "compatible_mission_types": ["surveillance", "reconnaissance"]
+    },
+    {
+      "id": "T001",
+      "type": "troops",
+      "capacity": 20,
+      "range_km": 300,
+      "speed_kph": 80,
+      "available": true,
+      "compatible_mission_types": ["rescue", "security", "transport"]
+    }
+  ],
+  "missions": [
+    {
+      "id": "M001",
+      "name": "Mountain Rescue",
+      "priority": 10,
+      "min_resources_needed": 5,
+      "required_resource_type": "helicopter",
+      "max_risk_tolerance": 0.7,
+      "location_x": 120,
+      "location_y": 80,
+      "deadline_hours": 4
+    },
+    {
+      "id": "M002",
+      "name": "Coastal Surveillance",
+      "priority": 7,
+      "min_resources_needed": 2,
+      "required_resource_type": "drone",
+      "max_risk_tolerance": 0.9,
+      "location_x": 200,
+      "location_y": 50,
+      "deadline_hours": 8
+    },
+    {
+      "id": "M003",
+      "name": "Supply Transport",
+      "priority": 8,
+      "min_resources_needed": 10,
+      "required_resource_type": "troops",
+      "max_risk_tolerance": 0.5,
+      "location_x": 80,
+      "location_y": 150,
+      "deadline_hours": 6
+    }
+  ]
+}
