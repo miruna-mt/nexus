@@ -12,7 +12,8 @@ Built on a **taxonomy of optimization problems** that transcend industries:
 
 Nexus helps you solve resource allocation problems across different industries with a simple web interface and powerful optimization engine.
 
-Instead of organizing by sector, Nexus organizes by **problem type**. Each problem type has a core mathematical model, and industries are just instances with different data. Just select a scenario, tweak the parameters or upload your own data — the engine does the math, you get the answers.
+Instead of organizing by sector, Nexus organizes by problem type. Each problem type has a core mathematical model, and industries are just instances with different data. Just select a scenario, tweak the parameters or upload your own data — the engine does the math, you get the answers.
+
 ---
 
 ## ✨ Features
