@@ -43,8 +43,11 @@ cd nexus
 python -m venv venv && venv\Scripts\activate
 pip install fastapi uvicorn ortools
 uvicorn app.main:app --reload --port 8080
+``` 
 
 Open http://localhost:8080
+
+---
 
 ## 📊 Scenarios
 
