@@ -106,3 +106,13 @@ MIT License — free to use, modify, and distribute.
 ## 👤 Author
 
 **Miruna Trufin** — Built by a strategist who codes.
+
+---
+
+## 🏛️ About MMTrufin StratEdge
+
+Nexus is built by **[MMTrufin StratEdge](https://mtrufin.com)** — an elite, independent consulting boutique specialized in eliminating the translation gap between boardroom strategy and complex execution.
+
+We audit corporate system logic, data flows, and relational architecture to ensure technical implementation aligns perfectly with financial targets. Serving medium to large enterprises across heavily regulated, high-volume, and data-dense industries — including banking, FMCG, media, and security networks.
+
+**Nexus is the proof that we do not stop at the slide deck. We build the engine.**
