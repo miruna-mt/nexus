@@ -56,7 +56,6 @@ let currentLevel = 'demo';
 let map = null;
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM cargado');
     const instanceSelect = document.getElementById('instance');
     if (instanceSelect) {
         while (instanceSelect.options.length > 1) {
@@ -164,7 +163,6 @@ function attachOptimizeEvent(isParametric) {
                 params[slider.dataset.param] = slider.value;
             });
             payload.params = params;
-            console.log('Enviando parametros:', params);
         }
 
         try {
@@ -175,7 +173,6 @@ function attachOptimizeEvent(isParametric) {
             });
             if (!response.ok) throw new Error('Error HTTP: ' + response.status);
             const data = await response.json();
-            console.log('Respuesta:', data);
 
             if (data.status === 'optimal') {
                 let html = '';
@@ -189,7 +186,7 @@ function attachOptimizeEvent(isParametric) {
                 }
 
                 if (config.problem_type === 'routing') {
-                    html += '<div style="background: #f0f9ff; padding: 20px; border-radius: 12px; margin-bottom: 20px;"><div style="font-size: 1.2rem; color: #1e293b;">Distancia total recorrida</div><div style="font-size: 2.5rem; font-weight: 700; color: #059669; margin: 10px 0;">' + data.objective_value + ' km</div><div style="font-size: 0.9rem; color: #64748b;">Rutas optimizadas con OR-Tools</div></div>';
+                    html += '<div style="background: #f0f9ff; padding: 20px; border-radius: 12px; margin-bottom: 20px;"><div style="font-size: 1.2rem; color: #1e293b;">Distancia total recorrida</div><div style="font-size: 2.5rem; font-weight: 700; color: #059669; margin: 10px 0;">' + data.objective_value + ' km</div></div>';
                     html += '<h4 style="color: #1e293b; margin-bottom: 15px;">Rutas asignadas</h4><div style="display: flex; flex-direction: column; gap: 15px;">';
                     if (data.rutas && data.rutas.length > 0) {
                         data.rutas.forEach(ruta => {
