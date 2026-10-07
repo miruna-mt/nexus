@@ -1,0 +1,59 @@
+{
+  "proyectos": [
+    {
+      "id": 1,
+      "nombre": "Cliente A (E-commerce)",
+      "habilidades_requeridas": ["SEO", "SEM", "Analytics"],
+      "horas": 120,
+      "valor": 18000
+    },
+    {
+      "id": 2,
+      "nombre": "Cliente B (Startup Tech)",
+      "habilidades_requeridas": ["SocialAds", "Content"],
+      "horas": 80,
+      "valor": 12000
+    },
+    {
+      "id": 3,
+      "nombre": "Cliente C (Gran Empresa)",
+      "habilidades_requeridas": ["SEO", "SEM", "SocialAds", "Analytics"],
+      "horas": 200,
+      "valor": 55000
+    },
+    {
+      "id": 4,
+      "nombre": "Cliente D (ONG)",
+      "habilidades_requeridas": ["Email", "SocialAds", "Content"],
+      "horas": 90,
+      "valor": 8000
+    },
+    {
+      "id": 5,
+      "nombre": "Cliente E (PyME)",
+      "habilidades_requeridas": ["SEO", "Email", "Strategy"],
+      "horas": 100,
+      "valor": 28000
+    }
+  ],
+  "equipos": [
+    {
+      "id": 1,
+      "nombre": "Equipo Growth",
+      "especialidades": ["SEO", "SEM", "Analytics"],
+      "horas_disponibles": 200
+    },
+    {
+      "id": 2,
+      "nombre": "Equipo Brand",
+      "especialidades": ["SocialAds", "Content", "Email"],
+      "horas_disponibles": 180
+    },
+    {
+      "id": 3,
+      "nombre": "Equipo Full-Service",
+      "especialidades": ["SEO", "SEM", "SocialAds", "Email", "Analytics", "Strategy"],
+      "horas_disponibles": 350
+    }
+  ]
+}

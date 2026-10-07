@@ -1,0 +1,18 @@
+﻿{
+  "capital_total": 100000,
+  "aversion_riesgo": 2.0,
+  "activos": [
+    { "id": "A001", "nombre": "Acciones Tecnologicas", "rentabilidad": 0.12, "riesgo": 0.22, "limite_max": 0.30 },
+    { "id": "A002", "nombre": "Bonos del Estado", "rentabilidad": 0.03, "riesgo": 0.02, "limite_max": 0.50 },
+    { "id": "A003", "nombre": "Oro", "rentabilidad": 0.06, "riesgo": 0.12, "limite_max": 0.20 },
+    { "id": "A004", "nombre": "Inmobiliario", "rentabilidad": 0.08, "riesgo": 0.15, "limite_max": 0.25 },
+    { "id": "A005", "nombre": "Bonos Corporativos", "rentabilidad": 0.05, "riesgo": 0.06, "limite_max": 0.40 }
+  ],
+  "covarianzas": [
+    [0.0484, -0.00044, 0.00132, 0.0132, 0.0033],
+    [-0.00044, 0.0004, 0.00036, -0.00045, 0.00078],
+    [0.00132, 0.00036, 0.0144, 0.0018, 0.00144],
+    [0.0132, -0.00045, 0.0018, 0.0225, 0.00315],
+    [0.0033, 0.00078, 0.00144, 0.00315, 0.0036]
+  ]
+}

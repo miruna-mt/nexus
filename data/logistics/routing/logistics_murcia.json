@@ -1,0 +1,33 @@
+﻿{
+  "vehiculos": [
+    { "id": "V1", "capacidad": 150, "costo_km": 1.0 },
+    { "id": "V2", "capacidad": 150, "costo_km": 1.0 },
+    { "id": "V3", "capacidad": 150, "costo_km": 1.0 },
+    { "id": "V4", "capacidad": 150, "costo_km": 1.0 }
+  ],
+  "clientes": [
+    { "id": 1, "nombre": "Plataforma Logistica Consum (Las Torres de Cotillas)", "demanda": 20, "ventana_inicio": 0, "ventana_fin": 1000, "x": 38.0038, "y": -1.3092 },
+    { "id": 2, "nombre": "Centro Logistico Lidl (Lorqui)", "demanda": 25, "ventana_inicio": 0, "ventana_fin": 1000, "x": 38.0911, "y": -1.2406 },
+    { "id": 3, "nombre": "Bodegas La Purisima (Yecla)", "demanda": 18, "ventana_inicio": 0, "ventana_fin": 1000, "x": 38.6104, "y": -1.1032 },
+    { "id": 4, "nombre": "CACOOR Alhama", "demanda": 15, "ventana_inicio": 0, "ventana_fin": 1000, "x": 37.8240, "y": -1.3938 },
+    { "id": 5, "nombre": "Coop. Agricola del Sureste (Cartagena)", "demanda": 30, "ventana_inicio": 0, "ventana_fin": 1000, "x": 37.6648, "y": -0.9024 },
+    { "id": 6, "nombre": "Coop. Agricola Sagrado Corazon (Lorca)", "demanda": 25, "ventana_inicio": 0, "ventana_fin": 1000, "x": 37.6716, "y": -1.6988 },
+    { "id": 7, "nombre": "Coop. Agricola y Ganadera (Molina de Segura)", "demanda": 20, "ventana_inicio": 0, "ventana_fin": 1000, "x": 38.0525, "y": -1.2224 },
+    { "id": 8, "nombre": "Frutas Caravaca", "demanda": 22, "ventana_inicio": 0, "ventana_fin": 1000, "x": 38.1089, "y": -1.8601 },
+    { "id": 9, "nombre": "Cooperativa Agra (Calasparra)", "demanda": 18, "ventana_inicio": 0, "ventana_fin": 1000, "x": 38.2300, "y": -1.7000 },
+    { "id": 10, "nombre": "Bodegas San Isidro (Bullas)", "demanda": 15, "ventana_inicio": 0, "ventana_fin": 1000, "x": 38.0563, "y": -1.6538 },
+    { "id": 11, "nombre": "Mercabarna (Barcelona)", "demanda": 35, "ventana_inicio": 0, "ventana_fin": 1000, "x": 41.3311, "y": 2.1155 },
+    { "id": 12, "nombre": "Mercamadrid (Madrid)", "demanda": 40, "ventana_inicio": 0, "ventana_fin": 1000, "x": 40.3593, "y": -3.6616 },
+    { "id": 13, "nombre": "Mercadona Alcantarilla", "demanda": 20, "ventana_inicio": 0, "ventana_fin": 1000, "x": 37.9700, "y": -1.2251 },
+    { "id": 14, "nombre": "Carrefour Las Atalayas (Murcia)", "demanda": 18, "ventana_inicio": 0, "ventana_fin": 1000, "x": 37.9918, "y": -1.1135 }
+  ],
+  "deposito": {
+    "id": 0,
+    "nombre": "Mercamurcia (El Palmar)",
+    "x": 37.9858,
+    "y": -1.1368,
+    "ventana_inicio": 0,
+    "ventana_fin": 1000
+  },
+  "distancias": []
+}

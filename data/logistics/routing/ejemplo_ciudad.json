@@ -1,0 +1,21 @@
+{
+  "vehiculos": [
+    { "id": "V1", "capacidad": 100, "costo_km": 1.0 },
+    { "id": "V2", "capacidad": 100, "costo_km": 1.0 }
+  ],
+  "clientes": [
+    { "id": 1, "demanda": 20, "ventana_inicio": 0, "ventana_fin": 100 },
+    { "id": 2, "demanda": 30, "ventana_inicio": 0, "ventana_fin": 100 },
+    { "id": 3, "demanda": 25, "ventana_inicio": 0, "ventana_fin": 100 },
+    { "id": 4, "demanda": 15, "ventana_inicio": 0, "ventana_fin": 100 },
+    { "id": 5, "demanda": 10, "ventana_inicio": 0, "ventana_fin": 100 }
+  ],
+  "distancias": [
+    [0, 10, 15, 20, 25, 30],
+    [10, 0, 5, 10, 15, 20],
+    [15, 5, 0, 5, 10, 15],
+    [20, 10, 5, 0, 5, 10],
+    [25, 15, 10, 5, 0, 5],
+    [30, 20, 15, 10, 5, 0]
+  ]
+}

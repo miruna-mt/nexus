@@ -68,12 +68,11 @@ document.getElementById('optimizeBtn').addEventListener('click', async () => {
                         </tr>`;
                     });
                     
-                    html += '</table>';
+                    html += '</tr>';
                 } else {
                     html += '<p style="color: #64748b;">No hay asignaciones para mostrar</p>';
                 }
-            } 
-            else if (instance === 'defense_missions') {
+            } else if (instance === 'defense_missions') {
                 // Formato para Defense
                 html = `
                     <div style="background: #fee2e2; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
@@ -97,40 +96,38 @@ document.getElementById('optimizeBtn').addEventListener('click', async () => {
                     });
                     
                     html += '</table>';
-else if (instance === 'cloud_vms') {
-    // Formato para Cloud VMs
-    html = `
-        <div style="background: #e0f2fe; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
-            <div style="font-size: 1.2rem; color: #1e293b;">⚡ Consumo energético total</div>
-            <div style="font-size: 2.5rem; font-weight: 700; color: #0284c7; margin: 10px 0;">${data.objective_value} W</div>
-            <div style="font-size: 0.9rem; color: #64748b;">minimizado respetando restricciones de capacidad y afinidad</div>
-        </div>
-        <h4 style="color: #1e293b; margin-bottom: 15px;">☁️ Asignación de VMs a servidores</h4>
-    `;
-    
-    if (data.assignments && data.assignments.length > 0) {
-        html += '<table style="width: 100%; border-collapse: collapse;">';
-        html += '<tr style="background: #e2e8f0; font-weight: 600;"><th style="padding: 12px; text-align: left;">Máquina Virtual</th><th style="padding: 12px; text-align: left;">Servidor</th><th style="padding: 12px; text-align: right;">CPU</th><th style="padding: 12px; text-align: right;">RAM</th></tr>';
-        
-        data.assignments.forEach(a => {
-            html += `<tr style="border-bottom: 1px solid #e2e8f0;">
-                <td style="padding: 12px;">${a.vm}</td>
-                <td style="padding: 12px;">${a.server}</td>
-                <td style="padding: 12px; text-align: right;">${a.cpu} cores</td>
-                <td style="padding: 12px; text-align: right;">${a.ram} GB</td>
-            </tr>`;
-        });
-        
-        html += '</table>';
-        
-        if (data.servers_used && data.servers_used.length > 0) {
-            html += '<p style="margin-top: 15px; color: #475569;"><strong>Servidores activos:</strong> ' + data.servers_used.join(', ') + '</p>';
-        }
-    } else {
-        html += '<p style="color: #64748b;">No hay asignaciones para mostrar</p>';
-    }
-}
-
+                } else {
+                    html += '<p style="color: #64748b;">No hay asignaciones para mostrar</p>';
+                }
+            } else if (instance === 'cloud_vms') {
+                // Formato para Cloud VMs
+                html = `
+                    <div style="background: #e0f2fe; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+                        <div style="font-size: 1.2rem; color: #1e293b;">⚡ Consumo energético total</div>
+                        <div style="font-size: 2.5rem; font-weight: 700; color: #0284c7; margin: 10px 0;">${data.objective_value} W</div>
+                        <div style="font-size: 0.9rem; color: #64748b;">minimizado respetando restricciones de capacidad y afinidad</div>
+                    </div>
+                    <h4 style="color: #1e293b; margin-bottom: 15px;">☁️ Asignación de VMs a servidores</h4>
+                `;
+                
+                if (data.assignments && data.assignments.length > 0) {
+                    html += '<table style="width: 100%; border-collapse: collapse;">';
+                    html += '<tr style="background: #e2e8f0; font-weight: 600;"><th style="padding: 12px; text-align: left;">Máquina Virtual</th><th style="padding: 12px; text-align: left;">Servidor</th><th style="padding: 12px; text-align: right;">CPU</th><th style="padding: 12px; text-align: right;">RAM</th></tr>';
+                    
+                    data.assignments.forEach(a => {
+                        html += `<tr style="border-bottom: 1px solid #e2e8f0;">
+                            <td style="padding: 12px;">${a.vm}</td>
+                            <td style="padding: 12px;">${a.server}</td>
+                            <td style="padding: 12px; text-align: right;">${a.cpu} cores</td>
+                            <td style="padding: 12px; text-align: right;">${a.ram} GB</td>
+                        </tr>`;
+                    });
+                    
+                    html += '</table>';
+                    
+                    if (data.servers_used && data.servers_used.length > 0) {
+                        html += '<p style="margin-top: 15px; color: #475569;"><strong>Servidores activos:</strong> ' + data.servers_used.join(', ') + '</p>';
+                    }
                 } else {
                     html += '<p style="color: #64748b;">No hay asignaciones para mostrar</p>';
                 }

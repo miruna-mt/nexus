@@ -1,0 +1,305 @@
+{
+  "vehiculos": [
+    {
+      "id": "V1",
+      "capacidad": 300,
+      "costo_km": 1.0
+    },
+    {
+      "id": "V2",
+      "capacidad": 300,
+      "costo_km": 1.0
+    },
+    {
+      "id": "V3",
+      "capacidad": 300,
+      "costo_km": 1.0
+    },
+    {
+      "id": "V4",
+      "capacidad": 300,
+      "costo_km": 1.0
+    }
+  ],
+  "clientes": [
+    {
+      "id": 1,
+      "nombre": "Puerto de Totana",
+      "demanda": 13,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 38.33076772084429,
+      "y": -0.7912859319019481
+    },
+    {
+      "id": 2,
+      "nombre": "Universidad de Murcia",
+      "demanda": 19,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 38.031806690098115,
+      "y": -0.9890144407346381
+    },
+    {
+      "id": 3,
+      "nombre": "Centro Comercial de Cartagena",
+      "demanda": 21,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 38.11373848583247,
+      "y": -1.3100273923206067
+    },
+    {
+      "id": 4,
+      "nombre": "Parque Empresarial de Totana",
+      "demanda": 20,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 38.104545444724536,
+      "y": -0.5784146762107413
+    },
+    {
+      "id": 5,
+      "nombre": "Puerto de Jumilla",
+      "demanda": 33,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 37.69914285054645,
+      "y": -1.2631058354167042
+    },
+    {
+      "id": 6,
+      "nombre": "Puerto de Cartagena",
+      "demanda": 25,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 38.25881068267463,
+      "y": -0.996638477237967
+    },
+    {
+      "id": 7,
+      "nombre": "Parque Empresarial de Alhama",
+      "demanda": 44,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 37.78944682950177,
+      "y": -1.6809801789925836
+    },
+    {
+      "id": 8,
+      "nombre": "Polígono Industrial de Lorca",
+      "demanda": 37,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 38.50265070483242,
+      "y": -1.0154085439267977
+    },
+    {
+      "id": 9,
+      "nombre": "Polígono Industrial de Murcia",
+      "demanda": 16,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 38.01366072672924,
+      "y": -0.8152084258956209
+    },
+    {
+      "id": 10,
+      "nombre": "Puerto de Jumilla",
+      "demanda": 42,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 38.46207870310282,
+      "y": -0.8583205621339418
+    },
+    {
+      "id": 11,
+      "nombre": "Puerto de Totana",
+      "demanda": 15,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 37.858624009471015,
+      "y": -0.8888813954609591
+    },
+    {
+      "id": 12,
+      "nombre": "Puerto de Yecla",
+      "demanda": 17,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 38.085903751874284,
+      "y": -1.1858910870304102
+    },
+    {
+      "id": 13,
+      "nombre": "Puerto de Alhama",
+      "demanda": 36,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 37.76718567115156,
+      "y": -1.283764919895865
+    },
+    {
+      "id": 14,
+      "nombre": "Hospital de Molina",
+      "demanda": 28,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 37.98116772001332,
+      "y": -1.75254714262985
+    },
+    {
+      "id": 15,
+      "nombre": "Universidad de Alhama",
+      "demanda": 18,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 37.827083919174086,
+      "y": -1.3378070501326549
+    },
+    {
+      "id": 16,
+      "nombre": "Universidad de Molina",
+      "demanda": 50,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 38.258542077223396,
+      "y": -1.262314152462788
+    },
+    {
+      "id": 17,
+      "nombre": "Parque Empresarial de Jumilla",
+      "demanda": 27,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 38.26087566754464,
+      "y": -1.245919203006789
+    },
+    {
+      "id": 18,
+      "nombre": "Parque Empresarial de Murcia",
+      "demanda": 43,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 37.41253033872943,
+      "y": -1.01090672779704
+    },
+    {
+      "id": 19,
+      "nombre": "Polígono Industrial de Totana",
+      "demanda": 21,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 38.085233019431996,
+      "y": -1.1836754935720664
+    },
+    {
+      "id": 20,
+      "nombre": "Centro Comercial de Caravaca",
+      "demanda": 37,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 37.87109746036531,
+      "y": -1.3754464057655098
+    },
+    {
+      "id": 21,
+      "nombre": "Estación de Totana",
+      "demanda": 36,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 38.036117445471554,
+      "y": -0.8177474248571486
+    },
+    {
+      "id": 22,
+      "nombre": "Universidad de Totana",
+      "demanda": 48,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 38.207036350011805,
+      "y": -1.2906620853403434
+    },
+    {
+      "id": 23,
+      "nombre": "Parque Empresarial de Murcia",
+      "demanda": 46,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 38.48529611748607,
+      "y": -0.7560398103226252
+    },
+    {
+      "id": 24,
+      "nombre": "Hospital de Yecla",
+      "demanda": 40,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 37.48362499471541,
+      "y": -1.3361551619569996
+    },
+    {
+      "id": 25,
+      "nombre": "Universidad de Molina",
+      "demanda": 44,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 38.09636446781892,
+      "y": -1.5935756894202355
+    },
+    {
+      "id": 26,
+      "nombre": "Puerto de Jumilla",
+      "demanda": 16,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 37.97493207404995,
+      "y": -0.844925613299147
+    },
+    {
+      "id": 27,
+      "nombre": "Parque Empresarial de Cieza",
+      "demanda": 11,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 37.74662798432737,
+      "y": -0.627624481698741
+    },
+    {
+      "id": 28,
+      "nombre": "Centro Comercial de Yecla",
+      "demanda": 44,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 38.07667268207148,
+      "y": -1.3861630514697236
+    },
+    {
+      "id": 29,
+      "nombre": "Parque Empresarial de Cartagena",
+      "demanda": 50,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 37.83602449430495,
+      "y": -1.1539347462446736
+    },
+    {
+      "id": 30,
+      "nombre": "Universidad de Lorca",
+      "demanda": 18,
+      "ventana_inicio": 0,
+      "ventana_fin": 1000,
+      "x": 37.714653596394676,
+      "y": -1.555147401799876
+    }
+  ],
+  "deposito": {
+    "id": 0,
+    "nombre": "ZAL de Murcia (Sangonera la Verde)",
+    "x": 37.9065,
+    "y": -1.2301,
+    "ventana_inicio": 0,
+    "ventana_fin": 1000
+  },
+  "distancias": []
+}
