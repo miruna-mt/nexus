@@ -1,31 +1,37 @@
-# Nexus
+﻿# Nexus
+
 **Connect. Optimize. Decide.**
 
 A multi-industry optimization engine that turns business problems into optimal decisions.
-
-Built on a **taxonomy of optimization problems** that transcend industries:
-📦 **Allocation** | 🗺️ **Routing** | 📊 **Inventory** | 💰 **Portfolio** | 📍 **Location** | 🎲 **Stochastic** | 📅 **Scheduling**
 
 ---
 
 ## 🧠 What is Nexus?
 
-Nexus helps you solve resource allocation problems across different industries with a simple web interface and powerful optimization engine.
+Nexus solves resource allocation problems across industries with a simple web interface and a powerful optimization engine.
 
-Instead of organizing by sector, Nexus organizes by problem type. Each problem type has a core mathematical model, and industries are just instances with different data. Just select a scenario, tweak the parameters or upload your own data — the engine does the math, you get the answers.
+Instead of organizing by sector, Nexus organizes by **problem type**. Each problem type has a core mathematical model, and industries are just instances with different data.
+
+| Problem type | What it solves |
+|--------------|----------------|
+| 🚚 **Routing** | Find the optimal route between multiple points |
+| 📊 **Assignment** | Assign resources to tasks |
+| 📦 **Inventory** | Decide when and how much to order |
+| 💰 **Portfolio** | Select combinations under risk |
 
 ---
 
 ## ✨ Features
 
-- 🔧 **Generic core** – Optimization engine built with Google OR-Tools
-- 🧩 **Problem-based taxonomy** – Same code, different data
-- 🌐 **Web interface** – User-friendly frontend with 3 interaction levels
-- 📊 **3 instances already implemented** (FMCG, Defense, Cloud) out of 21 planned
-- 🔄 **Easily extensible** – Add a new instance by creating:
-  - C++ code in `backend/src/problems/[tipo]/instances/`
-  - Description in `frontend/descriptions/[instancia].html`
-  - Result template in `frontend/templates/[instancia].html`
+- 🔧 **Generic core** — Built with Google OR-Tools
+- 🧩 **Problem-based taxonomy** — Same engine, different data
+- 🌐 **Web interface** with 3 interaction levels:
+  - **Demo** — Predefined scenarios
+  - **Parametric** — Adjust parameters with sliders
+  - **Expert** — Upload your own JSON *(coming soon)*
+- 🗺️ **Interactive maps** for routing
+- 📖 **Narrative results** — Every optimization explains what happened and why
+- 🔄 **Easily extensible** — Add an instance with a JSON file, an HTML description, and one line in the frontend
 
 ---
 
@@ -33,63 +39,67 @@ Instead of organizing by sector, Nexus organizes by problem type. Each problem t
 
 ```bash
 git clone https://github.com/miruna-mt/nexus.git
-cd nexus/backend && mkdir build && cd build
-cmake .. && make
-./nexus
-# Then open http://localhost:8080
-```
+cd nexus
+python -m venv venv && venv\Scripts\activate
+pip install fastapi uvicorn ortools
+uvicorn app.main:app --reload --port 8080
+
+Open http://localhost:8080
+
+## 📊 Scenarios
+
+Three instances per problem type. One implemented, two planned.
+
+| Routing | Status |
+|---------|--------|
+| 🍊 Agri-food distribution (Murcia) | ✅ |
+| Last-mile delivery | 🔜 |
+| Industrial maintenance | 🔜 |
+
+| Assignment | Status |
+|------------|--------|
+| 📣 Marketing agency projects | ✅ |
+| Cloud infrastructure | 🔜 |
+| Shift scheduling | 🔜 |
+
+| Inventory | Status |
+|-----------|--------|
+| 🛒 Supermarket perishables | ✅ |
+| Defense ammunition | 🔜 |
+| Energy storage | 🔜 |
+
+| Portfolio | Status |
+|-----------|--------|
+| 💹 Markowitz investment | ✅ |
+| R&D project selection | 🔜 |
+| Marketing budget allocation | 🔜 |
 
 ---
 
-## 🏗️ Project Structure
+## 🏗️ Architecture
 
-```
-nexus/
-├── backend/
-│   ├── src/
-│   │   ├── core/               # Abstract optimization engine
-│   │   ├── problems/            # Problem taxonomy
-│   │   │   ├── assignment/      # Assignment models
-│   │   │   │   └── instances/   # FMCG, Defense, Cloud...
-│   │   │   ├── routing/         # (pending)
-│   │   │   └── ...
-│   │   └── data/                # JSON data for each instance
-│   └── build/
-├── frontend/
-│   ├── index.html
-│   ├── style.css
-│   ├── script.js
-│   ├── descriptions/            # HTML descriptions per instance
-│   │   ├── fmcg_productos_tiendas.html
-│   │   ├── defense_missions.html
-│   │   └── cloud_vms.html
-│   └── templates/                # Result templates per instance
-│       ├── fmcg_productos_tiendas.html
-│       ├── defense_missions.html
-│       └── cloud_vms.html
-└── docs/
+Every model follows the same contract:
+
+```python
+SetParams()      # optional user parameters
+cargar_datos()   # load JSON data
+build()          # variables, constraints, objective
+solve()          # run OR-Tools
+get_results()    # JSON output + narrative
 ```
 
----
+**Adding a new instance**: JSON + description + one line in the config. Nothing else.
 
-## ✅ Implemented Instances
-
-| Problem Type | Instance | Status |
-|--------------|----------|--------|
-| Assignment | FMCG · Products to Stores | ✅ |
-| Assignment | Defense · Mission Assignment | ✅ |
-| Assignment | Cloud · Virtual Machine Allocation | ✅ |
-| Routing | Logistics · Delivery | ⏳ |
-| ... | (18 more planned) | ⏳ |
+**Adding a new problem type**: one new model file. Plugs into the same API and the same UI.
 
 ---
 
 ## 📄 License
 
-MIT License – feel free to use, modify, and distribute.
+MIT License — free to use, modify, and distribute.
 
 ---
 
 ## 👤 Author
 
-**Miruna Trufin** – Simplifying the impossible, one 'what if...?' at a time.
+**Miruna Trufin** — Built by a strategist who codes.
