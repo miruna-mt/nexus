@@ -1,4 +1,4 @@
-﻿from ortools.math_opt.python import mathopt
+from ortools.math_opt.python import mathopt
 import json
 
 
@@ -119,9 +119,9 @@ class PortfolioModel:
         riesgo_portfolio = varianza_total ** 0.5
 
         narrative = {
-            "titular": f"Cartera optima (Markowitz): {round(rentabilidad_total*100, 2)}% de rentabilidad esperada con {round(riesgo_portfolio*100, 2)}% de volatilidad.",
-            "comparacion": "El modelo cuadratico tiene en cuenta las correlaciones entre activos. Por eso la cartera esta mas diversificada que con el modelo lineal simple.",
-            "insight": f"Markowitz (Premio Nobel 1990) demuestra que la diversificacion reduce el riesgo sin sacrificar rentabilidad. Esta cartera usa {len(cartera)} activos."
+            "titular": f"Optimal portfolio \u00B7 {round(rentabilidad_total*100, 2)}% return \u00B7 {round(riesgo_portfolio*100, 2)}% volatility",
+            "comparacion": "Quadratic optimization accounts for correlations \u2014 a more diversified allocation than the linear model.",
+            "insight": f"Markowitz (Nobel Prize, 1990). This portfolio holds {len(cartera)} assets."
         }
 
         return {

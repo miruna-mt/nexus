@@ -1,4 +1,4 @@
-﻿from ortools.linear_solver import pywraplp
+from ortools.linear_solver import pywraplp
 import json
 
 class InventoryModel:
@@ -123,6 +123,30 @@ class InventoryModel:
         ahorro = coste_naive - coste_total
         ahorro_pct = round((ahorro / coste_naive) * 100, 1) if coste_naive > 0 else 0
 
+        # Cost breakdown (para la UI)
+        coste_almacenaje = 0.05
+        coste_rotura = 2.0
+        if self.params:
+            if "coste_almacenaje" in self.params:
+                coste_almacenaje = float(self.params["coste_almacenaje"])
+            if "coste_rotura" in self.params:
+                coste_rotura = float(self.params["coste_rotura"])
+
+        total_ordering = 0.0
+        total_storage = 0.0
+        total_stockout = 0.0
+        for p in range(self.num_productos):
+            for t in range(self.horizonte):
+                total_ordering += self.hacer_pedido[p][t].solution_value() * coste_pedido
+                total_storage += self.stock[p][t].solution_value() * coste_almacenaje
+                total_stockout += self.rotura[p][t].solution_value() * coste_rotura
+
+        cost_breakdown = {
+            "ordering": round(total_ordering, 2),
+            "storage": round(total_storage, 2),
+            "stockout": round(total_stockout, 2)
+        }
+
         pedidos_programados = []
         for p in range(self.num_productos):
             for t in range(self.horizonte):
@@ -149,19 +173,20 @@ class InventoryModel:
         roturas_totales = sum(r["total_rotura"] for r in resumen)
 
         if roturas_totales == 0:
-            insight_roturas = "Cero roturas de stock durante las 12 semanas. Ahorros tipicos del 30-50% estan documentados en la literatura academica (modelo Economic Order Quantity (EOQ) del MIT Sloan School of Management)."
+            insight_roturas = "Zero stockouts across 12 weeks. Literature documents 30\u201350% savings with EOQ."
         else:
-            insight_roturas = f"{roturas_totales} unidades no pudieron venderse por falta de stock."
+            insight_roturas = f"{roturas_totales} units lost to stockouts."
 
         narrative = {
-            "titular": f"Estrategia de pedidos optima: {coste_total:,.2f} EUR en 12 semanas, con {num_pedidos} pedidos programados.",
-            "comparacion": f"Pedir la demanda exacta cada semana costaria {coste_naive:,.2f} EUR. El ahorro es de {ahorro:,.2f} EUR ({ahorro_pct}%). Referencia: modelo EOQ (MIT Sloan School of Management).",
+            "titular": f"Optimal ordering \u00B7 \u20AC{coste_total:,.2f} over 12 weeks \u00B7 {num_pedidos} orders",
+            "comparacion": f"Ordering weekly on demand: \u20AC{coste_naive:,.2f}. Savings: \u20AC{ahorro:,.2f} ({ahorro_pct}%). EOQ model (MIT Sloan).",
             "insight": insight_roturas
         }
 
         return {
             "status": "optimal",
             "objective_value": coste_total,
+            "cost_breakdown": cost_breakdown,
             "pedidos": pedidos_programados,
             "resumen": resumen,
             "narrative": narrative

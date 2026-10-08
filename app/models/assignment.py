@@ -1,4 +1,4 @@
-﻿from ortools.linear_solver import pywraplp
+from ortools.linear_solver import pywraplp
 import json
 
 class AssignmentModel:
@@ -128,13 +128,13 @@ class AssignmentModel:
         porcentaje = round((valor_total / valor_total_posible) * 100, 1) if valor_total_posible > 0 else 0
 
         if proyectos_no_asignados:
-            insight = f"Proyectos no asignados por falta de capacidad: {', '.join(proyectos_no_asignados)}."
+            insight = f"Unassigned (capacity limit): {', '.join(proyectos_no_asignados)}."
         else:
-            insight = "Todos los proyectos han sido asignados a un equipo compatible."
+            insight = "All projects assigned to a compatible team."
 
         narrative = {
-            "titular": f"Se han asignado {len(asignados)} de {self.num_proyectos} proyectos, generando {valor_total:,.0f} EUR ({porcentaje}% del valor total posible).",
-            "comparacion": f"El valor total de los {self.num_proyectos} proyectos disponibles es de {valor_total_posible:,.0f} EUR.",
+            "titular": f"{len(asignados)} of {self.num_proyectos} projects assigned \u00B7 \u20AC{valor_total:,.0f} \u00B7 {porcentaje}% of maximum value",
+            "comparacion": f"Total available value: \u20AC{valor_total_posible:,.0f}.",
             "insight": insight
         }
 

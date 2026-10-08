@@ -1,4 +1,4 @@
-﻿from ortools.constraint_solver import routing_enums_pb2
+from ortools.constraint_solver import routing_enums_pb2
 from ortools.constraint_solver import pywrapcp
 import json
 import math
@@ -149,12 +149,12 @@ class RoutingModel:
 
         num_vehiculos_usados = len(rutas)
         num_clientes_visitados = sum(len(r["paradas"]) for r in rutas)
-        vehiculos_str = f"{num_vehiculos_usados} de {self.num_vehiculos}"
+        vehiculos_str = f"{num_vehiculos_usados} of {self.num_vehiculos}"
 
         narrative = {
-            "titular": f"Ruta optima calculada en {total_distance_km} km usando {vehiculos_str} vehiculos para visitar {num_clientes_visitados} destinos.",
-            "comparacion": f"Si cada cliente se visitara en un viaje separado desde el deposito, la distancia total seria de {round(2 * total_distance_km, 1)} km aproximadamente.",
-            "insight": "El algoritmo ha agrupado los clientes geograficamente para minimizar los desplazamientos."
+            "titular": f"Optimal route \u00B7 {total_distance_km} km \u00B7 {vehiculos_str} vehicles \u00B7 {num_clientes_visitados} stops",
+            "comparacion": f"Serving each stop as a separate round trip: ~{round(2 * total_distance_km, 1)} km.",
+            "insight": "Stops grouped geographically to minimize travel."
         }
 
         return {
