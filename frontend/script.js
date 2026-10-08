@@ -2,13 +2,13 @@
 
 const instancesConfig = {
     'logistics_delivery': {
-        name: 'Logistica - Reparto Agroalimentario',
+        name: 'Logistics - Agri-food Delivery',
         problem_type: 'routing',
-        description: 'Reparto de productos agricolas a plataformas y mercados.',
+        description: 'Delivery of agricultural products to platforms and markets.',
         parametric: {
             parameters: [
-                { name: 'num_vehiculos', label: 'Numero de vehiculos', type: 'slider', min: 1, max: 4, default: 4, unit: '' },
-                { name: 'num_clientes', label: 'Numero de clientes a visitar', type: 'slider', min: 5, max: 14, default: 14, unit: '' }
+                { name: 'num_vehiculos', label: 'Number of vehicles', type: 'slider', min: 1, max: 4, default: 4, unit: '' },
+                { name: 'num_clientes', label: 'Number of customers to visit', type: 'slider', min: 5, max: 14, default: 14, unit: '' }
             ]
         },
         expert: {
@@ -17,13 +17,13 @@ const instancesConfig = {
         }
     },
     'proyectos_equipos': {
-        name: 'Asignacion - Proyectos a Equipos',
+        name: 'Assignment - Projects to Teams',
         problem_type: 'assignment',
-        description: 'Asigna proyectos a equipos especializados maximizando el valor total.',
+        description: 'Assign projects to specialized teams maximizing total value.',
         parametric: {
             parameters: [
-                { name: 'capacidad_equipos', label: 'Capacidad de los equipos (%)', type: 'slider', min: 50, max: 200, default: 100, unit: '%' },
-                { name: 'bonus_gran_empresa', label: 'Bonus gran empresa (EUR)', type: 'slider', min: 0, max: 20000, default: 0, unit: 'EUR', step: 1000 }
+                { name: 'capacidad_equipos', label: 'Team capacity (%)', type: 'slider', min: 50, max: 200, default: 100, unit: '%' },
+                { name: 'bonus_gran_empresa', label: 'Large company bonus (EUR)', type: 'slider', min: 0, max: 20000, default: 0, unit: 'EUR', step: 1000 }
             ]
         },
         expert: {
@@ -32,14 +32,14 @@ const instancesConfig = {
         }
     },
     'supermercado': {
-        name: 'Inventario - Supermercado',
+        name: 'Inventory - Supermarket',
         problem_type: 'inventory',
-        description: 'Optimiza pedidos y stock de productos perecederos.',
+        description: 'Optimize orders and stock of perishable products.',
         parametric: {
             parameters: [
-                { name: 'coste_pedido', label: 'Coste por pedido (EUR)', type: 'slider', min: 10, max: 200, default: 50, unit: 'EUR', step: 5 },
-                { name: 'coste_almacenaje', label: 'Coste almacenaje (EUR/ud/sem)', type: 'slider', min: 0.01, max: 0.20, default: 0.05, unit: 'EUR', step: 0.01 },
-                { name: 'coste_rotura', label: 'Coste rotura (EUR/ud)', type: 'slider', min: 0.5, max: 5.0, default: 2.0, unit: 'EUR', step: 0.1 }
+                { name: 'coste_pedido', label: 'Order cost (EUR)', type: 'slider', min: 10, max: 200, default: 50, unit: 'EUR', step: 5 },
+                { name: 'coste_almacenaje', label: 'Storage cost (EUR/unit/week)', type: 'slider', min: 0.01, max: 0.20, default: 0.05, unit: 'EUR', step: 0.01 },
+                { name: 'coste_rotura', label: 'Out-of-stock cost (EUR/unit)', type: 'slider', min: 0.5, max: 5.0, default: 2.0, unit: 'EUR', step: 0.1 }
             ]
         },
         expert: {
@@ -48,13 +48,13 @@ const instancesConfig = {
         }
     },
     'cartera_markowitz': {
-        name: 'Portfolio - Cartera Markowitz',
+        name: 'Portfolio - Markowitz Portfolio',
         problem_type: 'portfolio',
-        description: 'Optimiza una cartera de inversion maximizando rentabilidad ajustada por riesgo.',
+        description: 'Optimize an investment portfolio maximizing risk-adjusted return.',
         parametric: {
             parameters: [
-                { name: 'aversion_riesgo', label: 'Aversion al riesgo', type: 'slider', min: 0, max: 10, default: 2, unit: '' },
-                { name: 'rentabilidad_tech', label: 'Rentabilidad Tech (%)', type: 'slider', min: 5, max: 25, default: 12, unit: '%' }
+                { name: 'aversion_riesgo', label: 'Risk aversion', type: 'slider', min: 0, max: 10, default: 2, unit: '' },
+                { name: 'rentabilidad_tech', label: 'Tech return (%)', type: 'slider', min: 5, max: 25, default: 12, unit: '%' }
             ]
         },
         expert: {
@@ -69,23 +69,74 @@ let map = null;
 window.userData = null;
 
 document.addEventListener('DOMContentLoaded', () => {
-    const instanceSelect = document.getElementById('instance');
-    if (instanceSelect) {
-        while (instanceSelect.options.length > 1) {
-            instanceSelect.remove(1);
-        }
-        for (const [key, config] of Object.entries(instancesConfig)) {
-            const option = document.createElement('option');
-            option.value = key;
-            option.textContent = config.name;
-            instanceSelect.appendChild(option);
-        }
-    }
+    setupProblemSelector();
     setupLevelButtons();
     setupInstanceSelector();
     updateLevelContent('demo');
     updateDescription();
 });
+
+function setupProblemSelector() {
+    const problemSelect = document.getElementById('problemType');
+    if (!problemSelect) return;
+    problemSelect.addEventListener('change', () => {
+        window.userData = null;
+        populateInstanceSelect(problemSelect.value);
+    });
+}
+
+function populateInstanceSelect(problemType) {
+    const instanceSelect = document.getElementById('instance');
+    const counter = document.getElementById('instance-counter');
+    if (!instanceSelect) return;
+
+    while (instanceSelect.options.length > 0) {
+        instanceSelect.remove(0);
+    }
+
+    const matching = Object.entries(instancesConfig)
+        .filter(([key, config]) => config.problem_type === problemType);
+
+    if (matching.length === 0) {
+        const opt = document.createElement('option');
+        opt.value = '';
+        opt.disabled = true;
+        opt.selected = true;
+        opt.textContent = 'No scenarios available';
+        instanceSelect.appendChild(opt);
+        instanceSelect.disabled = true;
+        if (counter) counter.textContent = '';
+        return;
+    }
+
+    matching.forEach(([key, config]) => {
+        const opt = document.createElement('option');
+        opt.value = key;
+        opt.textContent = config.name;
+        instanceSelect.appendChild(opt);
+    });
+
+    instanceSelect.disabled = false;
+    instanceSelect.selectedIndex = 0;
+
+    updateInstanceCounter();
+    window.userData = null;
+    updateDescription();
+    updateLevelContent(currentLevel);
+}
+
+function updateInstanceCounter() {
+    const instanceSelect = document.getElementById('instance');
+    const counter = document.getElementById('instance-counter');
+    if (!instanceSelect || !counter) return;
+    const total = instanceSelect.options.length;
+    const current = instanceSelect.selectedIndex + 1;
+    if (total > 0 && instanceSelect.value) {
+        counter.textContent = 'Scenario ' + current + ' of ' + total;
+    } else {
+        counter.textContent = '';
+    }
+}
 
 function setupLevelButtons() {
     document.querySelectorAll('.level-btn').forEach(btn => {
@@ -105,6 +156,7 @@ function setupInstanceSelector() {
     if (instanceSelect) {
         instanceSelect.addEventListener('change', () => {
             window.userData = null;
+            updateInstanceCounter();
             updateDescription();
             updateLevelContent(currentLevel);
         });
@@ -115,12 +167,12 @@ function updateLevelContent(level) {
     const instance = document.getElementById('instance').value;
     const container = document.getElementById('level-content');
     if (!instance) {
-        container.innerHTML = '<p style="color: #64748b; text-align: center;">Selecciona un escenario primero</p>';
+        container.innerHTML = '<p style="color: #64748b; text-align: center;">Select a scenario first</p>';
         return;
     }
     const config = instancesConfig[instance];
     if (!config) {
-        container.innerHTML = '<p style="color: #dc2626; text-align: center;">Configuracion no encontrada</p>';
+        container.innerHTML = '<p style="color: #dc2626; text-align: center;">Configuration not found</p>';
         return;
     }
     if (level === 'demo') {
@@ -136,20 +188,20 @@ function updateLevelContent(level) {
 }
 
 function generateDemoHTML(config) {
-    return '<div class="demo-container"><p style="color: #475569; margin-bottom: 15px;">Escenario predefinido con datos de ejemplo.</p><button id="optimizeBtn" class="optimize-btn">Optimizar con datos demo</button></div>';
+    return '<div class="demo-container"><p style="color: #475569; margin-bottom: 15px;">Predefined scenario with sample data.</p><button id="optimizeBtn" class="optimize-btn">Optimize with demo data</button></div>';
 }
 
 function generateParametricHTML(config) {
-    let html = '<div class="parametric-container"><h4 style="margin-bottom: 20px;">Ajusta los parametros:</h4>';
+    let html = '<div class="parametric-container"><h4 style="margin-bottom: 20px;">Adjust parameters:</h4>';
     if (config.parametric && config.parametric.parameters && config.parametric.parameters.length > 0) {
         config.parametric.parameters.forEach(param => {
             const step = param.step || 1;
             html += '<div class="parameter-item"><div class="parameter-label"><span>' + param.label + '</span><span class="parameter-value" data-param="' + param.name + '">' + param.default + ' ' + (param.unit || '') + '</span></div><input type="range" class="parameter-slider" data-param="' + param.name + '" min="' + param.min + '" max="' + param.max + '" value="' + param.default + '" step="' + step + '"></div>';
         });
     } else {
-        html += '<p>No hay parametros ajustables</p>';
+        html += '<p>No adjustable parameters</p>';
     }
-    html += '<button id="optimizeBtn" class="optimize-btn" style="margin-top: 20px;">Optimizar con estos valores</button></div>';
+    html += '<button id="optimizeBtn" class="optimize-btn" style="margin-top: 20px;">Optimize with these values</button></div>';
     return html;
 }
 
@@ -157,9 +209,9 @@ function generateExpertHTML(config) {
     const exampleFile = config.expert && config.expert.example ? config.expert.example : null;
     let exampleLink = '';
     if (exampleFile) {
-        exampleLink = '<div style="margin-top: 15px; text-align: center;"><a href="/examples/' + exampleFile + '" download style="color: #667eea; text-decoration: none; font-size: 0.9rem;">Descargar archivo de ejemplo</a></div>';
+        exampleLink = '<div style="margin-top: 15px; text-align: center;"><a href="/examples/' + exampleFile + '" download style="color: #667eea; text-decoration: none; font-size: 0.9rem;">Download example file</a></div>';
     }
-    return '<div class="expert-container"><h4 style="margin-bottom: 15px;">Sube tu propio archivo JSON</h4><div class="file-upload-area" id="fileUploadArea"><div class="upload-icon">Folder</div><div class="upload-text">Arrastra tu archivo JSON o haz clic para seleccionar</div><div class="upload-hint">Campos esperados: ' + (config.expert && config.expert.expectedSchema ? config.expert.expectedSchema.join(', ') : 'definir') + '</div><input type="file" id="fileInput" accept=".json" style="display: none;"></div>' + exampleLink + '<div id="validationResult" style="margin-top: 15px;"></div><button id="optimizeBtn" class="optimize-btn" style="margin-top: 20px; display: none;">Optimizar con mis datos</button></div>';
+    return '<div class="expert-container"><h4 style="margin-bottom: 15px;">Upload your own JSON file</h4><div class="file-upload-area" id="fileUploadArea"><div class="upload-icon">Folder</div><div class="upload-text">Drag your JSON file or click to select</div><div class="upload-hint">Expected fields: ' + (config.expert && config.expert.expectedSchema ? config.expert.expectedSchema.join(', ') : 'definir') + '</div><input type="file" id="fileInput" accept=".json" style="display: none;"></div>' + exampleLink + '<div id="validationResult" style="margin-top: 15px;"></div><button id="optimizeBtn" class="optimize-btn" style="margin-top: 20px; display: none;">Optimize with my data</button></div>';
 }
 
 function attachOptimizeEvent(isParametric, isExpert) {
@@ -174,7 +226,7 @@ function attachOptimizeEvent(isParametric, isExpert) {
         const output = document.getElementById('output');
         if (!config) return;
 
-        output.innerHTML = '<div style="text-align: center; color: #667eea;">Optimizando...</div>';
+        output.innerHTML = '<div style="text-align: center; color: #667eea;">Optimizing...</div>';
 
         const payload = { problem_type: config.problem_type, instance: instance };
 
@@ -205,41 +257,41 @@ function attachOptimizeEvent(isParametric, isExpert) {
                 if (data.narrative) {
                     html += '<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 16px; margin-bottom: 25px;">';
                     html += '<div style="font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; line-height: 1.4;">' + data.narrative.titular + '</div>';
-                    html += '<div style="font-size: 0.95rem; margin-bottom: 10px; opacity: 0.95; line-height: 1.5;"><strong>Comparacion:</strong> ' + data.narrative.comparacion + '</div>';
+                    html += '<div style="font-size: 0.95rem; margin-bottom: 10px; opacity: 0.95; line-height: 1.5;"><strong>Comparison:</strong> ' + data.narrative.comparacion + '</div>';
                     html += '<div style="font-size: 0.95rem; opacity: 0.95; line-height: 1.5;"><strong>Insight:</strong> ' + data.narrative.insight + '</div>';
                     html += '</div>';
                 }
 
                 if (config.problem_type === 'routing') {
-                    html += '<div style="background: #f0f9ff; padding: 20px; border-radius: 12px; margin-bottom: 20px;"><div style="font-size: 1.2rem; color: #1e293b;">Distancia total recorrida</div><div style="font-size: 2.5rem; font-weight: 700; color: #059669; margin: 10px 0;">' + data.objective_value + ' km</div></div>';
-                    html += '<h4 style="color: #1e293b; margin-bottom: 15px;">Rutas asignadas</h4><div style="display: flex; flex-direction: column; gap: 15px;">';
+                    html += '<div style="background: #f0f9ff; padding: 20px; border-radius: 12px; margin-bottom: 20px;"><div style="font-size: 1.2rem; color: #1e293b;">Total distance traveled</div><div style="font-size: 2.5rem; font-weight: 700; color: #059669; margin: 10px 0;">' + data.objective_value + ' km</div></div>';
+                    html += '<h4 style="color: #1e293b; margin-bottom: 15px;">Assigned routes</h4><div style="display: flex; flex-direction: column; gap: 15px;">';
                     if (data.rutas && data.rutas.length > 0) {
                         data.rutas.forEach(ruta => {
-                            html += '<div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px;"><div style="font-weight: 700; color: #1e293b; margin-bottom: 8px;">' + ruta.vehiculo + '</div><div style="color: #475569; margin-bottom: 8px;">Paradas: ' + ruta.paradas.join(' -> ') + '</div><div style="color: #059669; font-weight: 600;">Distancia: ' + ruta.distancia + ' km</div></div>';
+                            html += '<div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px;"><div style="font-weight: 700; color: #1e293b; margin-bottom: 8px;">' + ruta.vehiculo + '</div><div style="color: #475569; margin-bottom: 8px;">Stops: ' + ruta.paradas.join(' -> ') + '</div><div style="color: #059669; font-weight: 600;">Distance: ' + ruta.distancia + ' km</div></div>';
                         });
                     }
                     html += '</div>';
                     html += '<div id="map" style="height: 450px; margin-top: 20px; border-radius: 12px; background: #e2e8f0;"></div>';
                 } else if (config.problem_type === 'assignment') {
-                    html += '<div style="background: #f0f9ff; padding: 20px; border-radius: 12px; margin-bottom: 20px;"><div style="font-size: 1.2rem; color: #1e293b;">Valor total asignado</div><div style="font-size: 2.5rem; font-weight: 700; color: #059669; margin: 10px 0;">' + data.objective_value.toLocaleString('es-ES') + ' EUR</div></div>';
-                    html += '<h4 style="color: #1e293b; margin-bottom: 15px;">Asignaciones</h4><table style="width: 100%; border-collapse: collapse;"><tr style="background: #e2e8f0; font-weight: 600;"><th style="padding: 10px; text-align: left;">Proyecto</th><th style="padding: 10px; text-align: left;">Equipo</th><th style="padding: 10px; text-align: right;">Horas</th><th style="padding: 10px; text-align: right;">Valor</th></tr>';
+                    html += '<div style="background: #f0f9ff; padding: 20px; border-radius: 12px; margin-bottom: 20px;"><div style="font-size: 1.2rem; color: #1e293b;">Total assigned value</div><div style="font-size: 2.5rem; font-weight: 700; color: #059669; margin: 10px 0;">' + data.objective_value.toLocaleString('en-US') + ' EUR</div></div>';
+                    html += '<h4 style="color: #1e293b; margin-bottom: 15px;">Assignments</h4><table style="width: 100%; border-collapse: collapse;"><tr style="background: #e2e8f0; font-weight: 600;"><th style="padding: 10px; text-align: left;">Project</th><th style="padding: 10px; text-align: left;">Team</th><th style="padding: 10px; text-align: right;">Hours</th><th style="padding: 10px; text-align: right;">Value</th></tr>';
                     data.asignaciones.forEach(a => {
-                        html += '<tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 10px;">' + a.proyecto + '</td><td style="padding: 10px;">' + a.equipo + '</td><td style="padding: 10px; text-align: right;">' + a.horas + '</td><td style="padding: 10px; text-align: right; color: #059669; font-weight: 600;">' + a.valor.toLocaleString('es-ES') + ' EUR</td></tr>';
+                        html += '<tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 10px;">' + a.proyecto + '</td><td style="padding: 10px;">' + a.equipo + '</td><td style="padding: 10px; text-align: right;">' + a.horas + '</td><td style="padding: 10px; text-align: right; color: #059669; font-weight: 600;">' + a.valor.toLocaleString('en-US') + ' EUR</td></tr>';
                     });
                     html += '</table>';
                 } else if (config.problem_type === 'inventory') {
-                    html += '<div style="background: #fef3c7; padding: 20px; border-radius: 12px; margin-bottom: 20px;"><div style="font-size: 1.2rem; color: #1e293b;">Coste total de inventario</div><div style="font-size: 2.5rem; font-weight: 700; color: #d97706; margin: 10px 0;">' + data.objective_value.toLocaleString('es-ES', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' EUR</div></div>';
-                    html += '<h4 style="color: #1e293b; margin-bottom: 15px;">Resumen por producto</h4><table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;"><tr style="background: #e2e8f0; font-weight: 600;"><th style="padding: 10px; text-align: left;">Producto</th><th style="padding: 10px; text-align: right;">Total pedido</th><th style="padding: 10px; text-align: right;">Roturas</th><th style="padding: 10px; text-align: right;">Stock final</th></tr>';
+                    html += '<div style="background: #fef3c7; padding: 20px; border-radius: 12px; margin-bottom: 20px;"><div style="font-size: 1.2rem; color: #1e293b;">Total inventory cost</div><div style="font-size: 2.5rem; font-weight: 700; color: #d97706; margin: 10px 0;">' + data.objective_value.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' EUR</div></div>';
+                    html += '<h4 style="color: #1e293b; margin-bottom: 15px;">Product summary</h4><table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;"><tr style="background: #e2e8f0; font-weight: 600;"><th style="padding: 10px; text-align: left;">Product</th><th style="padding: 10px; text-align: right;">Total ordered</th><th style="padding: 10px; text-align: right;">Out-of-stock</th><th style="padding: 10px; text-align: right;">Final stock</th></tr>';
                     data.resumen.forEach(r => {
                         const color = r.total_rotura > 0 ? '#dc2626' : '#059669';
-                        html += '<tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 10px;">' + r.producto + '</td><td style="padding: 10px; text-align: right;">' + r.total_pedido + ' uds</td><td style="padding: 10px; text-align: right; color: ' + color + ';">' + r.total_rotura + ' uds</td><td style="padding: 10px; text-align: right;">' + r.stock_final + ' uds</td></tr>';
+                        html += '<tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 10px;">' + r.producto + '</td><td style="padding: 10px; text-align: right;">' + r.total_pedido + ' units</td><td style="padding: 10px; text-align: right; color: ' + color + ';">' + r.total_rotura + ' units</td><td style="padding: 10px; text-align: right;">' + r.stock_final + ' units</td></tr>';
                     });
                     html += '</table>';
                 } else if (config.problem_type === 'portfolio') {
-                    html += '<div style="background: #ecfdf5; padding: 20px; border-radius: 12px; margin-bottom: 20px;"><div style="font-size: 1.2rem; color: #1e293b;">Rentabilidad esperada de la cartera</div><div style="font-size: 2.5rem; font-weight: 700; color: #059669; margin: 10px 0;">' + data.rentabilidad_esperada_pct + ' %</div><div style="font-size: 0.9rem; color: #64748b;">con un riesgo estimado del ' + data.riesgo_estimado_pct + '%</div></div>';
-                    html += '<h4 style="color: #1e293b; margin-bottom: 15px;">Composicion de la cartera</h4><table style="width: 100%; border-collapse: collapse;"><tr style="background: #e2e8f0; font-weight: 600;"><th style="padding: 10px; text-align: left;">Activo</th><th style="padding: 10px; text-align: right;">Peso</th><th style="padding: 10px; text-align: right;">Inversion</th><th style="padding: 10px; text-align: right;">Rentabilidad</th><th style="padding: 10px; text-align: right;">Riesgo</th></tr>';
+                    html += '<div style="background: #ecfdf5; padding: 20px; border-radius: 12px; margin-bottom: 20px;"><div style="font-size: 1.2rem; color: #1e293b;">Expected portfolio return</div><div style="font-size: 2.5rem; font-weight: 700; color: #059669; margin: 10px 0;">' + data.rentabilidad_esperada_pct + ' %</div><div style="font-size: 0.9rem; color: #64748b;">with an estimated risk of ' + data.riesgo_estimado_pct + '%</div></div>';
+                    html += '<h4 style="color: #1e293b; margin-bottom: 15px;">Portfolio composition</h4><table style="width: 100%; border-collapse: collapse;"><tr style="background: #e2e8f0; font-weight: 600;"><th style="padding: 10px; text-align: left;">Asset</th><th style="padding: 10px; text-align: right;">Weight</th><th style="padding: 10px; text-align: right;">Investment</th><th style="padding: 10px; text-align: right;">Return</th><th style="padding: 10px; text-align: right;">Risk</th></tr>';
                     data.cartera.forEach(c => {
-                        html += '<tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 10px;">' + c.activo + '</td><td style="padding: 10px; text-align: right; font-weight: 600;">' + c.peso_pct + ' %</td><td style="padding: 10px; text-align: right;">' + c.inversion.toLocaleString('es-ES') + ' EUR</td><td style="padding: 10px; text-align: right; color: #059669;">' + c.rentabilidad_pct + ' %</td><td style="padding: 10px; text-align: right; color: #dc2626;">' + c.riesgo_pct + ' %</td></tr>';
+                        html += '<tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 10px;">' + c.activo + '</td><td style="padding: 10px; text-align: right; font-weight: 600;">' + c.peso_pct + ' %</td><td style="padding: 10px; text-align: right;">' + c.inversion.toLocaleString('en-US') + ' EUR</td><td style="padding: 10px; text-align: right; color: #059669;">' + c.rentabilidad_pct + ' %</td><td style="padding: 10px; text-align: right; color: #dc2626;">' + c.riesgo_pct + ' %</td></tr>';
                     });
                     html += '</table>';
                 }
@@ -250,11 +302,11 @@ function attachOptimizeEvent(isParametric, isExpert) {
                     setTimeout(() => dibujarMapa(data.rutas), 100);
                 }
             } else {
-                output.innerHTML = '<div style="color: #dc2626;">Error: ' + (data.error || 'Optimizacion fallida') + '</div>';
+                output.innerHTML = '<div style="color: #dc2626;">Error: ' + (data.error || 'Optimization failed') + '</div>';
             }
         } catch (error) {
             console.error('Error:', error);
-            output.innerHTML = '<div style="color: #dc2626;">Error de conexion: ' + error.message + '</div>';
+            output.innerHTML = '<div style="color: #dc2626;">Connection error: ' + error.message + '</div>';
         }
     });
 }
@@ -283,7 +335,7 @@ function dibujarMapa(rutas) {
                 const marker = L.circleMarker(coord, {
                     radius: 7, fillColor: color, color: '#fff', weight: 2, fillOpacity: 0.9
                 }).addTo(map);
-                const punto = ruta.paradas && ruta.paradas[i] ? ruta.paradas[i] : (i === 0 ? 'Deposito' : 'Punto');
+                const punto = ruta.paradas && ruta.paradas[i] ? ruta.paradas[i] : (i === 0 ? 'Depot' : 'Point');
                 marker.bindPopup('<b>' + ruta.vehiculo + '</b><br>' + punto);
                 bounds.push(coord);
             });
@@ -331,7 +383,7 @@ function handleFileUpload(file) {
     const validationDiv = document.getElementById('validationResult');
     const optimizeBtn = document.getElementById('optimizeBtn');
     if (!file || file.type !== 'application/json') {
-        validationDiv.innerHTML = '<div class="format-error">El archivo debe ser JSON</div>';
+        validationDiv.innerHTML = '<div class="format-error">The file must be JSON</div>';
         if (optimizeBtn) optimizeBtn.style.display = 'none';
         return;
     }
@@ -340,11 +392,11 @@ function handleFileUpload(file) {
         try {
             const parsed = JSON.parse(e.target.result);
             window.userData = parsed;
-            validationDiv.innerHTML = '<div class="format-valid">Formato valido. Listo para optimizar.</div>';
+            validationDiv.innerHTML = '<div class="format-valid">Valid format. Ready to optimize.</div>';
             if (optimizeBtn) optimizeBtn.style.display = 'block';
             updateDescription();
         } catch (error) {
-            validationDiv.innerHTML = '<div class="format-error">JSON invalido</div>';
+            validationDiv.innerHTML = '<div class="format-error">Invalid JSON</div>';
             if (optimizeBtn) optimizeBtn.style.display = 'none';
         }
     };
@@ -368,7 +420,7 @@ async function updateDescription() {
         const html = await response.text();
         container.innerHTML = html;
     } catch (error) {
-        container.innerHTML = '<p>Descripcion no disponible</p>';
+        container.innerHTML = '<p>Description not available</p>';
     }
 }
 
@@ -382,13 +434,13 @@ function buildExpertDescription(data) {
             items.push(key);
         } else {
             const display = typeof value === 'number' && Math.abs(value) >= 1000
-                ? value.toLocaleString('es-ES')
+                ? value.toLocaleString('en-US')
                 : value;
             items.push(key + ': ' + display);
         }
     }
     const resumen = items.slice(0, 5).join(' | ');
-    return '<p><strong>Datos personalizados</strong></p>' +
+    return '<p><strong>Custom data</strong></p>' +
            '<p>' + resumen + '</p>' +
-           '<p style="color:#64748b; font-size:0.9em;">Optimizando con tus datos. Los resultados aparecen a la derecha.</p>';
+           '<p style="color:#64748b; font-size:0.9em;">Optimizing with your data. Results appear on the right.</p>';
 }
