@@ -1,6 +1,7 @@
 ﻿from ortools.math_opt.python import mathopt
 import json
 
+
 class PortfolioModel:
     def __init__(self):
         self.name = "Portfolio - Markowitz"
@@ -12,9 +13,15 @@ class PortfolioModel:
         self.params = params
         print(f"Parametros recibidos: {params}")
 
-    def cargar_datos(self, filename):
-        with open(filename, "r", encoding="utf-8-sig") as f:
-            data = json.load(f)
+    def cargar_datos(self, filename=None, data_dict=None):
+        if data_dict is not None:
+            data = data_dict
+        elif filename is not None:
+            with open(filename, "r", encoding="utf-8-sig") as f:
+                data = json.load(f)
+        else:
+            raise ValueError("cargar_datos necesita 'filename' o 'data_dict'")
+
         self.activos = data["activos"]
         self.num_activos = len(self.activos)
         self.capital_total = data.get("capital_total", 100000)

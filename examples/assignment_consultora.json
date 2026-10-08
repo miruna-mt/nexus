@@ -1,0 +1,15 @@
+﻿{
+  "proyectos": [
+    { "id": 1, "nombre": "Estrategia digital retail", "habilidades_requeridas": ["Strategy", "Analytics"], "horas": 120, "valor": 18000 },
+    { "id": 2, "nombre": "Campana SEM ecommerce", "habilidades_requeridas": ["SEM", "Analytics"], "horas": 100, "valor": 15000 },
+    { "id": 3, "nombre": "Rediseno web corporativa", "habilidades_requeridas": ["Content", "SocialAds"], "horas": 80, "valor": 12000 },
+    { "id": 4, "nombre": "Lanzamiento nuevo producto", "habilidades_requeridas": ["Strategy", "Content", "SocialAds"], "horas": 150, "valor": 25000 },
+    { "id": 5, "nombre": "SEO internacional", "habilidades_requeridas": ["SEO", "Analytics"], "horas": 90, "valor": 14000 },
+    { "id": 6, "nombre": "Programa de fidelizacion", "habilidades_requeridas": ["Strategy", "Email", "Analytics"], "horas": 110, "valor": 20000 }
+  ],
+  "equipos": [
+    { "id": 1, "nombre": "Growth", "especialidades": ["SEO", "SEM", "Analytics"], "horas_disponibles": 200 },
+    { "id": 2, "nombre": "Brand", "especialidades": ["Content", "SocialAds", "Email"], "horas_disponibles": 200 },
+    { "id": 3, "nombre": "Full-Service", "especialidades": ["Strategy", "SEO", "SEM", "SocialAds", "Email", "Analytics", "Content"], "horas_disponibles": 300 }
+  ]
+}

@@ -1,0 +1,20 @@
+﻿{
+  "capital_total": 100000,
+  "aversion_riesgo": 3.0,
+  "activos": [
+    { "id": "A001", "nombre": "S&P 500 (acciones USA)", "rentabilidad": 0.10, "riesgo": 0.18, "limite_max": 0.40 },
+    { "id": "A002", "nombre": "Bonos del Tesoro USA 10Y", "rentabilidad": 0.04, "riesgo": 0.07, "limite_max": 0.50 },
+    { "id": "A003", "nombre": "Oro", "rentabilidad": 0.05, "riesgo": 0.15, "limite_max": 0.20 },
+    { "id": "A004", "nombre": "REITs (inmobiliario)", "rentabilidad": 0.07, "riesgo": 0.20, "limite_max": 0.25 },
+    { "id": "A005", "nombre": "Bonos corporativos IG", "rentabilidad": 0.05, "riesgo": 0.09, "limite_max": 0.40 },
+    { "id": "A006", "nombre": "Bitcoin", "rentabilidad": 0.20, "riesgo": 0.60, "limite_max": 0.05 }
+  ],
+  "covarianzas": [
+    [0.0324, -0.0013, 0.0027, 0.0259, 0.0081, 0.0086],
+    [-0.0013, 0.0049, 0.0008, -0.0014, 0.0035, -0.0017],
+    [0.0027, 0.0008, 0.0225, 0.0030, 0.0014, 0.0090],
+    [0.0259, -0.0014, 0.0030, 0.0400, 0.0090, 0.0072],
+    [0.0081, 0.0035, 0.0014, 0.0090, 0.0081, 0.0011],
+    [0.0086, -0.0017, 0.0090, 0.0072, 0.0011, 0.3600]
+  ]
+}

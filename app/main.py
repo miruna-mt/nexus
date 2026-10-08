@@ -1,41 +1,41 @@
 ﻿from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-import json
 
 try:
     from app.models.logistics.routing import RoutingModel
-    print("RoutingModel importado")
-except Exception as e:
-    print(f"Error RoutingModel: {e}")
-    RoutingModel = None
-
-try:
     from app.models.assignment import AssignmentModel
-    print("AssignmentModel importado")
-except Exception as e:
-    print(f"Error AssignmentModel: {e}")
-    AssignmentModel = None
-
-try:
     from app.models.inventory import InventoryModel
-    print("InventoryModel importado")
-except Exception as e:
-    print(f"Error InventoryModel: {e}")
-    InventoryModel = None
-
-try:
     from app.models.portfolio import PortfolioModel
-    print("PortfolioModel importado")
+    print("Todos los modelos importados correctamente")
 except Exception as e:
-    print(f"Error PortfolioModel: {e}")
-    PortfolioModel = None
+    print(f"Error importando modelos: {e}")
+
+MODEL_REGISTRY = {
+    ("routing", "logistics_delivery"): {
+        "class": RoutingModel,
+        "data": "data/logistics/routing/logistics_murcia.json",
+    },
+    ("assignment", "proyectos_equipos"): {
+        "class": AssignmentModel,
+        "data": "data/assignment/proyectos_equipos.json",
+    },
+    ("inventory", "supermercado"): {
+        "class": InventoryModel,
+        "data": "data/inventory/supermercado.json",
+    },
+    ("portfolio", "cartera_markowitz"): {
+        "class": PortfolioModel,
+        "data": "data/portfolio/cartera_markowitz.json",
+    },
+}
 
 app = FastAPI()
 
 app.mount("/assets", StaticFiles(directory="frontend/assets"), name="assets")
 app.mount("/descriptions", StaticFiles(directory="frontend/descriptions"), name="descriptions")
 app.mount("/templates", StaticFiles(directory="frontend/templates"), name="templates")
+app.mount("/examples", StaticFiles(directory="examples"), name="examples")
 
 @app.get("/style.css")
 async def css():
@@ -57,57 +57,40 @@ async def optimize(request: Request):
         problem_type = body.get("problem_type")
         instance = body.get("instance")
         params = body.get("params", None)
+        user_data = body.get("user_data", None)
 
         print(f"Recibido: {problem_type}/{instance}")
         if params:
             print(f"Parametros: {params}")
+        if user_data:
+            print(f"Datos de usuario: {len(str(user_data))} bytes")
 
-        if problem_type == "routing" and instance == "logistics_delivery":
-            modelo = RoutingModel()
-            if params:
-                modelo.SetParams(params)
-            modelo.cargar_datos("data/logistics/routing/logistics_murcia.json")
-            if not modelo.build():
-                return JSONResponse(status_code=500, content={"error": "Error build"})
-            if not modelo.solve():
-                return JSONResponse(status_code=500, content={"error": "No solucion"})
-            return JSONResponse(content=modelo.get_results())
+        key = (problem_type, instance)
+        if key not in MODEL_REGISTRY:
+            return JSONResponse(
+                status_code=404,
+                content={"error": f"Instancia no encontrada: {problem_type}/{instance}"}
+            )
 
-        elif problem_type == "assignment" and instance == "proyectos_equipos":
-            modelo = AssignmentModel()
-            if params:
-                modelo.SetParams(params)
-            modelo.cargar_datos("data/assignment/proyectos_equipos.json")
-            if not modelo.build():
-                return JSONResponse(status_code=500, content={"error": "Error build"})
-            if not modelo.solve():
-                return JSONResponse(status_code=500, content={"error": "No solucion"})
-            return JSONResponse(content=modelo.get_results())
+        entry = MODEL_REGISTRY[key]
+        ModelClass = entry["class"]
+        data_file = entry["data"]
 
-        elif problem_type == "inventory" and instance == "supermercado":
-            modelo = InventoryModel()
-            if params:
-                modelo.SetParams(params)
-            modelo.cargar_datos("data/inventory/supermercado.json")
-            if not modelo.build():
-                return JSONResponse(status_code=500, content={"error": "Error build"})
-            if not modelo.solve():
-                return JSONResponse(status_code=500, content={"error": "No solucion"})
-            return JSONResponse(content=modelo.get_results())
+        modelo = ModelClass()
+        if params:
+            modelo.SetParams(params)
 
-        elif problem_type == "portfolio" and instance == "cartera_markowitz":
-            modelo = PortfolioModel()
-            if params:
-                modelo.SetParams(params)
-            modelo.cargar_datos("data/portfolio/cartera_markowitz.json")
-            if not modelo.build():
-                return JSONResponse(status_code=500, content={"error": "Error build"})
-            if not modelo.solve():
-                return JSONResponse(status_code=500, content={"error": "No solucion"})
-            return JSONResponse(content=modelo.get_results())
-
+        if user_data:
+            modelo.cargar_datos(data_dict=user_data)
         else:
-            return JSONResponse(status_code=404, content={"error": f"No encontrado: {problem_type}/{instance}"})
+            modelo.cargar_datos(filename=data_file)
+
+        if not modelo.build():
+            return JSONResponse(status_code=500, content={"error": "Error construyendo el modelo"})
+        if not modelo.solve():
+            return JSONResponse(status_code=500, content={"error": "No se encontro solucion"})
+
+        return JSONResponse(content=modelo.get_results())
 
     except Exception as e:
         print(f"Error: {e}")

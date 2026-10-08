@@ -1,0 +1,28 @@
+﻿{
+  "vehiculos": [
+    { "id": "V1", "capacidad": 120, "costo_km": 1.0 },
+    { "id": "V2", "capacidad": 100, "costo_km": 1.0 },
+    { "id": "V3", "capacidad": 120, "costo_km": 1.0 }
+  ],
+  "clientes": [
+    { "id": 1, "nombre": "Puerta del Sol", "demanda": 25, "ventana_inicio": 0, "ventana_fin": 1000, "x": 40.4169, "y": -3.7035 },
+    { "id": 2, "nombre": "Estacion de Atocha", "demanda": 30, "ventana_inicio": 0, "ventana_fin": 1000, "x": 40.4066, "y": -3.6905 },
+    { "id": 3, "nombre": "Estadio Santiago Bernabeu", "demanda": 20, "ventana_inicio": 0, "ventana_fin": 1000, "x": 40.4530, "y": -3.6883 },
+    { "id": 4, "nombre": "IFEMA Feria de Madrid", "demanda": 40, "ventana_inicio": 0, "ventana_fin": 1000, "x": 40.4671, "y": -3.6162 },
+    { "id": 5, "nombre": "Aeropuerto Adolfo Suarez T4", "demanda": 35, "ventana_inicio": 0, "ventana_fin": 1000, "x": 40.4936, "y": -3.5668 },
+    { "id": 6, "nombre": "Palacio Real", "demanda": 15, "ventana_inicio": 0, "ventana_fin": 1000, "x": 40.4180, "y": -3.7143 },
+    { "id": 7, "nombre": "Museo del Prado", "demanda": 18, "ventana_inicio": 0, "ventana_fin": 1000, "x": 40.4138, "y": -3.6921 },
+    { "id": 8, "nombre": "Plaza Mayor", "demanda": 22, "ventana_inicio": 0, "ventana_fin": 1000, "x": 40.4155, "y": -3.7074 },
+    { "id": 9, "nombre": "La Latina", "demanda": 20, "ventana_inicio": 0, "ventana_fin": 1000, "x": 40.4113, "y": -3.7097 },
+    { "id": 10, "nombre": "Malasana", "demanda": 18, "ventana_inicio": 0, "ventana_fin": 1000, "x": 40.4260, "y": -3.7038 }
+  ],
+  "deposito": {
+    "id": 0,
+    "nombre": "Mercamadrid",
+    "x": 40.3700,
+    "y": -3.6400,
+    "ventana_inicio": 0,
+    "ventana_fin": 1000
+  },
+  "distancias": []
+}

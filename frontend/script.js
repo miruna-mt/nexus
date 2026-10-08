@@ -11,7 +11,10 @@ const instancesConfig = {
                 { name: 'num_clientes', label: 'Numero de clientes a visitar', type: 'slider', min: 5, max: 14, default: 14, unit: '' }
             ]
         },
-        expert: { expectedSchema: ['vehiculos', 'clientes', 'distancias'] }
+        expert: {
+            expectedSchema: ['vehiculos', 'clientes', 'deposito'],
+            example: 'routing_madrid.json'
+        }
     },
     'proyectos_equipos': {
         name: 'Asignacion - Proyectos a Equipos',
@@ -23,7 +26,10 @@ const instancesConfig = {
                 { name: 'bonus_gran_empresa', label: 'Bonus gran empresa (EUR)', type: 'slider', min: 0, max: 20000, default: 0, unit: 'EUR', step: 1000 }
             ]
         },
-        expert: { expectedSchema: ['proyectos', 'equipos'] }
+        expert: {
+            expectedSchema: ['proyectos', 'equipos'],
+            example: 'assignment_consultora.json'
+        }
     },
     'supermercado': {
         name: 'Inventario - Supermercado',
@@ -36,7 +42,10 @@ const instancesConfig = {
                 { name: 'coste_rotura', label: 'Coste rotura (EUR/ud)', type: 'slider', min: 0.5, max: 5.0, default: 2.0, unit: 'EUR', step: 0.1 }
             ]
         },
-        expert: { expectedSchema: ['horizonte_semanas', 'capacidad_almacen', 'productos'] }
+        expert: {
+            expectedSchema: ['horizonte_semanas', 'capacidad_almacen', 'productos'],
+            example: 'inventory_supermercado.json'
+        }
     },
     'cartera_markowitz': {
         name: 'Portfolio - Cartera Markowitz',
@@ -48,12 +57,16 @@ const instancesConfig = {
                 { name: 'rentabilidad_tech', label: 'Rentabilidad Tech (%)', type: 'slider', min: 5, max: 25, default: 12, unit: '%' }
             ]
         },
-        expert: { expectedSchema: ['capital_total', 'aversion_riesgo', 'activos'] }
+        expert: {
+            expectedSchema: ['capital_total', 'aversion_riesgo', 'activos', 'covarianzas'],
+            example: 'portfolio_inversor.json'
+        }
     }
 };
 
 let currentLevel = 'demo';
 let map = null;
+window.userData = null;
 
 document.addEventListener('DOMContentLoaded', () => {
     const instanceSelect = document.getElementById('instance');
@@ -80,6 +93,7 @@ function setupLevelButtons() {
             document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             currentLevel = btn.dataset.level;
+            window.userData = null;
             updateLevelContent(currentLevel);
         });
     });
@@ -89,6 +103,7 @@ function setupInstanceSelector() {
     const instanceSelect = document.getElementById('instance');
     if (instanceSelect) {
         instanceSelect.addEventListener('change', () => {
+            window.userData = null;
             updateDescription();
             updateLevelContent(currentLevel);
         });
@@ -109,7 +124,7 @@ function updateLevelContent(level) {
     }
     if (level === 'demo') {
         container.innerHTML = generateDemoHTML(config);
-        attachOptimizeEvent(false);
+        attachOptimizeEvent(false, false);
     } else if (level === 'parametric') {
         container.innerHTML = generateParametricHTML(config);
         attachParametricEvents();
@@ -138,10 +153,15 @@ function generateParametricHTML(config) {
 }
 
 function generateExpertHTML(config) {
-    return '<div class="expert-container"><h4 style="margin-bottom: 15px;">Sube tu propio archivo JSON</h4><div class="file-upload-area" id="fileUploadArea"><div class="upload-icon">Folder</div><div class="upload-text">Arrastra tu archivo JSON o haz clic para seleccionar</div><div class="upload-hint">Formato esperado: ' + (config.expert && config.expert.expectedSchema ? config.expert.expectedSchema.join(', ') : 'definir') + '</div><input type="file" id="fileInput" accept=".json" style="display: none;"></div><div id="validationResult" style="margin-top: 15px;"></div><button id="optimizeBtn" class="optimize-btn" style="margin-top: 20px; display: none;">Optimizar con mis datos</button></div>';
+    const exampleFile = config.expert && config.expert.example ? config.expert.example : null;
+    let exampleLink = '';
+    if (exampleFile) {
+        exampleLink = '<div style="margin-top: 15px; text-align: center;"><a href="/examples/' + exampleFile + '" download style="color: #667eea; text-decoration: none; font-size: 0.9rem;">Descargar archivo de ejemplo</a></div>';
+    }
+    return '<div class="expert-container"><h4 style="margin-bottom: 15px;">Sube tu propio archivo JSON</h4><div class="file-upload-area" id="fileUploadArea"><div class="upload-icon">Folder</div><div class="upload-text">Arrastra tu archivo JSON o haz clic para seleccionar</div><div class="upload-hint">Campos esperados: ' + (config.expert && config.expert.expectedSchema ? config.expert.expectedSchema.join(', ') : 'definir') + '</div><input type="file" id="fileInput" accept=".json" style="display: none;"></div>' + exampleLink + '<div id="validationResult" style="margin-top: 15px;"></div><button id="optimizeBtn" class="optimize-btn" style="margin-top: 20px; display: none;">Optimizar con mis datos</button></div>';
 }
 
-function attachOptimizeEvent(isParametric) {
+function attachOptimizeEvent(isParametric, isExpert) {
     const btn = document.getElementById('optimizeBtn');
     if (!btn) return;
     const newBtn = btn.cloneNode(true);
@@ -163,6 +183,10 @@ function attachOptimizeEvent(isParametric) {
                 params[slider.dataset.param] = slider.value;
             });
             payload.params = params;
+        }
+
+        if (isExpert && window.userData) {
+            payload.user_data = window.userData;
         }
 
         try {
@@ -280,7 +304,7 @@ function attachParametricEvents() {
             document.querySelector('.parameter-value[data-param="' + param + '"]').textContent = value + unit;
         });
     });
-    attachOptimizeEvent(true);
+    attachOptimizeEvent(true, false);
 }
 
 function attachExpertEvents() {
@@ -288,26 +312,38 @@ function attachExpertEvents() {
     const fileInput = document.getElementById('fileInput');
     if (uploadArea) {
         uploadArea.addEventListener('click', () => fileInput.click());
+        uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.classList.add('dragover'); });
+        uploadArea.addEventListener('dragleave', () => { uploadArea.classList.remove('dragover'); });
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            handleFileUpload(e.dataTransfer.files[0]);
+        });
     }
     if (fileInput) {
         fileInput.addEventListener('change', (e) => handleFileUpload(e.target.files[0]));
     }
-    attachOptimizeEvent(false);
+    attachOptimizeEvent(false, true);
 }
 
 function handleFileUpload(file) {
     const validationDiv = document.getElementById('validationResult');
+    const optimizeBtn = document.getElementById('optimizeBtn');
     if (!file || file.type !== 'application/json') {
         validationDiv.innerHTML = '<div class="format-error">El archivo debe ser JSON</div>';
+        if (optimizeBtn) optimizeBtn.style.display = 'none';
         return;
     }
     const reader = new FileReader();
     reader.onload = (e) => {
         try {
-            JSON.parse(e.target.result);
-            validationDiv.innerHTML = '<div class="format-valid">Formato valido</div>';
+            const parsed = JSON.parse(e.target.result);
+            window.userData = parsed;
+            validationDiv.innerHTML = '<div class="format-valid">Formato valido. Listo para optimizar.</div>';
+            if (optimizeBtn) optimizeBtn.style.display = 'block';
         } catch (error) {
             validationDiv.innerHTML = '<div class="format-error">JSON invalido</div>';
+            if (optimizeBtn) optimizeBtn.style.display = 'none';
         }
     };
     reader.readAsText(file);

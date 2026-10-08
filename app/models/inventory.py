@@ -12,9 +12,14 @@ class InventoryModel:
         self.params = params
         print(f"Parametros recibidos: {params}")
 
-    def cargar_datos(self, filename):
-        with open(filename, "r", encoding="utf-8-sig") as f:
-            data = json.load(f)
+    def cargar_datos(self, filename=None, data_dict=None):
+        if data_dict is not None:
+            data = data_dict
+        elif filename is not None:
+            with open(filename, "r", encoding="utf-8-sig") as f:
+                data = json.load(f)
+        else:
+            raise ValueError("cargar_datos necesita 'filename' o 'data_dict'")
         self.horizonte = data["horizonte_semanas"]
         self.capacidad_almacen = data["capacidad_almacen"]
         self.productos = data["productos"]

@@ -12,9 +12,14 @@ class AssignmentModel:
         self.params = params
         print(f"Parametros recibidos: {params}")
 
-    def cargar_datos(self, filename):
-        with open(filename, "r", encoding="utf-8-sig") as f:
-            data = json.load(f)
+    def cargar_datos(self, filename=None, data_dict=None):
+        if data_dict is not None:
+            data = data_dict
+        elif filename is not None:
+            with open(filename, "r", encoding="utf-8-sig") as f:
+                data = json.load(f)
+        else:
+            raise ValueError("cargar_datos necesita 'filename' o 'data_dict'")
         self.proyectos = data["proyectos"]
         self.equipos = data["equipos"]
         self.num_proyectos = len(self.proyectos)
