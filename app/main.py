@@ -1,4 +1,4 @@
-﻿from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -34,7 +34,6 @@ app = FastAPI()
 
 app.mount("/assets", StaticFiles(directory="frontend/assets"), name="assets")
 app.mount("/descriptions", StaticFiles(directory="frontend/descriptions"), name="descriptions")
-app.mount("/templates", StaticFiles(directory="frontend/templates"), name="templates")
 app.mount("/examples", StaticFiles(directory="examples"), name="examples")
 
 @app.get("/style.css")
