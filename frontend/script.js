@@ -95,6 +95,7 @@ function setupLevelButtons() {
             currentLevel = btn.dataset.level;
             window.userData = null;
             updateLevelContent(currentLevel);
+            updateDescription();
         });
     });
 }
@@ -341,6 +342,7 @@ function handleFileUpload(file) {
             window.userData = parsed;
             validationDiv.innerHTML = '<div class="format-valid">Formato valido. Listo para optimizar.</div>';
             if (optimizeBtn) optimizeBtn.style.display = 'block';
+            updateDescription();
         } catch (error) {
             validationDiv.innerHTML = '<div class="format-error">JSON invalido</div>';
             if (optimizeBtn) optimizeBtn.style.display = 'none';
@@ -356,6 +358,10 @@ async function updateDescription() {
         container.innerHTML = '';
         return;
     }
+    if (currentLevel === 'expert' && window.userData) {
+        container.innerHTML = buildExpertDescription(window.userData);
+        return;
+    }
     try {
         const response = await fetch('/descriptions/' + instance + '.html');
         if (!response.ok) throw new Error('No encontrada');
@@ -364,4 +370,25 @@ async function updateDescription() {
     } catch (error) {
         container.innerHTML = '<p>Descripcion no disponible</p>';
     }
+}
+
+function buildExpertDescription(data) {
+    const items = [];
+    for (const key of Object.keys(data)) {
+        const value = data[key];
+        if (Array.isArray(value)) {
+            items.push(value.length + ' ' + key);
+        } else if (typeof value === 'object' && value !== null) {
+            items.push(key);
+        } else {
+            const display = typeof value === 'number' && Math.abs(value) >= 1000
+                ? value.toLocaleString('es-ES')
+                : value;
+            items.push(key + ': ' + display);
+        }
+    }
+    const resumen = items.slice(0, 5).join(' | ');
+    return '<p><strong>Datos personalizados</strong></p>' +
+           '<p>' + resumen + '</p>' +
+           '<p style="color:#64748b; font-size:0.9em;">Optimizando con tus datos. Los resultados aparecen a la derecha.</p>';
 }
