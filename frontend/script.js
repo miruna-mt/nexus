@@ -415,7 +415,7 @@ async function updateDescription() {
         return;
     }
     try {
-        const response = await fetch('/descriptions/' + instance + '.html');
+        const response = await fetch('/descriptions/' + instance + '.html?v=' + Date.now());
         if (!response.ok) throw new Error('No encontrada');
         const html = await response.text();
         container.innerHTML = html;

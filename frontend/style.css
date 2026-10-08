@@ -151,16 +151,41 @@ body {
 /* Descripción del escenario */
 .scenario-description {
     background: #f8fafc;
-    padding: 12px;
+    padding: 16px;
     border-radius: 12px;
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     color: #475569;
     margin-top: 8px;
+    line-height: 1.5;
 }
 
 .scenario-description h4 {
-    margin: 0 0 4px 0;
-    font-size: 0.85rem;
+    margin: 16px 0 8px 0;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #2c7da0;
+    letter-spacing: 0.01em;
+}
+
+.scenario-description h4:first-child {
+    margin-top: 0;
+}
+
+.scenario-description p {
+    margin: 0 0 10px 0;
+}
+
+.scenario-description ul {
+    margin: 6px 0 12px 0;
+    padding-left: 20px;
+}
+
+.scenario-description li {
+    margin-bottom: 5px;
+}
+
+.scenario-description strong {
+    color: #1e293b;
     font-weight: 600;
 }
 
