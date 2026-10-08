@@ -167,7 +167,7 @@ function updateLevelContent(level) {
     const instance = document.getElementById('instance').value;
     const container = document.getElementById('level-content');
     if (!instance) {
-        container.innerHTML = '<p style="color: #64748b; text-align: center;">Select a scenario first</p>';
+        container.innerHTML = '';
         return;
     }
     const config = instancesConfig[instance];
@@ -211,7 +211,7 @@ function generateExpertHTML(config) {
     if (exampleFile) {
         exampleLink = '<div style="margin-top: 15px; text-align: center;"><a href="/examples/' + exampleFile + '" download style="color: #667eea; text-decoration: none; font-size: 0.9rem;">Download example file</a></div>';
     }
-    return '<div class="expert-container"><h4 style="margin-bottom: 15px;">Upload your own JSON file</h4><div class="file-upload-area" id="fileUploadArea"><div class="upload-icon">Folder</div><div class="upload-text">Drag your JSON file or click to select</div><div class="upload-hint">Expected fields: ' + (config.expert && config.expert.expectedSchema ? config.expert.expectedSchema.join(', ') : 'definir') + '</div><input type="file" id="fileInput" accept=".json" style="display: none;"></div>' + exampleLink + '<div id="validationResult" style="margin-top: 15px;"></div><button id="optimizeBtn" class="optimize-btn" style="margin-top: 20px; display: none;">Optimize with my data</button></div>';
+    return '<div class="expert-container"><h4 style="margin-bottom: 15px;">Upload your own JSON file</h4><div class="file-upload-area" id="fileUploadArea"><div class="upload-icon">Folder</div><div class="upload-text">Drag your JSON file or click to select</div><div class="upload-hint">Expected fields: ' + (config.expert && config.expert.expectedSchema ? config.expert.expectedSchema.join(', ') : 'definir') + '</div><input type="file" id="fileInput" accept=".json" style="display: none;"></div>' + exampleLink + '<div id="validationResult" style="margin-top: 15px;"></div><div class="privacy-note">&#128274; Local processing \u00B7 your file is never stored</div><button id="optimizeBtn" class="optimize-btn" style="margin-top: 20px; display: none;">Optimize with my data</button></div>';
 }
 
 function attachOptimizeEvent(isParametric, isExpert) {
@@ -255,43 +255,40 @@ function attachOptimizeEvent(isParametric, isExpert) {
                 let html = '';
 
                 if (data.narrative) {
-                    html += '<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 16px; margin-bottom: 25px;">';
-                    html += '<div style="font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; line-height: 1.4;">' + data.narrative.titular + '</div>';
-                    html += '<div style="font-size: 0.95rem; margin-bottom: 10px; opacity: 0.95; line-height: 1.5;"><strong>Comparison:</strong> ' + data.narrative.comparacion + '</div>';
-                    html += '<div style="font-size: 0.95rem; opacity: 0.95; line-height: 1.5;"><strong>Insight:</strong> ' + data.narrative.insight + '</div>';
-                    html += '</div>';
+                    html += '<div class="result-hero">';
+                    html += buildContextBadge(isParametric, isExpert);
+                    html += '<div class="result-hero-title">' + data.narrative.titular + '</div>';
+                    html += '<div class="result-hero-divider">';
+                    html += '<div class="result-hero-line"><span class="result-hero-label">Comparison</span>' + data.narrative.comparacion + '</div>';
+                    html += '<div class="result-hero-line"><span class="result-hero-label">Insight</span>' + data.narrative.insight + '</div>';
+                    html += '</div></div>';
                 }
 
                 if (config.problem_type === 'routing') {
-                    html += '<div style="background: #f0f9ff; padding: 20px; border-radius: 12px; margin-bottom: 20px;"><div style="font-size: 1.2rem; color: #1e293b;">Total distance traveled</div><div style="font-size: 2.5rem; font-weight: 700; color: #059669; margin: 10px 0;">' + data.objective_value + ' km</div></div>';
+                    html += '<div style="background: #f0f9ff; padding: 20px; border-radius: 12px; margin-bottom: 20px;"><div style="font-size: 1.2rem; color: #1e293b;">Total distance traveled</div><div style="font-size: 2.5rem; font-weight: 700; color: #2C7DA0; margin: 10px 0;">' + data.objective_value + ' km</div></div>';
                     html += '<h4 style="color: #1e293b; margin-bottom: 15px;">Assigned routes</h4><div style="display: flex; flex-direction: column; gap: 15px;">';
                     if (data.rutas && data.rutas.length > 0) {
                         data.rutas.forEach(ruta => {
-                            html += '<div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px;"><div style="font-weight: 700; color: #1e293b; margin-bottom: 8px;">' + ruta.vehiculo + '</div><div style="color: #475569; margin-bottom: 8px;">Stops: ' + ruta.paradas.join(' -> ') + '</div><div style="color: #059669; font-weight: 600;">Distance: ' + ruta.distancia + ' km</div></div>';
+                            html += '<div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px;"><div style="font-weight: 700; color: #1e293b; margin-bottom: 8px;">' + ruta.vehiculo + '</div><div style="color: #475569; margin-bottom: 8px;">Stops: ' + ruta.paradas.join(' -> ') + '</div><div style="color: #2C7DA0; font-weight: 600;">Distance: ' + ruta.distancia + ' km</div></div>';
                         });
                     }
                     html += '</div>';
                     html += '<div id="map" style="height: 450px; margin-top: 20px; border-radius: 12px; background: #e2e8f0;"></div>';
                 } else if (config.problem_type === 'assignment') {
-                    html += '<div style="background: #f0f9ff; padding: 20px; border-radius: 12px; margin-bottom: 20px;"><div style="font-size: 1.2rem; color: #1e293b;">Total assigned value</div><div style="font-size: 2.5rem; font-weight: 700; color: #059669; margin: 10px 0;">' + data.objective_value.toLocaleString('en-US') + ' EUR</div></div>';
+                    html += '<div style="background: #f0f9ff; padding: 20px; border-radius: 12px; margin-bottom: 20px;"><div style="font-size: 1.2rem; color: #1e293b;">Total assigned value</div><div style="font-size: 2.5rem; font-weight: 700; color: #2C7DA0; margin: 10px 0;">' + data.objective_value.toLocaleString('en-US') + ' EUR</div></div>';
                     html += '<h4 style="color: #1e293b; margin-bottom: 15px;">Assignments</h4><table style="width: 100%; border-collapse: collapse;"><tr style="background: #e2e8f0; font-weight: 600;"><th style="padding: 10px; text-align: left;">Project</th><th style="padding: 10px; text-align: left;">Team</th><th style="padding: 10px; text-align: right;">Hours</th><th style="padding: 10px; text-align: right;">Value</th></tr>';
                     data.asignaciones.forEach(a => {
-                        html += '<tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 10px;">' + a.proyecto + '</td><td style="padding: 10px;">' + a.equipo + '</td><td style="padding: 10px; text-align: right;">' + a.horas + '</td><td style="padding: 10px; text-align: right; color: #059669; font-weight: 600;">' + a.valor.toLocaleString('en-US') + ' EUR</td></tr>';
+                        html += '<tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 10px;">' + a.proyecto + '</td><td style="padding: 10px;">' + a.equipo + '</td><td style="padding: 10px; text-align: right;">' + a.horas + '</td><td style="padding: 10px; text-align: right; color: #2C7DA0; font-weight: 600;">' + a.valor.toLocaleString('en-US') + ' EUR</td></tr>';
                     });
                     html += '</table>';
                 } else if (config.problem_type === 'inventory') {
-                    html += '<div style="background: #fef3c7; padding: 20px; border-radius: 12px; margin-bottom: 20px;"><div style="font-size: 1.2rem; color: #1e293b;">Total inventory cost</div><div style="font-size: 2.5rem; font-weight: 700; color: #d97706; margin: 10px 0;">' + data.objective_value.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' EUR</div></div>';
-                    html += '<h4 style="color: #1e293b; margin-bottom: 15px;">Product summary</h4><table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;"><tr style="background: #e2e8f0; font-weight: 600;"><th style="padding: 10px; text-align: left;">Product</th><th style="padding: 10px; text-align: right;">Total ordered</th><th style="padding: 10px; text-align: right;">Out-of-stock</th><th style="padding: 10px; text-align: right;">Final stock</th></tr>';
-                    data.resumen.forEach(r => {
-                        const color = r.total_rotura > 0 ? '#dc2626' : '#059669';
-                        html += '<tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 10px;">' + r.producto + '</td><td style="padding: 10px; text-align: right;">' + r.total_pedido + ' units</td><td style="padding: 10px; text-align: right; color: ' + color + ';">' + r.total_rotura + ' units</td><td style="padding: 10px; text-align: right;">' + r.stock_final + ' units</td></tr>';
-                    });
-                    html += '</table>';
+                    html += '<div style="background: #f0f9ff; padding: 20px; border-radius: 12px; margin-bottom: 20px;"><div style="font-size: 1.2rem; color: #1e293b;">Total inventory cost</div><div style="font-size: 2.5rem; font-weight: 700; color: #2C7DA0; margin: 10px 0;">' + data.objective_value.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' EUR</div></div>';
+                    html += '<h4 style="color: #1e293b; margin-bottom: 15px;">Cost breakdown</h4><div class="cost-breakdown"><div class="cost-line"><span>Ordering</span><span>€' + data.cost_breakdown.ordering.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</span></div><div class="cost-line"><span>Storage</span><span>€' + data.cost_breakdown.storage.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</span></div><div class="cost-line"><span>Out-of-stock</span><span>€' + data.cost_breakdown.stockout.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</span></div></div>';
                 } else if (config.problem_type === 'portfolio') {
-                    html += '<div style="background: #ecfdf5; padding: 20px; border-radius: 12px; margin-bottom: 20px;"><div style="font-size: 1.2rem; color: #1e293b;">Expected portfolio return</div><div style="font-size: 2.5rem; font-weight: 700; color: #059669; margin: 10px 0;">' + data.rentabilidad_esperada_pct + ' %</div><div style="font-size: 0.9rem; color: #64748b;">with an estimated risk of ' + data.riesgo_estimado_pct + '%</div></div>';
+                    html += '<div style="background: #f0f9ff; padding: 20px; border-radius: 12px; margin-bottom: 20px;"><div style="font-size: 1.2rem; color: #1e293b;">Expected portfolio return</div><div style="font-size: 2.5rem; font-weight: 700; color: #2C7DA0; margin: 10px 0;">' + data.rentabilidad_esperada_pct + ' %</div><div style="font-size: 0.9rem; color: #64748b;">with an estimated risk of ' + data.riesgo_estimado_pct + '%</div></div>';
                     html += '<h4 style="color: #1e293b; margin-bottom: 15px;">Portfolio composition</h4><table style="width: 100%; border-collapse: collapse;"><tr style="background: #e2e8f0; font-weight: 600;"><th style="padding: 10px; text-align: left;">Asset</th><th style="padding: 10px; text-align: right;">Weight</th><th style="padding: 10px; text-align: right;">Investment</th><th style="padding: 10px; text-align: right;">Return</th><th style="padding: 10px; text-align: right;">Risk</th></tr>';
                     data.cartera.forEach(c => {
-                        html += '<tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 10px;">' + c.activo + '</td><td style="padding: 10px; text-align: right; font-weight: 600;">' + c.peso_pct + ' %</td><td style="padding: 10px; text-align: right;">' + c.inversion.toLocaleString('en-US') + ' EUR</td><td style="padding: 10px; text-align: right; color: #059669;">' + c.rentabilidad_pct + ' %</td><td style="padding: 10px; text-align: right; color: #dc2626;">' + c.riesgo_pct + ' %</td></tr>';
+                        html += '<tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 10px;">' + c.activo + '</td><td style="padding: 10px; text-align: right; font-weight: 600;">' + c.peso_pct + ' %</td><td style="padding: 10px; text-align: right;">' + c.inversion.toLocaleString('en-US') + ' EUR</td><td style="padding: 10px; text-align: right; color: #2C7DA0;">' + c.rentabilidad_pct + ' %</td><td style="padding: 10px; text-align: right; color: #dc2626;">' + c.riesgo_pct + ' %</td></tr>';
                     });
                     html += '</table>';
                 }
@@ -443,4 +440,37 @@ function buildExpertDescription(data) {
     return '<p><strong>Custom data</strong></p>' +
            '<p>' + resumen + '</p>' +
            '<p style="color:#64748b; font-size:0.9em;">Optimizing with your data. Results appear on the right.</p>';
+}
+
+function buildContextBadge(isParametric, isExpert) {
+    let label, details = [];
+
+    if (isExpert && window.userData) {
+        label = 'YOUR DATA';
+        const entries = Object.entries(window.userData).slice(0, 5);
+        for (const [key, value] of entries) {
+            if (Array.isArray(value)) {
+                details.push(value.length + ' ' + key);
+            } else if (typeof value === 'object' && value !== null) {
+                details.push(key);
+            } else {
+                const display = typeof value === 'number' && Math.abs(value) >= 1000
+                    ? value.toLocaleString('en-US')
+                    : value;
+                details.push(key + ' ' + display);
+            }
+        }
+    } else if (isParametric) {
+        label = 'PARAMETRIC';
+        document.querySelectorAll('.parameter-slider').forEach(slider => {
+            details.push(slider.dataset.param + ' ' + slider.value);
+        });
+    } else {
+        label = 'DEMO SCENARIO';
+    }
+
+    const detailsStr = details.length > 0
+        ? '<span class="context-badge-details">' + details.join(' \u00B7 ') + '</span>'
+        : '';
+    return '<div class="context-badge"><span class="context-badge-label">' + label + '</span>' + detailsStr + '</div>';
 }
