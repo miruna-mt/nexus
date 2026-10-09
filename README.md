@@ -98,10 +98,16 @@ Four more problem types are planned, all in active exploration:
 - 🎯 Multi-Objective Optimization — trade-offs when more than one goal matters
 
 All four plug into the same API, the same UI, and the same taxonomy.
-📄 License
+
+---
+
+## 📄 License
 
 MIT License — free to use, modify, and distribute.
-🏛️ About MMTrufin StratEdge
+
+---
+
+## 🏛️ About MMTrufin StratEdge
 
 Nexus is built by MMTrufin StratEdge — an elite, independent consulting boutique specialized in eliminating the translation gap between boardroom strategy and complex execution.
 
@@ -109,5 +115,6 @@ We audit corporate system logic, data flows, and relational architecture to ensu
 
 Nexus is the proof that we do not stop at the slide deck. We build the engine.
 
-Built by Miruna Trufin — a strategist who codes.
-Simplifying the impossible, one "what if...?" at a time.
+*Built by Miruna Trufin — a strategist who codes.*
+
+*Simplifying the impossible, one "what if...?" at a time.*
