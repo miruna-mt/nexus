@@ -115,6 +115,5 @@ We audit corporate system logic, data flows, and relational architecture to ensu
 
 Nexus is the proof that we do not stop at the slide deck. We build the engine.
 
-*Built by Miruna Trufin — a strategist who codes.*
-
+*Built by Miruna Trufin — a strategist who codes.*  
 *Simplifying the impossible, one "what if...?" at a time.*
