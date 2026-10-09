@@ -61,27 +61,41 @@ cd nexus
 python -m venv venv && venv\Scripts\activate
 pip install fastapi uvicorn ortools
 uvicorn app.main:app --reload --port 8080
+```
 
+Open http://localhost:8080
+
+---
+
+## 🏗️ Architecture
+
+Every model follows the same contract:
+
+```python
 SetParams()      # optional user parameters
 cargar_datos()   # load JSON data
 build()          # variables, constraints, objective
 solve()          # run OR-Tools
 get_results()    # JSON output + narrative
+```
 
-Adding a new instance: JSON + description + one line in the config. Nothing else.
+**Adding a new instance**: JSON + description + one line in the config. Nothing else.
 
-Adding a new problem type: one new model file. Plugs into the same API and the same UI.
-🗺️ Roadmap
+**Adding a new problem type**: one new model file. Plugs into the same API and the same UI.
+
+---
+
+## 🗺️ Roadmap
 
 Four more problem types are planned, all in active exploration:
 
-    🏭 Facility Location — where to open warehouses, data centers, stores
+- 🏭 Facility Location — where to open warehouses, data centers, stores
 
-    📅 Project Scheduling — sequencing tasks with dependencies and resource constraints
+- 📅 Project Scheduling — sequencing tasks with dependencies and resource constraints
 
-    🎲 Stochastic Optimization — decisions when the future is uncertain
+- 🎲 Stochastic Optimization — decisions when the future is uncertain
 
-    🎯 Multi-Objective Optimization — trade-offs when more than one goal matters
+- 🎯 Multi-Objective Optimization — trade-offs when more than one goal matters
 
 All four plug into the same API, the same UI, and the same taxonomy.
 📄 License
