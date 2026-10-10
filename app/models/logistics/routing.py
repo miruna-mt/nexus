@@ -3,6 +3,48 @@ from ortools.constraint_solver import pywrapcp
 import json
 import math
 
+
+def _normalize_data(data):
+    """Accept both English and Spanish field names.
+    Returns a dict with Spanish keys (internal canonical format)."""
+    def pick(d, *keys):
+        for k in keys:
+            if k in d:
+                return d[k]
+        raise KeyError("None of " + str(keys) + " found in " + str(list(d.keys())))
+
+    def norm_vehicle(v):
+        return {
+            "id": v.get("id"),
+            "capacidad": pick(v, "capacity", "capacidad"),
+            "costo_km": v.get("cost_per_km", v.get("costo_km", 1.0)),
+        }
+
+    def norm_client(c):
+        return {
+            "id": c.get("id"),
+            "nombre": pick(c, "name", "nombre"),
+            "demanda": pick(c, "demand", "demanda"),
+            "x": pick(c, "lat", "x"),
+            "y": pick(c, "lon", "y"),
+            "ventana_inicio": c.get("time_window_start", c.get("ventana_inicio", 0)),
+            "ventana_fin": c.get("time_window_end", c.get("ventana_fin", 1000)),
+        }
+
+    depot_src = data.get("depot", data.get("deposito", {}))
+
+    return {
+        "vehiculos": [norm_vehicle(v) for v in pick(data, "vehicles", "vehiculos")],
+        "clientes":  [norm_client(c)  for c in pick(data, "clients",  "clientes")],
+        "deposito": {
+            "id":     depot_src.get("id", 0),
+            "nombre": pick(depot_src, "name", "nombre"),
+            "x":      pick(depot_src, "lat", "x"),
+            "y":      pick(depot_src, "lon", "y"),
+        },
+    }
+
+
 class RoutingModel:
     def __init__(self):
         self.name = "Logistica - Reparto Agroalimentario"
@@ -22,6 +64,9 @@ class RoutingModel:
                 data = json.load(f)
         else:
             raise ValueError("cargar_datos necesita 'filename' o 'data_dict'")
+
+        # Normalizar nombres de campos (ES o EN)
+        data = _normalize_data(data)
 
         # Filtrar vehiculos segun parametro
         vehiculos = data["vehiculos"]
