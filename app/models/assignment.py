@@ -1,6 +1,39 @@
 from ortools.linear_solver import pywraplp
 import json
 
+
+def _normalize_data(data):
+    """Accept both English and Spanish field names.
+    Returns a dict with Spanish keys (internal canonical format)."""
+    def pick(d, *keys):
+        for k in keys:
+            if k in d:
+                return d[k]
+        raise KeyError("None of " + str(keys) + " found in " + str(list(d.keys())))
+
+    def norm_project(p):
+        return {
+            "id": p.get("id"),
+            "nombre": pick(p, "name", "nombre"),
+            "valor": pick(p, "value", "valor"),
+            "horas": pick(p, "hours", "horas"),
+            "habilidades_requeridas": pick(p, "required_skills", "habilidades_requeridas"),
+        }
+
+    def norm_team(t):
+        return {
+            "id": t.get("id"),
+            "nombre": pick(t, "name", "nombre"),
+            "horas_disponibles": pick(t, "available_hours", "horas_disponibles"),
+            "especialidades": pick(t, "specialties", "especialidades"),
+        }
+
+    return {
+        "proyectos": [norm_project(p) for p in pick(data, "projects", "proyectos")],
+        "equipos":   [norm_team(t)    for t in pick(data, "teams",    "equipos")],
+    }
+
+
 class AssignmentModel:
     def __init__(self):
         self.name = "Asignacion de Proyectos a Equipos"
@@ -20,6 +53,10 @@ class AssignmentModel:
                 data = json.load(f)
         else:
             raise ValueError("cargar_datos necesita 'filename' o 'data_dict'")
+
+        # Normalizar nombres de campos (ES o EN)
+        data = _normalize_data(data)
+
         self.proyectos = data["proyectos"]
         self.equipos = data["equipos"]
         self.num_proyectos = len(self.proyectos)
