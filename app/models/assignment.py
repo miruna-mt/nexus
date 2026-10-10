@@ -2,42 +2,14 @@ from ortools.linear_solver import pywraplp
 import json
 
 
-def _normalize_data(data):
-    """Accept both English and Spanish field names.
-    Returns a dict with Spanish keys (internal canonical format)."""
-    def pick(d, *keys):
-        for k in keys:
-            if k in d:
-                return d[k]
-        raise KeyError("None of " + str(keys) + " found in " + str(list(d.keys())))
-
-    def norm_project(p):
-        return {
-            "id": p.get("id"),
-            "nombre": pick(p, "name", "nombre"),
-            "valor": pick(p, "value", "valor"),
-            "horas": pick(p, "hours", "horas"),
-            "habilidades_requeridas": pick(p, "required_skills", "habilidades_requeridas"),
-        }
-
-    def norm_team(t):
-        return {
-            "id": t.get("id"),
-            "nombre": pick(t, "name", "nombre"),
-            "horas_disponibles": pick(t, "available_hours", "horas_disponibles"),
-            "especialidades": pick(t, "specialties", "especialidades"),
-        }
-
-    return {
-        "proyectos": [norm_project(p) for p in pick(data, "projects", "proyectos")],
-        "equipos":   [norm_team(t)    for t in pick(data, "teams",    "equipos")],
-    }
+PRIORITY_WEIGHTS = {"high": 3, "medium": 2, "low": 1}
+HOURS_PER_MEMBER_PER_DAY = 6.0
 
 
 class AssignmentModel:
     def __init__(self):
-        self.name = "Asignacion de Proyectos a Equipos"
-        self.description = "Maximiza el valor de los proyectos asignados a equipos especializados"
+        self.name = "Case Assignment to Specialized Teams"
+        self.description = "Balances caseload across teams to minimize maximum backlog"
         self.solver = None
         self.params = None
 
@@ -54,73 +26,61 @@ class AssignmentModel:
         else:
             raise ValueError("cargar_datos necesita 'filename' o 'data_dict'")
 
-        # Normalizar nombres de campos (ES o EN)
-        data = _normalize_data(data)
-
-        self.proyectos = data["proyectos"]
-        self.equipos = data["equipos"]
-        self.num_proyectos = len(self.proyectos)
-        self.num_equipos = len(self.equipos)
-        print(f"Datos cargados: {self.num_proyectos} proyectos, {self.num_equipos} equipos")
+        self.teams = data["teams"]
+        self.cases = data["cases"]
+        self.num_teams = len(self.teams)
+        self.num_cases = len(self.cases)
+        self.unit_name = data.get("unit_name", "case")
+        print(f"Datos cargados: {self.num_cases} casos, {self.num_teams} equipos")
 
     def build(self):
-        print("Construyendo modelo de asignacion...")
+        print("Construyendo modelo de asignacion (minimax backlog)...")
 
-        multiplicador = 1.0
-        bonus = 0.0
-        if self.params:
-            if "capacidad_equipos" in self.params:
-                multiplicador = float(self.params["capacidad_equipos"]) / 100.0
-                print(f"Multiplicador de capacidad: {multiplicador}")
-            if "bonus_gran_empresa" in self.params:
-                bonus = float(self.params["bonus_gran_empresa"])
-                print(f"Bonus gran empresa: {bonus}")
+        self.capacity_multiplier = 1.0
+        if self.params and "capacity_multiplier" in self.params:
+            self.capacity_multiplier = float(self.params["capacity_multiplier"]) / 100.0
+            print(f"Multiplicador de capacidad: {self.capacity_multiplier}")
 
         self.solver = pywraplp.Solver.CreateSolver("SCIP")
         if not self.solver:
             return False
 
+        # x[i][j] = 1 si el caso i va al equipo j
         self.x = {}
-        self.unassigned = {}
-        for i in range(self.num_proyectos):
-            self.unassigned[i] = self.solver.IntVar(0, 1, f"unassigned_{i}")
-            for j in range(self.num_equipos):
+        for i in range(self.num_cases):
+            for j in range(self.num_teams):
                 self.x[(i, j)] = self.solver.IntVar(0, 1, f"x_{i}_{j}")
 
-        # Cada proyecto o se asigna a un equipo o queda sin asignar
-        for i in range(self.num_proyectos):
-            constraint = self.solver.Constraint(1, 1, f"un_equipo_o_sin_asignar_{i}")
-            for j in range(self.num_equipos):
-                constraint.SetCoefficient(self.x[(i, j)], 1)
-            constraint.SetCoefficient(self.unassigned[i], 1)
+        # B = backlog maximo ponderado (variable auxiliar)
+        self.B = self.solver.NumVar(0, self.solver.infinity(), "B")
 
-        # Capacidad de cada equipo (con multiplicador)
-        for j in range(self.num_equipos):
-            horas_max = self.equipos[j]["horas_disponibles"] * multiplicador
-            constraint = self.solver.Constraint(0, horas_max, f"capacidad_equipo_{j}")
-            for i in range(self.num_proyectos):
-                constraint.SetCoefficient(self.x[(i, j)], self.proyectos[i]["horas"])
+        # Cada caso va a exactamente 1 equipo
+        for i in range(self.num_cases):
+            constraint = self.solver.Constraint(1, 1, f"one_team_{i}")
+            for j in range(self.num_teams):
+                constraint.SetCoefficient(self.x[(i, j)], 1)
 
         # Incompatibilidad de habilidades
-        for i in range(self.num_proyectos):
-            for j in range(self.num_equipos):
-                habilidades_proyecto = set(self.proyectos[i]["habilidades_requeridas"])
-                habilidades_equipo = set(self.equipos[j]["especialidades"])
-                if not habilidades_proyecto.issubset(habilidades_equipo):
+        for i in range(self.num_cases):
+            req = set(self.cases[i]["required_skills"])
+            for j in range(self.num_teams):
+                spec = set(self.teams[j]["specialties"])
+                if not req.issubset(spec):
                     self.x[(i, j)].SetUb(0)
 
-        # Funcion objetivo: maximizar valor asignado, penalizar no asignados
-        PENALTY = 1.3
+        # Backlog ponderado por equipo <= B
+        for j in range(self.num_teams):
+            constraint = self.solver.Constraint(-self.solver.infinity(), 0, f"backlog_team_{j}")
+            constraint.SetCoefficient(self.B, -1)
+            for i in range(self.num_cases):
+                w = PRIORITY_WEIGHTS.get(self.cases[i]["priority"], 1)
+                h = self.cases[i]["hours"]
+                constraint.SetCoefficient(self.x[(i, j)], h * w)
+
+        # Objetivo: minimizar B
         objective = self.solver.Objective()
-        objective.SetMaximization()
-        for i in range(self.num_proyectos):
-            valor = self.proyectos[i]["valor"]
-            if bonus > 0 and self.proyectos[i]["id"] == 3:
-                valor += bonus
-                print(f"Bonus al proyecto: {self.proyectos[i]['nombre']}")
-            for j in range(self.num_equipos):
-                objective.SetCoefficient(self.x[(i, j)], valor)
-            objective.SetCoefficient(self.unassigned[i], -valor * PENALTY)
+        objective.SetCoefficient(self.B, 1)
+        objective.SetMinimization()
 
         print(f"Modelo construido: {self.solver.NumVariables()} variables, {self.solver.NumConstraints()} restricciones")
         return True
@@ -129,56 +89,65 @@ class AssignmentModel:
         print("Resolviendo modelo de asignacion...")
         status = self.solver.Solve()
         if status == pywraplp.Solver.OPTIMAL:
-            print(f"Solucion optima! Valor total: {self.solver.Objective().Value():.2f} EUR")
+            print(f"Solucion optima! Backlog maximo ponderado: {self.B.solution_value():.1f}")
             return True
         elif status == pywraplp.Solver.FEASIBLE:
-            print(f"Solucion factible. Valor: {self.solver.Objective().Value():.2f} EUR")
+            print(f"Solucion factible. Backlog: {self.B.solution_value():.1f}")
             return True
         else:
             print(f"No se encontro solucion. Status: {status}")
             return False
 
     def get_results(self):
-        valor_total = 0
-        asignados = []
-        proyectos_asignados = set()
-
-        for i in range(self.num_proyectos):
-            for j in range(self.num_equipos):
+        team_stats = []
+        for j in range(self.num_teams):
+            assigned = 0
+            raw_hours = 0.0
+            weighted_hours = 0.0
+            for i in range(self.num_cases):
                 if self.x[(i, j)].solution_value() > 0.5:
-                    asignados.append({
-                        "proyecto": self.proyectos[i]["nombre"],
-                        "equipo": self.equipos[j]["nombre"],
-                        "horas": self.proyectos[i]["horas"],
-                        "valor": self.proyectos[i]["valor"]
-                    })
-                    valor_total += self.proyectos[i]["valor"]
-                    proyectos_asignados.add(i)
+                    assigned += 1
+                    h = self.cases[i]["hours"]
+                    w = PRIORITY_WEIGHTS.get(self.cases[i]["priority"], 1)
+                    raw_hours += h
+                    weighted_hours += h * w
 
-        proyectos_no_asignados = [
-            self.proyectos[i]["nombre"]
-            for i in range(self.num_proyectos)
-            if i not in proyectos_asignados
-        ]
+            members = self.teams[j]["members"]
+            daily_capacity = members * HOURS_PER_MEMBER_PER_DAY * self.capacity_multiplier
+            backlog_days = round(raw_hours / daily_capacity, 1) if daily_capacity > 0 else 0.0
 
-        valor_total_posible = sum(p["valor"] for p in self.proyectos)
-        porcentaje = round((valor_total / valor_total_posible) * 100, 1) if valor_total_posible > 0 else 0
+            team_stats.append({
+                "name": self.teams[j]["name"],
+                "assigned": assigned,
+                "raw_hours": round(raw_hours, 1),
+                "weighted_hours": round(weighted_hours, 1),
+                "backlog_days": backlog_days,
+            })
 
-        if proyectos_no_asignados:
-            insight = f"Unassigned (capacity limit): {', '.join(proyectos_no_asignados)}."
-        else:
-            insight = "All projects assigned to a compatible team."
+        max_backlog = max((t["backlog_days"] for t in team_stats), default=0.0)
+        avg_backlog = round(sum(t["backlog_days"] for t in team_stats) / len(team_stats), 1) if team_stats else 0.0
+        busiest = max(team_stats, key=lambda t: t["backlog_days"]) if team_stats else None
+        lightest = min(team_stats, key=lambda t: t["backlog_days"]) if team_stats else None
+
+        insight = (
+            f"Busiest: {busiest['name']} ({busiest['backlog_days']}d). "
+            f"Lightest: {lightest['name']} ({lightest['backlog_days']}d)."
+        ) if busiest and lightest else "No team data."
+
+        warning = None
+        if max_backlog > 5 and busiest:
+            warning = f"\u26A0 {busiest['name']} is {busiest['backlog_days']} days behind. Consider rebalancing or adding capacity."
 
         narrative = {
-            "titular": f"{len(asignados)} of {self.num_proyectos} projects assigned \u00B7 \u20AC{valor_total:,.0f} \u00B7 {porcentaje}% of maximum value",
-            "comparacion": f"Total available value: \u20AC{valor_total_posible:,.0f}.",
-            "insight": insight
+            "titular": f"{self.num_cases} {self.unit_name if self.num_cases == 1 else self.unit_name + 's'} assigned \u00B7 max backlog {max_backlog} days ({busiest['name'] if busiest else 'n/a'})",
+            "comparacion": f"Average backlog across teams: {avg_backlog} days.",
+            "insight": insight,
+            "warning": warning,
         }
 
         return {
             "status": "optimal",
-            "objective_value": valor_total,
-            "asignaciones": asignados,
-            "narrative": narrative
+            "objective_value": round(self.B.solution_value(), 1),
+            "teams": team_stats,
+            "narrative": narrative,
         }
-

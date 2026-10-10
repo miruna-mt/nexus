@@ -1,59 +1,199 @@
 {
-  "proyectos": [
+  "unit_name": "project",
+  "teams": [
+    {
+      "id": "T1",
+      "name": "Integrated Campaign",
+      "specialties": [
+        "pm",
+        "strategy",
+        "creative",
+        "media_planning"
+      ],
+      "members": 10
+    },
+    {
+      "id": "T2",
+      "name": "Performance & Paid Media",
+      "specialties": [
+        "pm",
+        "sem",
+        "social_ads",
+        "programmatic",
+        "analytics"
+      ],
+      "members": 8
+    },
+    {
+      "id": "T3",
+      "name": "Content & Social Studio",
+      "specialties": [
+        "pm",
+        "content",
+        "creative",
+        "video",
+        "social_organic",
+        "influencer"
+      ],
+      "members": 12
+    },
+    {
+      "id": "T4",
+      "name": "Brand Strategy",
+      "specialties": [
+        "pm",
+        "strategy",
+        "creative"
+      ],
+      "members": 6
+    },
+    {
+      "id": "T5",
+      "name": "CRM & Lifecycle",
+      "specialties": [
+        "pm",
+        "crm",
+        "email",
+        "data",
+        "analytics"
+      ],
+      "members": 7
+    }
+  ],
+  "cases": [
     {
       "id": 1,
-      "nombre": "Cliente A (E-commerce)",
-      "habilidades_requeridas": ["SEO", "SEM", "Analytics"],
-      "horas": 120,
-      "valor": 18000
+      "name": "Client A · E-commerce",
+      "hours": 120,
+      "priority": "medium",
+      "required_skills": [
+        "pm",
+        "sem",
+        "analytics"
+      ]
     },
     {
       "id": 2,
-      "nombre": "Cliente B (Startup Tech)",
-      "habilidades_requeridas": ["SocialAds", "Content"],
-      "horas": 80,
-      "valor": 12000
+      "name": "Client B · Startup Tech",
+      "hours": 80,
+      "priority": "low",
+      "required_skills": [
+        "pm",
+        "social_ads"
+      ]
     },
     {
       "id": 3,
-      "nombre": "Cliente C (Gran Empresa)",
-      "habilidades_requeridas": ["SEO", "SEM", "SocialAds", "Analytics"],
-      "horas": 200,
-      "valor": 55000
+      "name": "Client C · Large Corp",
+      "hours": 200,
+      "priority": "high",
+      "required_skills": [
+        "pm",
+        "strategy",
+        "creative",
+        "media_planning"
+      ]
     },
     {
       "id": 4,
-      "nombre": "Cliente D (ONG)",
-      "habilidades_requeridas": ["Email", "SocialAds", "Content"],
-      "horas": 90,
-      "valor": 8000
+      "name": "Client D · NGO",
+      "hours": 90,
+      "priority": "low",
+      "required_skills": [
+        "pm",
+        "content",
+        "video"
+      ]
     },
     {
       "id": 5,
-      "nombre": "Cliente E (PyME)",
-      "habilidades_requeridas": ["SEO", "Email", "Strategy"],
-      "horas": 100,
-      "valor": 28000
-    }
-  ],
-  "equipos": [
-    {
-      "id": 1,
-      "nombre": "Equipo Growth",
-      "especialidades": ["SEO", "SEM", "Analytics"],
-      "horas_disponibles": 200
+      "name": "Client E · SMB",
+      "hours": 100,
+      "priority": "medium",
+      "required_skills": [
+        "pm",
+        "crm",
+        "email"
+      ]
     },
     {
-      "id": 2,
-      "nombre": "Equipo Brand",
-      "especialidades": ["SocialAds", "Content", "Email"],
-      "horas_disponibles": 180
+      "id": 6,
+      "name": "Client F · Banking",
+      "hours": 160,
+      "priority": "high",
+      "required_skills": [
+        "pm",
+        "programmatic",
+        "analytics"
+      ]
     },
     {
-      "id": 3,
-      "nombre": "Equipo Full-Service",
-      "especialidades": ["SEO", "SEM", "SocialAds", "Email", "Analytics", "Strategy"],
-      "horas_disponibles": 350
+      "id": 7,
+      "name": "Client G · Beauty Brand",
+      "hours": 130,
+      "priority": "high",
+      "required_skills": [
+        "pm",
+        "influencer",
+        "social_organic"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Client H · Automotive",
+      "hours": 180,
+      "priority": "medium",
+      "required_skills": [
+        "pm",
+        "strategy",
+        "creative"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Client I · Fashion",
+      "hours": 110,
+      "priority": "medium",
+      "required_skills": [
+        "pm",
+        "sem",
+        "social_ads"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Client J · Luxury",
+      "hours": 140,
+      "priority": "high",
+      "required_skills": [
+        "pm",
+        "strategy",
+        "creative",
+        "media_planning"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Client K · Fintech",
+      "hours": 150,
+      "priority": "high",
+      "required_skills": [
+        "pm",
+        "data",
+        "analytics"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Client L · Media Group",
+      "hours": 95,
+      "priority": "low",
+      "required_skills": [
+        "pm",
+        "content",
+        "video",
+        "social_organic"
+      ]
     }
   ]
 }
