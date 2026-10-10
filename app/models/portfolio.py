@@ -2,6 +2,32 @@ from ortools.math_opt.python import mathopt
 import json
 
 
+def _normalize_data(data):
+    """Accept both English and Spanish field names.
+    Returns a dict with Spanish keys (internal canonical format)."""
+    def pick(d, *keys):
+        for k in keys:
+            if k in d:
+                return d[k]
+        raise KeyError("None of " + str(keys) + " found in " + str(list(d.keys())))
+
+    def norm_asset(a):
+        return {
+            "id": a.get("id"),
+            "nombre": pick(a, "name", "nombre"),
+            "rentabilidad": pick(a, "expected_return", "rentabilidad"),
+            "riesgo": pick(a, "risk", "riesgo"),
+            "limite_max": pick(a, "max_weight", "limite_max"),
+        }
+
+    return {
+        "activos": [norm_asset(a) for a in pick(data, "assets", "activos")],
+        "capital_total": pick(data, "total_capital", "capital_total"),
+        "aversion_riesgo": data.get("risk_aversion", data.get("aversion_riesgo", 2.0)),
+        "covarianzas": pick(data, "covariances", "covarianzas"),
+    }
+
+
 class PortfolioModel:
     def __init__(self):
         self.name = "Portfolio - Markowitz"
@@ -21,6 +47,9 @@ class PortfolioModel:
                 data = json.load(f)
         else:
             raise ValueError("cargar_datos necesita 'filename' o 'data_dict'")
+
+        # Normalizar nombres de campos (ES o EN)
+        data = _normalize_data(data)
 
         self.activos = data["activos"]
         self.num_activos = len(self.activos)
