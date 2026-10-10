@@ -1,0 +1,99 @@
+{
+  "unit_name": "channel",
+  "total_capital": 1000000,
+  "risk_aversion": 3.0,
+  "assets": [
+    {
+      "id": "C1",
+      "name": "TV",
+      "expected_return": 0.08,
+      "risk": 0.15,
+      "max_weight": 0.4
+    },
+    {
+      "id": "C2",
+      "name": "Digital",
+      "expected_return": 0.12,
+      "risk": 0.2,
+      "max_weight": 0.5
+    },
+    {
+      "id": "C3",
+      "name": "OOH",
+      "expected_return": 0.06,
+      "risk": 0.12,
+      "max_weight": 0.25
+    },
+    {
+      "id": "C4",
+      "name": "Influencers",
+      "expected_return": 0.15,
+      "risk": 0.35,
+      "max_weight": 0.2
+    },
+    {
+      "id": "C5",
+      "name": "Radio",
+      "expected_return": 0.05,
+      "risk": 0.1,
+      "max_weight": 0.2
+    },
+    {
+      "id": "C6",
+      "name": "Email",
+      "expected_return": 0.18,
+      "risk": 0.08,
+      "max_weight": 0.15
+    }
+  ],
+  "covariances": [
+    [
+      0.0225,
+      0.009,
+      0.0108,
+      0.0105,
+      0.006,
+      0.0012
+    ],
+    [
+      0.009,
+      0.04,
+      0.006,
+      0.0385,
+      0.003,
+      0.0032
+    ],
+    [
+      0.0108,
+      0.006,
+      0.0144,
+      0.0063,
+      0.0042,
+      0.0005
+    ],
+    [
+      0.0105,
+      0.0385,
+      0.0063,
+      0.1225,
+      0.0035,
+      0.0042
+    ],
+    [
+      0.006,
+      0.003,
+      0.0042,
+      0.0035,
+      0.01,
+      0.0008
+    ],
+    [
+      0.0012,
+      0.0032,
+      0.0005,
+      0.0042,
+      0.0008,
+      0.0064
+    ]
+  ]
+}
