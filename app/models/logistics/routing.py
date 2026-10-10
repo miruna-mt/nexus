@@ -151,10 +151,23 @@ class RoutingModel:
         num_clientes_visitados = sum(len(r["paradas"]) for r in rutas)
         vehiculos_str = f"{num_vehiculos_usados} of {self.num_vehiculos}"
 
+        insight = "Stops grouped geographically to minimize travel."
+        warning = None
+        max_hours = 0.0
+        max_vehiculo = None
+        for r in rutas:
+            h = r["distancia"] / 60.0
+            if h > max_hours:
+                max_hours = h
+                max_vehiculo = r["vehiculo"]
+        if max_hours > 8:
+            warning = f"\u26A0 {max_vehiculo}'s route is ~{round(max_hours, 1)}h \u2014 exceeds a single driving day. Consider multi-day scheduling or additional vehicles."
+
         narrative = {
             "titular": f"Optimal route \u00B7 {total_distance_km} km \u00B7 {vehiculos_str} vehicles \u00B7 {num_clientes_visitados} stops",
             "comparacion": f"Serving each stop as a separate round trip: ~{round(2 * total_distance_km, 1)} km.",
-            "insight": "Stops grouped geographically to minimize travel."
+            "insight": insight,
+            "warning": warning
         }
 
         return {

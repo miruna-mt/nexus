@@ -261,6 +261,9 @@ function attachOptimizeEvent(isParametric, isExpert) {
                     html += '<div class="result-hero-divider">';
                     html += '<div class="result-hero-line"><span class="result-hero-label">Comparison</span>' + data.narrative.comparacion + '</div>';
                     html += '<div class="result-hero-line"><span class="result-hero-label">Insight</span>' + data.narrative.insight + '</div>';
+                    if (data.narrative.warning) {
+                        html += '<div class="result-hero-line result-hero-warning"><span class="result-hero-label">Warning</span>' + data.narrative.warning + '</div>';
+                    }
                     html += '</div></div>';
                 }
 

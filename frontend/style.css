@@ -535,3 +535,17 @@ body {
 .scenario-description:empty {
     display: none;
 }
+
+
+/* Warning line en el hero de resultados */
+.result-hero-warning {
+    background: rgba(255, 200, 80, 0.15);
+    border-left: 3px solid rgba(255, 200, 80, 0.9);
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-top: 6px;
+}
+
+.result-hero-warning .result-hero-label {
+    color: rgba(255, 220, 120, 0.95);
+}

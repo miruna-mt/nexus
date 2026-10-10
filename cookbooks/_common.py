@@ -41,6 +41,7 @@ def print_narrative(results):
     titular = narrative.get("titular", "")
     comparacion = narrative.get("comparacion", "")
     insight = narrative.get("insight", "")
+    warning = narrative.get("warning", "")
 
     if titular:
         print("  " + titular)
@@ -48,4 +49,7 @@ def print_narrative(results):
         print("  -> " + comparacion)
     if insight:
         print("  -> " + insight)
+    if warning:
+        print()
+        print("  " + warning)
     print()
