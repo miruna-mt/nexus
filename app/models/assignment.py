@@ -92,7 +92,7 @@ class AssignmentModel:
             print(f"Solucion optima! Backlog maximo ponderado: {self.B.solution_value():.1f}")
             return True
         elif status == pywraplp.Solver.FEASIBLE:
-            print(f"Solucion factible. Backlog: {self.B.solution_value():.1f}")
+            print(f"Mejor solucion encontrada en el tiempo limite: Backlog {self.B.solution_value():.1f}")
             return True
         else:
             print(f"No se encontro solucion. Status: {status}")

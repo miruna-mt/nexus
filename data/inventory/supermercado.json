@@ -1,4 +1,5 @@
 {
+  "narrative_domain": "retail",
   "horizonte_semanas": 12,
   "capacidad_almacen": 3000,
   "productos": [
@@ -9,7 +10,20 @@
       "coste_almacenaje": 0.05,
       "coste_rotura": 2.0,
       "stock_inicial": 100,
-      "demanda_semanal": [200, 210, 220, 230, 240, 250, 240, 230, 220, 210, 200, 190]
+      "demanda_semanal": [
+        200,
+        210,
+        220,
+        230,
+        240,
+        250,
+        240,
+        230,
+        220,
+        210,
+        200,
+        190
+      ]
     },
     {
       "id": "P002",
@@ -18,7 +32,20 @@
       "coste_almacenaje": 0.05,
       "coste_rotura": 2.0,
       "stock_inicial": 100,
-      "demanda_semanal": [150, 155, 160, 165, 170, 175, 170, 165, 160, 155, 150, 145]
+      "demanda_semanal": [
+        150,
+        155,
+        160,
+        165,
+        170,
+        175,
+        170,
+        165,
+        160,
+        155,
+        150,
+        145
+      ]
     },
     {
       "id": "P003",
@@ -27,7 +54,20 @@
       "coste_almacenaje": 0.05,
       "coste_rotura": 2.0,
       "stock_inicial": 100,
-      "demanda_semanal": [300, 310, 320, 330, 340, 350, 340, 330, 320, 310, 300, 290]
+      "demanda_semanal": [
+        300,
+        310,
+        320,
+        330,
+        340,
+        350,
+        340,
+        330,
+        320,
+        310,
+        300,
+        290
+      ]
     },
     {
       "id": "P004",
@@ -36,7 +76,20 @@
       "coste_almacenaje": 0.05,
       "coste_rotura": 2.0,
       "stock_inicial": 100,
-      "demanda_semanal": [100, 105, 110, 115, 120, 125, 120, 115, 110, 105, 100, 95]
+      "demanda_semanal": [
+        100,
+        105,
+        110,
+        115,
+        120,
+        125,
+        120,
+        115,
+        110,
+        105,
+        100,
+        95
+      ]
     },
     {
       "id": "P005",
@@ -45,7 +98,20 @@
       "coste_almacenaje": 0.05,
       "coste_rotura": 2.0,
       "stock_inicial": 100,
-      "demanda_semanal": [120, 125, 130, 135, 140, 145, 140, 135, 130, 125, 120, 115]
+      "demanda_semanal": [
+        120,
+        125,
+        130,
+        135,
+        140,
+        145,
+        140,
+        135,
+        130,
+        125,
+        120,
+        115
+      ]
     },
     {
       "id": "P006",
@@ -54,7 +120,20 @@
       "coste_almacenaje": 0.05,
       "coste_rotura": 2.0,
       "stock_inicial": 100,
-      "demanda_semanal": [80, 85, 90, 95, 100, 105, 100, 95, 90, 85, 80, 75]
+      "demanda_semanal": [
+        80,
+        85,
+        90,
+        95,
+        100,
+        105,
+        100,
+        95,
+        90,
+        85,
+        80,
+        75
+      ]
     }
   ]
 }

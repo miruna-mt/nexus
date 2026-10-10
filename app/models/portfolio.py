@@ -25,6 +25,10 @@ def _normalize_data(data):
         "capital_total": pick(data, "total_capital", "capital_total"),
         "aversion_riesgo": data.get("risk_aversion", data.get("aversion_riesgo", 2.0)),
         "covarianzas": pick(data, "covariances", "covarianzas"),
+        "narrative_domain": data.get("narrative_domain", "finance"),
+        "subject": data.get("subject", ""),
+        "target_audience": data.get("target_audience", ""),
+        "return_unit": data.get("return_unit", "%"),
     }
 
 
@@ -56,6 +60,10 @@ class PortfolioModel:
         self.capital_total = data.get("capital_total", 100000)
         self.aversion_base = data.get("aversion_riesgo", 2.0)
         self.covarianzas = data["covarianzas"]
+        self.narrative_domain = data.get("narrative_domain", "finance")
+        self.subject = data.get("subject", "")
+        self.target_audience = data.get("target_audience", "")
+        self.return_unit = data.get("return_unit", "%")
         print(f"Datos cargados: {self.num_activos} activos")
 
     def build(self):
@@ -147,11 +155,59 @@ class PortfolioModel:
 
         riesgo_portfolio = varianza_total ** 0.5
 
-        narrative = {
-            "titular": f"Optimal portfolio \u00B7 {round(rentabilidad_total*100, 2)}% return \u00B7 {round(riesgo_portfolio*100, 2)}% volatility",
-            "comparacion": "Quadratic optimization accounts for correlations \u2014 a more diversified allocation than the linear model.",
-            "insight": f"Markowitz (Nobel Prize, 1990). This portfolio holds {len(cartera)} assets."
-        }
+        # Formato de la metrica de retorno segun el return_unit
+        if self.return_unit == "%":
+            metric = f"{round(rentabilidad_total*100, 2)}% return"
+        else:
+            metric = f"{round(rentabilidad_total, 2)} {self.return_unit}"
+
+        # Identificar top asset
+        top = max(cartera, key=lambda x: x["peso_pct"]) if cartera else None
+        top_str = f"{top['activo']} ({top['peso_pct']}%)" if top else "n/a"
+
+        # Narrativa por dominio
+        if self.narrative_domain == "media_planning":
+            parts = ["Optimal media plan"]
+            if self.subject:
+                parts.append(self.subject)
+            if self.target_audience:
+                parts.append(self.target_audience)
+            total_reach = round(rentabilidad_total * self.capital_total / 1000, 0)
+            parts.append(f"{int(total_reach)} {self.return_unit}")
+            parts.append(f"{round(riesgo_portfolio*100, 2)}% volatility")
+            titular = " \u00B7 ".join(parts)
+
+            narrative = {
+                "titular": titular,
+                "comparacion": f"Concentrated in the {len(cartera)} most efficient networks. Raising risk aversion would diversify further but reduce total reach.",
+                "insight": f"Top pick: {top_str}.",
+            }
+        elif self.narrative_domain == "marketing":
+            parts = ["Optimal media mix"]
+            if self.subject:
+                parts.append(self.subject)
+            parts.append(metric)
+            parts.append(f"{round(riesgo_portfolio*100, 2)}% volatility")
+            titular = " \u00B7 ".join(parts)
+
+            narrative = {
+                "titular": titular,
+                "comparacion": "Quadratic optimization accounts for correlations between channels \u2014 a more diversified mix than a flat allocation.",
+                "insight": f"Top pick: {top_str}.",
+            }
+        else:  # finance (default)
+            parts = ["Optimal portfolio"]
+            if self.subject:
+                parts.append(self.subject)
+            parts.append(metric)
+            parts.append(f"{round(riesgo_portfolio*100, 2)}% volatility")
+            titular = " \u00B7 ".join(parts)
+
+            narrative = {
+                "titular": titular,
+                "comparacion": "Quadratic optimization accounts for correlations \u2014 a more diversified allocation than the linear model.",
+                "insight": f"Markowitz (Nobel Prize, 1990). This portfolio holds {len(cartera)} assets.",
+            }
 
         return {
             "status": "optimal",

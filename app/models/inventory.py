@@ -26,6 +26,8 @@ def _normalize_data(data):
         "horizonte_semanas": pick(data, "horizon_weeks", "horizonte_semanas"),
         "capacidad_almacen": pick(data, "storage_capacity", "capacidad_almacen"),
         "productos": [norm_product(p) for p in pick(data, "products", "productos")],
+        "unit_name": data.get("unit_name", "unit"),
+        "narrative_domain": data.get("narrative_domain", "retail"),
     }
 
 
@@ -57,6 +59,8 @@ class InventoryModel:
         self.productos = data["productos"]
         self.num_productos = len(self.productos)
         print(f"Datos cargados: {self.num_productos} productos, {self.horizonte} semanas")
+        self.unit_name = data.get("unit_name", "unit")
+        self.narrative_domain = data.get("narrative_domain", "retail")
 
     def build(self):
         print("Construyendo modelo de inventario...")
@@ -129,12 +133,13 @@ class InventoryModel:
 
     def solve(self):
         print("Resolviendo modelo de inventario...")
+        self.solver.SetTimeLimit(15000)  # 15 seconds
         status = self.solver.Solve()
         if status == pywraplp.Solver.OPTIMAL:
             print(f"Solucion optima! Coste total: {self.solver.Objective().Value():.2f} EUR")
             return True
         elif status == pywraplp.Solver.FEASIBLE:
-            print(f"Solucion factible. Coste: {self.solver.Objective().Value():.2f} EUR")
+            print(f"Mejor solucion encontrada en el tiempo limite: {self.solver.Objective().Value():.2f} EUR")
             return True
         else:
             print(f"No se encontro solucion. Status: {status}")
@@ -205,12 +210,32 @@ class InventoryModel:
         roturas_totales = sum(r["total_rotura"] for r in resumen)
 
         if roturas_totales == 0:
-            insight_roturas = "Zero stockouts across 12 weeks. Literature documents 30\u201350% savings with EOQ."
+            insight_roturas = f"Zero stockouts across {self.horizonte} weeks. Literature documents 30\u201350% savings with EOQ."
         else:
-            insight_roturas = f"{roturas_totales} units lost to stockouts."
+            # Producto con mas roturas
+            worst = max(resumen, key=lambda r: r["total_rotura"])
+            worst_idx = next(p for p in range(self.num_productos)
+                             if self.productos[p]["nombre"] == worst["producto"])
+            # Semanas con rotura para ese producto (top 2)
+            weeks = [(t + 1, int(self.rotura[worst_idx][t].solution_value()))
+                     for t in range(self.horizonte)
+                     if self.rotura[worst_idx][t].solution_value() > 0.5]
+            weeks.sort(key=lambda x: x[1], reverse=True)
+            top = [w for w, _ in weeks[:2]]
+            if len(top) == 2:
+                weeks_str = f"weeks {top[0]} and {top[1]}"
+            elif len(top) == 1:
+                weeks_str = f"week {top[0]}"
+            else:
+                weeks_str = "some weeks"
+
+            if self.narrative_domain == "ad_sales":
+                insight_roturas = f"{worst['producto']} turned away {worst['total_rotura']} buyers in {weeks_str} \u2014 demand exceeded available inventory."
+            else:
+                insight_roturas = f"{worst['producto']} had {worst['total_rotura']} unfilled {self.unit_name}s in {weeks_str} \u2014 demand exceeded stock."
 
         narrative = {
-            "titular": f"Optimal ordering \u00B7 \u20AC{coste_total:,.2f} over 12 weeks \u00B7 {num_pedidos} orders",
+            "titular": f"Optimal ordering \u00B7 \u20AC{coste_total:,.2f} over {self.horizonte} weeks \u00B7 {num_pedidos} orders",
             "comparacion": f"Ordering weekly on demand: \u20AC{coste_naive:,.2f}. Savings: \u20AC{ahorro:,.2f} ({ahorro_pct}%). EOQ model (MIT Sloan).",
             "insight": insight_roturas
         }
