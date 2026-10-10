@@ -1,0 +1,2021 @@
+{
+  "unit_name": "case",
+  "teams": [
+    {
+      "id": "T1",
+      "name": "Accounts Investigations",
+      "specialties": [
+        "accounts",
+        "transfers"
+      ],
+      "members": 8
+    },
+    {
+      "id": "T2",
+      "name": "Card Investigations",
+      "specialties": [
+        "cards",
+        "payments"
+      ],
+      "members": 9
+    },
+    {
+      "id": "T3",
+      "name": "Fraud Unit",
+      "specialties": [
+        "fraud",
+        "cards",
+        "accounts"
+      ],
+      "members": 6
+    },
+    {
+      "id": "T4",
+      "name": "Premium & VIP",
+      "specialties": [
+        "premium",
+        "accounts",
+        "cards"
+      ],
+      "members": 5
+    },
+    {
+      "id": "T5",
+      "name": "Compliance & Regulatory",
+      "specialties": [
+        "compliance",
+        "regulatory",
+        "aml"
+      ],
+      "members": 5
+    },
+    {
+      "id": "T6",
+      "name": "General Complaints",
+      "specialties": [
+        "complaints",
+        "general",
+        "accounts",
+        "cards"
+      ],
+      "members": 7
+    }
+  ],
+  "cases": [
+    {
+      "id": 1172,
+      "name": "General complaint #5892",
+      "hours": 3,
+      "priority": "medium",
+      "required_skills": [
+        "complaints",
+        "general"
+      ]
+    },
+    {
+      "id": 1102,
+      "name": "AML investigation #1832",
+      "hours": 11,
+      "priority": "low",
+      "required_skills": [
+        "fraud",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1031,
+      "name": "Chargeback #9348",
+      "hours": 3,
+      "priority": "medium",
+      "required_skills": [
+        "cards",
+        "payments"
+      ]
+    },
+    {
+      "id": 1042,
+      "name": "Transfer investigation #9837",
+      "hours": 7,
+      "priority": "high",
+      "required_skills": [
+        "accounts",
+        "transfers"
+      ]
+    },
+    {
+      "id": 1011,
+      "name": "Card dispute #2674",
+      "hours": 2,
+      "priority": "low",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1155,
+      "name": "Compliance query #5082",
+      "hours": 4,
+      "priority": "high",
+      "required_skills": [
+        "compliance",
+        "regulatory"
+      ]
+    },
+    {
+      "id": 1164,
+      "name": "Regulatory filing #6238",
+      "hours": 6,
+      "priority": "high",
+      "required_skills": [
+        "regulatory",
+        "compliance"
+      ]
+    },
+    {
+      "id": 1175,
+      "name": "General complaint #8140",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "complaints",
+        "general"
+      ]
+    },
+    {
+      "id": 1121,
+      "name": "Premium retention #7528",
+      "hours": 3,
+      "priority": "medium",
+      "required_skills": [
+        "premium",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1081,
+      "name": "Fraud alert #1931",
+      "hours": 4,
+      "priority": "high",
+      "required_skills": [
+        "fraud",
+        "cards"
+      ]
+    },
+    {
+      "id": 1019,
+      "name": "Card dispute #3664",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1021,
+      "name": "Card dispute #3803",
+      "hours": 3,
+      "priority": "medium",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1050,
+      "name": "Transfer investigation #7932",
+      "hours": 7,
+      "priority": "high",
+      "required_skills": [
+        "accounts",
+        "transfers"
+      ]
+    },
+    {
+      "id": 1012,
+      "name": "Card dispute #6881",
+      "hours": 4,
+      "priority": "medium",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1064,
+      "name": "Account review #8651",
+      "hours": 2,
+      "priority": "medium",
+      "required_skills": [
+        "accounts"
+      ]
+    },
+    {
+      "id": 1048,
+      "name": "Transfer investigation #3060",
+      "hours": 6,
+      "priority": "low",
+      "required_skills": [
+        "accounts",
+        "transfers"
+      ]
+    },
+    {
+      "id": 1078,
+      "name": "Account review #1958",
+      "hours": 2,
+      "priority": "medium",
+      "required_skills": [
+        "accounts"
+      ]
+    },
+    {
+      "id": 1073,
+      "name": "Account review #4502",
+      "hours": 2,
+      "priority": "medium",
+      "required_skills": [
+        "accounts"
+      ]
+    },
+    {
+      "id": 1056,
+      "name": "Transfer investigation #2163",
+      "hours": 3,
+      "priority": "medium",
+      "required_skills": [
+        "accounts",
+        "transfers"
+      ]
+    },
+    {
+      "id": 1060,
+      "name": "Transfer investigation #9834",
+      "hours": 7,
+      "priority": "low",
+      "required_skills": [
+        "accounts",
+        "transfers"
+      ]
+    },
+    {
+      "id": 1032,
+      "name": "Chargeback #2796",
+      "hours": 4,
+      "priority": "low",
+      "required_skills": [
+        "cards",
+        "payments"
+      ]
+    },
+    {
+      "id": 1001,
+      "name": "Card dispute #2824",
+      "hours": 4,
+      "priority": "low",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1026,
+      "name": "Chargeback #6155",
+      "hours": 6,
+      "priority": "low",
+      "required_skills": [
+        "cards",
+        "payments"
+      ]
+    },
+    {
+      "id": 1045,
+      "name": "Transfer investigation #6038",
+      "hours": 4,
+      "priority": "low",
+      "required_skills": [
+        "accounts",
+        "transfers"
+      ]
+    },
+    {
+      "id": 1198,
+      "name": "Fee complaint #4978",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "complaints",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1156,
+      "name": "Regulatory filing #8478",
+      "hours": 12,
+      "priority": "low",
+      "required_skills": [
+        "regulatory",
+        "compliance"
+      ]
+    },
+    {
+      "id": 1051,
+      "name": "Transfer investigation #4295",
+      "hours": 6,
+      "priority": "medium",
+      "required_skills": [
+        "accounts",
+        "transfers"
+      ]
+    },
+    {
+      "id": 1053,
+      "name": "Transfer investigation #8397",
+      "hours": 4,
+      "priority": "low",
+      "required_skills": [
+        "accounts",
+        "transfers"
+      ]
+    },
+    {
+      "id": 1149,
+      "name": "Compliance query #4185",
+      "hours": 7,
+      "priority": "medium",
+      "required_skills": [
+        "compliance",
+        "regulatory"
+      ]
+    },
+    {
+      "id": 1165,
+      "name": "Regulatory filing #3267",
+      "hours": 11,
+      "priority": "low",
+      "required_skills": [
+        "regulatory",
+        "compliance"
+      ]
+    },
+    {
+      "id": 1066,
+      "name": "Account review #2790",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "accounts"
+      ]
+    },
+    {
+      "id": 1153,
+      "name": "Compliance query #3881",
+      "hours": 9,
+      "priority": "high",
+      "required_skills": [
+        "compliance",
+        "regulatory"
+      ]
+    },
+    {
+      "id": 1132,
+      "name": "VIP escalation #4228",
+      "hours": 4,
+      "priority": "medium",
+      "required_skills": [
+        "premium",
+        "cards"
+      ]
+    },
+    {
+      "id": 1180,
+      "name": "General complaint #3223",
+      "hours": 2,
+      "priority": "medium",
+      "required_skills": [
+        "complaints",
+        "general"
+      ]
+    },
+    {
+      "id": 1197,
+      "name": "Fee complaint #2245",
+      "hours": 4,
+      "priority": "low",
+      "required_skills": [
+        "complaints",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1177,
+      "name": "General complaint #3704",
+      "hours": 2,
+      "priority": "medium",
+      "required_skills": [
+        "complaints",
+        "general"
+      ]
+    },
+    {
+      "id": 1106,
+      "name": "AML investigation #1158",
+      "hours": 7,
+      "priority": "medium",
+      "required_skills": [
+        "fraud",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1082,
+      "name": "Fraud alert #4044",
+      "hours": 4,
+      "priority": "low",
+      "required_skills": [
+        "fraud",
+        "cards"
+      ]
+    },
+    {
+      "id": 1054,
+      "name": "Transfer investigation #2049",
+      "hours": 7,
+      "priority": "medium",
+      "required_skills": [
+        "accounts",
+        "transfers"
+      ]
+    },
+    {
+      "id": 1075,
+      "name": "Account review #5345",
+      "hours": 5,
+      "priority": "high",
+      "required_skills": [
+        "accounts"
+      ]
+    },
+    {
+      "id": 1029,
+      "name": "Chargeback #9830",
+      "hours": 6,
+      "priority": "low",
+      "required_skills": [
+        "cards",
+        "payments"
+      ]
+    },
+    {
+      "id": 1144,
+      "name": "Compliance query #6491",
+      "hours": 10,
+      "priority": "low",
+      "required_skills": [
+        "compliance",
+        "regulatory"
+      ]
+    },
+    {
+      "id": 1034,
+      "name": "Chargeback #7252",
+      "hours": 6,
+      "priority": "medium",
+      "required_skills": [
+        "cards",
+        "payments"
+      ]
+    },
+    {
+      "id": 1154,
+      "name": "Compliance query #9486",
+      "hours": 8,
+      "priority": "medium",
+      "required_skills": [
+        "compliance",
+        "regulatory"
+      ]
+    },
+    {
+      "id": 1176,
+      "name": "General complaint #6507",
+      "hours": 3,
+      "priority": "medium",
+      "required_skills": [
+        "complaints",
+        "general"
+      ]
+    },
+    {
+      "id": 1092,
+      "name": "Fraud alert #9288",
+      "hours": 6,
+      "priority": "medium",
+      "required_skills": [
+        "fraud",
+        "cards"
+      ]
+    },
+    {
+      "id": 1123,
+      "name": "Premium retention #7548",
+      "hours": 7,
+      "priority": "high",
+      "required_skills": [
+        "premium",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1027,
+      "name": "Chargeback #7482",
+      "hours": 6,
+      "priority": "medium",
+      "required_skills": [
+        "cards",
+        "payments"
+      ]
+    },
+    {
+      "id": 1147,
+      "name": "Compliance query #5011",
+      "hours": 8,
+      "priority": "high",
+      "required_skills": [
+        "compliance",
+        "regulatory"
+      ]
+    },
+    {
+      "id": 1086,
+      "name": "Fraud alert #9565",
+      "hours": 6,
+      "priority": "medium",
+      "required_skills": [
+        "fraud",
+        "cards"
+      ]
+    },
+    {
+      "id": 1161,
+      "name": "Regulatory filing #5543",
+      "hours": 12,
+      "priority": "high",
+      "required_skills": [
+        "regulatory",
+        "compliance"
+      ]
+    },
+    {
+      "id": 1113,
+      "name": "AML investigation #3662",
+      "hours": 7,
+      "priority": "high",
+      "required_skills": [
+        "fraud",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1085,
+      "name": "Fraud alert #2343",
+      "hours": 8,
+      "priority": "medium",
+      "required_skills": [
+        "fraud",
+        "cards"
+      ]
+    },
+    {
+      "id": 1020,
+      "name": "Card dispute #5374",
+      "hours": 2,
+      "priority": "medium",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1099,
+      "name": "Fraud alert #3546",
+      "hours": 8,
+      "priority": "medium",
+      "required_skills": [
+        "fraud",
+        "cards"
+      ]
+    },
+    {
+      "id": 1065,
+      "name": "Account review #2612",
+      "hours": 4,
+      "priority": "low",
+      "required_skills": [
+        "accounts"
+      ]
+    },
+    {
+      "id": 1058,
+      "name": "Transfer investigation #6413",
+      "hours": 4,
+      "priority": "low",
+      "required_skills": [
+        "accounts",
+        "transfers"
+      ]
+    },
+    {
+      "id": 1010,
+      "name": "Card dispute #4527",
+      "hours": 4,
+      "priority": "high",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1194,
+      "name": "Fee complaint #6096",
+      "hours": 2,
+      "priority": "low",
+      "required_skills": [
+        "complaints",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1174,
+      "name": "General complaint #4613",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "complaints",
+        "general"
+      ]
+    },
+    {
+      "id": 1114,
+      "name": "AML investigation #7755",
+      "hours": 10,
+      "priority": "low",
+      "required_skills": [
+        "fraud",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1101,
+      "name": "AML investigation #5325",
+      "hours": 9,
+      "priority": "high",
+      "required_skills": [
+        "fraud",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1178,
+      "name": "General complaint #9751",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "complaints",
+        "general"
+      ]
+    },
+    {
+      "id": 1080,
+      "name": "Account review #9238",
+      "hours": 3,
+      "priority": "high",
+      "required_skills": [
+        "accounts"
+      ]
+    },
+    {
+      "id": 1052,
+      "name": "Transfer investigation #7118",
+      "hours": 7,
+      "priority": "medium",
+      "required_skills": [
+        "accounts",
+        "transfers"
+      ]
+    },
+    {
+      "id": 1009,
+      "name": "Card dispute #7924",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1015,
+      "name": "Card dispute #6925",
+      "hours": 2,
+      "priority": "medium",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1100,
+      "name": "Fraud alert #4450",
+      "hours": 5,
+      "priority": "high",
+      "required_skills": [
+        "fraud",
+        "cards"
+      ]
+    },
+    {
+      "id": 1196,
+      "name": "Fee complaint #7498",
+      "hours": 2,
+      "priority": "medium",
+      "required_skills": [
+        "complaints",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1159,
+      "name": "Regulatory filing #9976",
+      "hours": 7,
+      "priority": "medium",
+      "required_skills": [
+        "regulatory",
+        "compliance"
+      ]
+    },
+    {
+      "id": 1193,
+      "name": "Fee complaint #2876",
+      "hours": 2,
+      "priority": "medium",
+      "required_skills": [
+        "complaints",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1044,
+      "name": "Transfer investigation #1319",
+      "hours": 5,
+      "priority": "low",
+      "required_skills": [
+        "accounts",
+        "transfers"
+      ]
+    },
+    {
+      "id": 1135,
+      "name": "VIP escalation #6344",
+      "hours": 6,
+      "priority": "high",
+      "required_skills": [
+        "premium",
+        "cards"
+      ]
+    },
+    {
+      "id": 1186,
+      "name": "Fee complaint #6733",
+      "hours": 2,
+      "priority": "low",
+      "required_skills": [
+        "complaints",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1061,
+      "name": "Account review #8744",
+      "hours": 5,
+      "priority": "low",
+      "required_skills": [
+        "accounts"
+      ]
+    },
+    {
+      "id": 1097,
+      "name": "Fraud alert #5905",
+      "hours": 4,
+      "priority": "high",
+      "required_skills": [
+        "fraud",
+        "cards"
+      ]
+    },
+    {
+      "id": 1074,
+      "name": "Account review #3697",
+      "hours": 5,
+      "priority": "low",
+      "required_skills": [
+        "accounts"
+      ]
+    },
+    {
+      "id": 1128,
+      "name": "Premium retention #8149",
+      "hours": 7,
+      "priority": "high",
+      "required_skills": [
+        "premium",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1014,
+      "name": "Card dispute #7201",
+      "hours": 4,
+      "priority": "low",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1148,
+      "name": "Compliance query #2193",
+      "hours": 9,
+      "priority": "medium",
+      "required_skills": [
+        "compliance",
+        "regulatory"
+      ]
+    },
+    {
+      "id": 1162,
+      "name": "Regulatory filing #4919",
+      "hours": 6,
+      "priority": "medium",
+      "required_skills": [
+        "regulatory",
+        "compliance"
+      ]
+    },
+    {
+      "id": 1094,
+      "name": "Fraud alert #5669",
+      "hours": 10,
+      "priority": "medium",
+      "required_skills": [
+        "fraud",
+        "cards"
+      ]
+    },
+    {
+      "id": 1140,
+      "name": "VIP escalation #6279",
+      "hours": 7,
+      "priority": "high",
+      "required_skills": [
+        "premium",
+        "cards"
+      ]
+    },
+    {
+      "id": 1007,
+      "name": "Card dispute #4611",
+      "hours": 4,
+      "priority": "low",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1006,
+      "name": "Card dispute #4257",
+      "hours": 5,
+      "priority": "medium",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1103,
+      "name": "AML investigation #5533",
+      "hours": 10,
+      "priority": "low",
+      "required_skills": [
+        "fraud",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1017,
+      "name": "Card dispute #2307",
+      "hours": 2,
+      "priority": "medium",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1190,
+      "name": "Fee complaint #2874",
+      "hours": 2,
+      "priority": "low",
+      "required_skills": [
+        "complaints",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1002,
+      "name": "Card dispute #5012",
+      "hours": 2,
+      "priority": "low",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1039,
+      "name": "Chargeback #9201",
+      "hours": 3,
+      "priority": "medium",
+      "required_skills": [
+        "cards",
+        "payments"
+      ]
+    },
+    {
+      "id": 1200,
+      "name": "Fee complaint #1672",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "complaints",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1179,
+      "name": "General complaint #1444",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "complaints",
+        "general"
+      ]
+    },
+    {
+      "id": 1187,
+      "name": "Fee complaint #1659",
+      "hours": 2,
+      "priority": "medium",
+      "required_skills": [
+        "complaints",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1038,
+      "name": "Chargeback #3591",
+      "hours": 5,
+      "priority": "medium",
+      "required_skills": [
+        "cards",
+        "payments"
+      ]
+    },
+    {
+      "id": 1107,
+      "name": "AML investigation #9938",
+      "hours": 10,
+      "priority": "low",
+      "required_skills": [
+        "fraud",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1013,
+      "name": "Card dispute #1711",
+      "hours": 2,
+      "priority": "medium",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1037,
+      "name": "Chargeback #6573",
+      "hours": 6,
+      "priority": "low",
+      "required_skills": [
+        "cards",
+        "payments"
+      ]
+    },
+    {
+      "id": 1077,
+      "name": "Account review #3536",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "accounts"
+      ]
+    },
+    {
+      "id": 1068,
+      "name": "Account review #4006",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "accounts"
+      ]
+    },
+    {
+      "id": 1110,
+      "name": "AML investigation #6862",
+      "hours": 8,
+      "priority": "medium",
+      "required_skills": [
+        "fraud",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1136,
+      "name": "VIP escalation #3085",
+      "hours": 7,
+      "priority": "medium",
+      "required_skills": [
+        "premium",
+        "cards"
+      ]
+    },
+    {
+      "id": 1168,
+      "name": "General complaint #8633",
+      "hours": 2,
+      "priority": "low",
+      "required_skills": [
+        "complaints",
+        "general"
+      ]
+    },
+    {
+      "id": 1036,
+      "name": "Chargeback #2876",
+      "hours": 5,
+      "priority": "medium",
+      "required_skills": [
+        "cards",
+        "payments"
+      ]
+    },
+    {
+      "id": 1142,
+      "name": "Compliance query #3780",
+      "hours": 6,
+      "priority": "medium",
+      "required_skills": [
+        "compliance",
+        "regulatory"
+      ]
+    },
+    {
+      "id": 1131,
+      "name": "VIP escalation #1027",
+      "hours": 8,
+      "priority": "high",
+      "required_skills": [
+        "premium",
+        "cards"
+      ]
+    },
+    {
+      "id": 1191,
+      "name": "Fee complaint #8619",
+      "hours": 3,
+      "priority": "medium",
+      "required_skills": [
+        "complaints",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1139,
+      "name": "VIP escalation #5978",
+      "hours": 7,
+      "priority": "medium",
+      "required_skills": [
+        "premium",
+        "cards"
+      ]
+    },
+    {
+      "id": 1137,
+      "name": "VIP escalation #3851",
+      "hours": 6,
+      "priority": "high",
+      "required_skills": [
+        "premium",
+        "cards"
+      ]
+    },
+    {
+      "id": 1129,
+      "name": "Premium retention #2894",
+      "hours": 7,
+      "priority": "medium",
+      "required_skills": [
+        "premium",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1188,
+      "name": "Fee complaint #4266",
+      "hours": 4,
+      "priority": "medium",
+      "required_skills": [
+        "complaints",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1173,
+      "name": "General complaint #9818",
+      "hours": 4,
+      "priority": "medium",
+      "required_skills": [
+        "complaints",
+        "general"
+      ]
+    },
+    {
+      "id": 1160,
+      "name": "Regulatory filing #8777",
+      "hours": 8,
+      "priority": "medium",
+      "required_skills": [
+        "regulatory",
+        "compliance"
+      ]
+    },
+    {
+      "id": 1117,
+      "name": "Premium retention #7267",
+      "hours": 6,
+      "priority": "high",
+      "required_skills": [
+        "premium",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1041,
+      "name": "Transfer investigation #3504",
+      "hours": 4,
+      "priority": "medium",
+      "required_skills": [
+        "accounts",
+        "transfers"
+      ]
+    },
+    {
+      "id": 1025,
+      "name": "Card dispute #7572",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1189,
+      "name": "Fee complaint #3496",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "complaints",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1016,
+      "name": "Card dispute #1750",
+      "hours": 4,
+      "priority": "medium",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1030,
+      "name": "Chargeback #7543",
+      "hours": 4,
+      "priority": "low",
+      "required_skills": [
+        "cards",
+        "payments"
+      ]
+    },
+    {
+      "id": 1033,
+      "name": "Chargeback #7916",
+      "hours": 6,
+      "priority": "medium",
+      "required_skills": [
+        "cards",
+        "payments"
+      ]
+    },
+    {
+      "id": 1185,
+      "name": "General complaint #1317",
+      "hours": 2,
+      "priority": "medium",
+      "required_skills": [
+        "complaints",
+        "general"
+      ]
+    },
+    {
+      "id": 1035,
+      "name": "Chargeback #9669",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "cards",
+        "payments"
+      ]
+    },
+    {
+      "id": 1059,
+      "name": "Transfer investigation #5562",
+      "hours": 4,
+      "priority": "medium",
+      "required_skills": [
+        "accounts",
+        "transfers"
+      ]
+    },
+    {
+      "id": 1090,
+      "name": "Fraud alert #2188",
+      "hours": 8,
+      "priority": "low",
+      "required_skills": [
+        "fraud",
+        "cards"
+      ]
+    },
+    {
+      "id": 1183,
+      "name": "General complaint #7211",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "complaints",
+        "general"
+      ]
+    },
+    {
+      "id": 1043,
+      "name": "Transfer investigation #1009",
+      "hours": 6,
+      "priority": "medium",
+      "required_skills": [
+        "accounts",
+        "transfers"
+      ]
+    },
+    {
+      "id": 1151,
+      "name": "Compliance query #1090",
+      "hours": 10,
+      "priority": "high",
+      "required_skills": [
+        "compliance",
+        "regulatory"
+      ]
+    },
+    {
+      "id": 1096,
+      "name": "Fraud alert #9666",
+      "hours": 10,
+      "priority": "low",
+      "required_skills": [
+        "fraud",
+        "cards"
+      ]
+    },
+    {
+      "id": 1109,
+      "name": "AML investigation #6050",
+      "hours": 5,
+      "priority": "medium",
+      "required_skills": [
+        "fraud",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1089,
+      "name": "Fraud alert #5915",
+      "hours": 10,
+      "priority": "medium",
+      "required_skills": [
+        "fraud",
+        "cards"
+      ]
+    },
+    {
+      "id": 1141,
+      "name": "Compliance query #4501",
+      "hours": 10,
+      "priority": "medium",
+      "required_skills": [
+        "compliance",
+        "regulatory"
+      ]
+    },
+    {
+      "id": 1199,
+      "name": "Fee complaint #2983",
+      "hours": 4,
+      "priority": "medium",
+      "required_skills": [
+        "complaints",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1079,
+      "name": "Account review #6138",
+      "hours": 5,
+      "priority": "low",
+      "required_skills": [
+        "accounts"
+      ]
+    },
+    {
+      "id": 1181,
+      "name": "General complaint #1823",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "complaints",
+        "general"
+      ]
+    },
+    {
+      "id": 1104,
+      "name": "AML investigation #3143",
+      "hours": 9,
+      "priority": "high",
+      "required_skills": [
+        "fraud",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1057,
+      "name": "Transfer investigation #4750",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "accounts",
+        "transfers"
+      ]
+    },
+    {
+      "id": 1076,
+      "name": "Account review #5673",
+      "hours": 5,
+      "priority": "low",
+      "required_skills": [
+        "accounts"
+      ]
+    },
+    {
+      "id": 1024,
+      "name": "Card dispute #4752",
+      "hours": 4,
+      "priority": "medium",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1005,
+      "name": "Card dispute #4811",
+      "hours": 2,
+      "priority": "medium",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1115,
+      "name": "AML investigation #7745",
+      "hours": 8,
+      "priority": "high",
+      "required_skills": [
+        "fraud",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1150,
+      "name": "Compliance query #9099",
+      "hours": 5,
+      "priority": "medium",
+      "required_skills": [
+        "compliance",
+        "regulatory"
+      ]
+    },
+    {
+      "id": 1122,
+      "name": "Premium retention #5573",
+      "hours": 7,
+      "priority": "medium",
+      "required_skills": [
+        "premium",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1145,
+      "name": "Compliance query #4848",
+      "hours": 5,
+      "priority": "medium",
+      "required_skills": [
+        "compliance",
+        "regulatory"
+      ]
+    },
+    {
+      "id": 1192,
+      "name": "Fee complaint #3749",
+      "hours": 4,
+      "priority": "low",
+      "required_skills": [
+        "complaints",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1105,
+      "name": "AML investigation #3647",
+      "hours": 11,
+      "priority": "high",
+      "required_skills": [
+        "fraud",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1062,
+      "name": "Account review #7669",
+      "hours": 2,
+      "priority": "low",
+      "required_skills": [
+        "accounts"
+      ]
+    },
+    {
+      "id": 1022,
+      "name": "Card dispute #3677",
+      "hours": 4,
+      "priority": "low",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1049,
+      "name": "Transfer investigation #3705",
+      "hours": 7,
+      "priority": "low",
+      "required_skills": [
+        "accounts",
+        "transfers"
+      ]
+    },
+    {
+      "id": 1133,
+      "name": "VIP escalation #6409",
+      "hours": 4,
+      "priority": "high",
+      "required_skills": [
+        "premium",
+        "cards"
+      ]
+    },
+    {
+      "id": 1003,
+      "name": "Card dispute #9935",
+      "hours": 5,
+      "priority": "low",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1143,
+      "name": "Compliance query #9445",
+      "hours": 8,
+      "priority": "medium",
+      "required_skills": [
+        "compliance",
+        "regulatory"
+      ]
+    },
+    {
+      "id": 1071,
+      "name": "Account review #2528",
+      "hours": 3,
+      "priority": "high",
+      "required_skills": [
+        "accounts"
+      ]
+    },
+    {
+      "id": 1169,
+      "name": "General complaint #7883",
+      "hours": 4,
+      "priority": "low",
+      "required_skills": [
+        "complaints",
+        "general"
+      ]
+    },
+    {
+      "id": 1195,
+      "name": "Fee complaint #6111",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "complaints",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1067,
+      "name": "Account review #9786",
+      "hours": 5,
+      "priority": "low",
+      "required_skills": [
+        "accounts"
+      ]
+    },
+    {
+      "id": 1091,
+      "name": "Fraud alert #2638",
+      "hours": 5,
+      "priority": "low",
+      "required_skills": [
+        "fraud",
+        "cards"
+      ]
+    },
+    {
+      "id": 1055,
+      "name": "Transfer investigation #4770",
+      "hours": 3,
+      "priority": "medium",
+      "required_skills": [
+        "accounts",
+        "transfers"
+      ]
+    },
+    {
+      "id": 1125,
+      "name": "Premium retention #5279",
+      "hours": 5,
+      "priority": "low",
+      "required_skills": [
+        "premium",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1047,
+      "name": "Transfer investigation #2133",
+      "hours": 7,
+      "priority": "high",
+      "required_skills": [
+        "accounts",
+        "transfers"
+      ]
+    },
+    {
+      "id": 1084,
+      "name": "Fraud alert #5033",
+      "hours": 4,
+      "priority": "high",
+      "required_skills": [
+        "fraud",
+        "cards"
+      ]
+    },
+    {
+      "id": 1127,
+      "name": "Premium retention #6663",
+      "hours": 5,
+      "priority": "high",
+      "required_skills": [
+        "premium",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1008,
+      "name": "Card dispute #1106",
+      "hours": 3,
+      "priority": "medium",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1087,
+      "name": "Fraud alert #4346",
+      "hours": 6,
+      "priority": "high",
+      "required_skills": [
+        "fraud",
+        "cards"
+      ]
+    },
+    {
+      "id": 1098,
+      "name": "Fraud alert #3200",
+      "hours": 4,
+      "priority": "medium",
+      "required_skills": [
+        "fraud",
+        "cards"
+      ]
+    },
+    {
+      "id": 1157,
+      "name": "Regulatory filing #9702",
+      "hours": 10,
+      "priority": "high",
+      "required_skills": [
+        "regulatory",
+        "compliance"
+      ]
+    },
+    {
+      "id": 1146,
+      "name": "Compliance query #4262",
+      "hours": 4,
+      "priority": "low",
+      "required_skills": [
+        "compliance",
+        "regulatory"
+      ]
+    },
+    {
+      "id": 1119,
+      "name": "Premium retention #6728",
+      "hours": 4,
+      "priority": "medium",
+      "required_skills": [
+        "premium",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1171,
+      "name": "General complaint #7232",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "complaints",
+        "general"
+      ]
+    },
+    {
+      "id": 1116,
+      "name": "Premium retention #5371",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "premium",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1072,
+      "name": "Account review #3724",
+      "hours": 5,
+      "priority": "low",
+      "required_skills": [
+        "accounts"
+      ]
+    },
+    {
+      "id": 1023,
+      "name": "Card dispute #4598",
+      "hours": 2,
+      "priority": "medium",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1063,
+      "name": "Account review #8062",
+      "hours": 5,
+      "priority": "low",
+      "required_skills": [
+        "accounts"
+      ]
+    },
+    {
+      "id": 1083,
+      "name": "Fraud alert #4853",
+      "hours": 8,
+      "priority": "medium",
+      "required_skills": [
+        "fraud",
+        "cards"
+      ]
+    },
+    {
+      "id": 1069,
+      "name": "Account review #2235",
+      "hours": 2,
+      "priority": "low",
+      "required_skills": [
+        "accounts"
+      ]
+    },
+    {
+      "id": 1152,
+      "name": "Compliance query #2746",
+      "hours": 5,
+      "priority": "medium",
+      "required_skills": [
+        "compliance",
+        "regulatory"
+      ]
+    },
+    {
+      "id": 1184,
+      "name": "General complaint #5133",
+      "hours": 3,
+      "priority": "medium",
+      "required_skills": [
+        "complaints",
+        "general"
+      ]
+    },
+    {
+      "id": 1120,
+      "name": "Premium retention #4652",
+      "hours": 4,
+      "priority": "low",
+      "required_skills": [
+        "premium",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1124,
+      "name": "Premium retention #6425",
+      "hours": 3,
+      "priority": "high",
+      "required_skills": [
+        "premium",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1138,
+      "name": "VIP escalation #7653",
+      "hours": 4,
+      "priority": "high",
+      "required_skills": [
+        "premium",
+        "cards"
+      ]
+    },
+    {
+      "id": 1158,
+      "name": "Regulatory filing #8251",
+      "hours": 11,
+      "priority": "medium",
+      "required_skills": [
+        "regulatory",
+        "compliance"
+      ]
+    },
+    {
+      "id": 1070,
+      "name": "Account review #1828",
+      "hours": 2,
+      "priority": "medium",
+      "required_skills": [
+        "accounts"
+      ]
+    },
+    {
+      "id": 1167,
+      "name": "General complaint #7797",
+      "hours": 4,
+      "priority": "low",
+      "required_skills": [
+        "complaints",
+        "general"
+      ]
+    },
+    {
+      "id": 1134,
+      "name": "VIP escalation #5920",
+      "hours": 7,
+      "priority": "high",
+      "required_skills": [
+        "premium",
+        "cards"
+      ]
+    },
+    {
+      "id": 1046,
+      "name": "Transfer investigation #2290",
+      "hours": 6,
+      "priority": "low",
+      "required_skills": [
+        "accounts",
+        "transfers"
+      ]
+    },
+    {
+      "id": 1112,
+      "name": "AML investigation #3532",
+      "hours": 8,
+      "priority": "high",
+      "required_skills": [
+        "fraud",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1040,
+      "name": "Chargeback #5889",
+      "hours": 4,
+      "priority": "medium",
+      "required_skills": [
+        "cards",
+        "payments"
+      ]
+    },
+    {
+      "id": 1182,
+      "name": "General complaint #4467",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "complaints",
+        "general"
+      ]
+    },
+    {
+      "id": 1118,
+      "name": "Premium retention #4644",
+      "hours": 6,
+      "priority": "low",
+      "required_skills": [
+        "premium",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1163,
+      "name": "Regulatory filing #5681",
+      "hours": 10,
+      "priority": "medium",
+      "required_skills": [
+        "regulatory",
+        "compliance"
+      ]
+    },
+    {
+      "id": 1093,
+      "name": "Fraud alert #2127",
+      "hours": 6,
+      "priority": "high",
+      "required_skills": [
+        "fraud",
+        "cards"
+      ]
+    },
+    {
+      "id": 1111,
+      "name": "AML investigation #2684",
+      "hours": 11,
+      "priority": "medium",
+      "required_skills": [
+        "fraud",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1028,
+      "name": "Chargeback #3340",
+      "hours": 4,
+      "priority": "low",
+      "required_skills": [
+        "cards",
+        "payments"
+      ]
+    },
+    {
+      "id": 1126,
+      "name": "Premium retention #1626",
+      "hours": 6,
+      "priority": "low",
+      "required_skills": [
+        "premium",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1108,
+      "name": "AML investigation #3426",
+      "hours": 5,
+      "priority": "medium",
+      "required_skills": [
+        "fraud",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1004,
+      "name": "Card dispute #1520",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1088,
+      "name": "Fraud alert #4910",
+      "hours": 5,
+      "priority": "medium",
+      "required_skills": [
+        "fraud",
+        "cards"
+      ]
+    },
+    {
+      "id": 1166,
+      "name": "General complaint #3503",
+      "hours": 2,
+      "priority": "medium",
+      "required_skills": [
+        "complaints",
+        "general"
+      ]
+    },
+    {
+      "id": 1130,
+      "name": "Premium retention #4114",
+      "hours": 6,
+      "priority": "medium",
+      "required_skills": [
+        "premium",
+        "accounts"
+      ]
+    },
+    {
+      "id": 1018,
+      "name": "Card dispute #7227",
+      "hours": 4,
+      "priority": "low",
+      "required_skills": [
+        "cards"
+      ]
+    },
+    {
+      "id": 1095,
+      "name": "Fraud alert #9900",
+      "hours": 8,
+      "priority": "high",
+      "required_skills": [
+        "fraud",
+        "cards"
+      ]
+    },
+    {
+      "id": 1170,
+      "name": "General complaint #1320",
+      "hours": 4,
+      "priority": "medium",
+      "required_skills": [
+        "complaints",
+        "general"
+      ]
+    }
+  ]
+}
