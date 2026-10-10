@@ -1,0 +1,248 @@
+{
+  "vehicles": [
+    {
+      "id": "V1",
+      "capacity": 500,
+      "cost_per_km": 2.5
+    },
+    {
+      "id": "V2",
+      "capacity": 500,
+      "cost_per_km": 2.5
+    },
+    {
+      "id": "V3",
+      "capacity": 500,
+      "cost_per_km": 2.5
+    },
+    {
+      "id": "V4",
+      "capacity": 500,
+      "cost_per_km": 2.5
+    }
+  ],
+  "clients": [
+    {
+      "id": 1,
+      "name": "CaixaBank Gran Via",
+      "demand": 120,
+      "time_window_start": 480,
+      "time_window_end": 600,
+      "lat": 40.42,
+      "lon": -3.705
+    },
+    {
+      "id": 2,
+      "name": "BBVA Serrano",
+      "demand": 100,
+      "time_window_start": 480,
+      "time_window_end": 600,
+      "lat": 40.431,
+      "lon": -3.6875
+    },
+    {
+      "id": 3,
+      "name": "Santander Sol",
+      "demand": 130,
+      "time_window_start": 480,
+      "time_window_end": 600,
+      "lat": 40.417,
+      "lon": -3.7045
+    },
+    {
+      "id": 4,
+      "name": "Sabadell Alcala",
+      "demand": 90,
+      "time_window_start": 480,
+      "time_window_end": 600,
+      "lat": 40.42,
+      "lon": -3.68
+    },
+    {
+      "id": 5,
+      "name": "Bankinter Castellana",
+      "demand": 110,
+      "time_window_start": 480,
+      "time_window_end": 600,
+      "lat": 40.44,
+      "lon": -3.69
+    },
+    {
+      "id": 6,
+      "name": "CaixaBank Principe Pio",
+      "demand": 95,
+      "time_window_start": 480,
+      "time_window_end": 600,
+      "lat": 40.416,
+      "lon": -3.72
+    },
+    {
+      "id": 7,
+      "name": "BBVA Puerta del Sol",
+      "demand": 115,
+      "time_window_start": 480,
+      "time_window_end": 600,
+      "lat": 40.4169,
+      "lon": -3.7035
+    },
+    {
+      "id": 8,
+      "name": "Santander Atocha",
+      "demand": 105,
+      "time_window_start": 480,
+      "time_window_end": 600,
+      "lat": 40.407,
+      "lon": -3.689
+    },
+    {
+      "id": 9,
+      "name": "Sabadell Nuevos Ministerios",
+      "demand": 100,
+      "time_window_start": 480,
+      "time_window_end": 600,
+      "lat": 40.446,
+      "lon": -3.693
+    },
+    {
+      "id": 10,
+      "name": "CaixaBank Aeropuerto T4",
+      "demand": 140,
+      "time_window_start": 480,
+      "time_window_end": 600,
+      "lat": 40.493,
+      "lon": -3.567
+    },
+    {
+      "id": 11,
+      "name": "Santander Chamberi",
+      "demand": 85,
+      "time_window_start": 480,
+      "time_window_end": 600,
+      "lat": 40.435,
+      "lon": -3.703
+    },
+    {
+      "id": 12,
+      "name": "BBVA Callao",
+      "demand": 120,
+      "time_window_start": 480,
+      "time_window_end": 600,
+      "lat": 40.42,
+      "lon": -3.706
+    },
+    {
+      "id": 13,
+      "name": "ATM Atocha Renfe",
+      "demand": 40,
+      "time_window_start": 0,
+      "time_window_end": 1440,
+      "lat": 40.4068,
+      "lon": -3.69
+    },
+    {
+      "id": 14,
+      "name": "ATM Nuevos Ministerios",
+      "demand": 45,
+      "time_window_start": 0,
+      "time_window_end": 1440,
+      "lat": 40.4465,
+      "lon": -3.6925
+    },
+    {
+      "id": 15,
+      "name": "ATM Aeropuerto T1",
+      "demand": 50,
+      "time_window_start": 0,
+      "time_window_end": 1440,
+      "lat": 40.472,
+      "lon": -3.561
+    },
+    {
+      "id": 16,
+      "name": "ATM Plaza Mayor",
+      "demand": 35,
+      "time_window_start": 0,
+      "time_window_end": 1440,
+      "lat": 40.4155,
+      "lon": -3.7075
+    },
+    {
+      "id": 17,
+      "name": "ATM Puerta del Sol",
+      "demand": 30,
+      "time_window_start": 0,
+      "time_window_end": 1440,
+      "lat": 40.417,
+      "lon": -3.703
+    },
+    {
+      "id": 18,
+      "name": "ATM Retiro",
+      "demand": 25,
+      "time_window_start": 0,
+      "time_window_end": 1440,
+      "lat": 40.415,
+      "lon": -3.678
+    },
+    {
+      "id": 19,
+      "name": "ATM Moncloa",
+      "demand": 40,
+      "time_window_start": 0,
+      "time_window_end": 1440,
+      "lat": 40.435,
+      "lon": -3.719
+    },
+    {
+      "id": 20,
+      "name": "ATM Avenida America",
+      "demand": 35,
+      "time_window_start": 0,
+      "time_window_end": 1440,
+      "lat": 40.438,
+      "lon": -3.677
+    },
+    {
+      "id": 21,
+      "name": "Mercadona Chamberi",
+      "demand": 80,
+      "time_window_start": 540,
+      "time_window_end": 780,
+      "lat": 40.434,
+      "lon": -3.701
+    },
+    {
+      "id": 22,
+      "name": "El Corte Ingles Callao",
+      "demand": 95,
+      "time_window_start": 540,
+      "time_window_end": 780,
+      "lat": 40.421,
+      "lon": -3.7065
+    },
+    {
+      "id": 23,
+      "name": "Gasolinera Repsol M-30",
+      "demand": 60,
+      "time_window_start": 540,
+      "time_window_end": 780,
+      "lat": 40.42,
+      "lon": -3.65
+    },
+    {
+      "id": 24,
+      "name": "Farmacia Gran Via",
+      "demand": 30,
+      "time_window_start": 540,
+      "time_window_end": 780,
+      "lat": 40.4195,
+      "lon": -3.704
+    }
+  ],
+  "depot": {
+    "id": 0,
+    "name": "Centro Operativo Vicalvaro",
+    "lat": 40.405,
+    "lon": -3.61
+  }
+}
