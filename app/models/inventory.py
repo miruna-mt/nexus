@@ -1,6 +1,34 @@
 from ortools.linear_solver import pywraplp
 import json
 
+
+def _normalize_data(data):
+    """Accept both English and Spanish field names.
+    Returns a dict with Spanish keys (internal canonical format)."""
+    def pick(d, *keys):
+        for k in keys:
+            if k in d:
+                return d[k]
+        raise KeyError("None of " + str(keys) + " found in " + str(list(d.keys())))
+
+    def norm_product(p):
+        return {
+            "id": p.get("id"),
+            "nombre": pick(p, "name", "nombre"),
+            "coste_pedido": pick(p, "order_cost", "coste_pedido"),
+            "coste_almacenaje": pick(p, "holding_cost", "coste_almacenaje"),
+            "coste_rotura": pick(p, "stockout_cost", "coste_rotura"),
+            "stock_inicial": pick(p, "initial_stock", "stock_inicial"),
+            "demanda_semanal": pick(p, "weekly_demand", "demanda_semanal"),
+        }
+
+    return {
+        "horizonte_semanas": pick(data, "horizon_weeks", "horizonte_semanas"),
+        "capacidad_almacen": pick(data, "storage_capacity", "capacidad_almacen"),
+        "productos": [norm_product(p) for p in pick(data, "products", "productos")],
+    }
+
+
 class InventoryModel:
     def __init__(self):
         self.name = "Gestion de Inventario - Supermercado"
@@ -20,6 +48,10 @@ class InventoryModel:
                 data = json.load(f)
         else:
             raise ValueError("cargar_datos necesita 'filename' o 'data_dict'")
+
+        # Normalizar nombres de campos (ES o EN)
+        data = _normalize_data(data)
+
         self.horizonte = data["horizonte_semanas"]
         self.capacidad_almacen = data["capacidad_almacen"]
         self.productos = data["productos"]
