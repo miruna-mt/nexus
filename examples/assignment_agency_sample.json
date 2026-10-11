@@ -1,0 +1,255 @@
+{
+  "unit_name": "deliverable",
+  "subject": "Creative studio · Production backlog",
+  "teams": [
+    {
+      "id": "T1",
+      "name": "Creative Team A",
+      "specialties": [
+        "art_direction",
+        "copy",
+        "strategy",
+        "design"
+      ],
+      "members": 2
+    },
+    {
+      "id": "T2",
+      "name": "Creative Team B",
+      "specialties": [
+        "art_direction",
+        "copy",
+        "content",
+        "design"
+      ],
+      "members": 2
+    },
+    {
+      "id": "T3",
+      "name": "Video Editors",
+      "specialties": [
+        "video_editing",
+        "color",
+        "sound"
+      ],
+      "members": 3
+    },
+    {
+      "id": "T4",
+      "name": "Motion Designers",
+      "specialties": [
+        "motion",
+        "animation",
+        "video_editing"
+      ],
+      "members": 3
+    },
+    {
+      "id": "T5",
+      "name": "Producers",
+      "specialties": [
+        "production",
+        "coordination"
+      ],
+      "members": 3
+    }
+  ],
+  "cases": [
+    {
+      "id": 1,
+      "name": "Social cut 30s · Nike",
+      "hours": 3,
+      "priority": "high",
+      "required_skills": [
+        "video_editing"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Social cut 15s · Nike",
+      "hours": 2,
+      "priority": "high",
+      "required_skills": [
+        "video_editing"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Motion pack · Adidas",
+      "hours": 5,
+      "priority": "medium",
+      "required_skills": [
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Landing page copy · Spotify",
+      "hours": 3,
+      "priority": "medium",
+      "required_skills": [
+        "copy",
+        "content"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Print ad mockup · Coca-Cola",
+      "hours": 4,
+      "priority": "high",
+      "required_skills": [
+        "art_direction",
+        "design"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Storyboard · BMW",
+      "hours": 6,
+      "priority": "medium",
+      "required_skills": [
+        "art_direction",
+        "copy"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Color grade · Audi spot",
+      "hours": 4,
+      "priority": "high",
+      "required_skills": [
+        "color",
+        "video_editing"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Sound design · Audi spot",
+      "hours": 3,
+      "priority": "medium",
+      "required_skills": [
+        "sound"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Email sequence copy · PayPal",
+      "hours": 4,
+      "priority": "low",
+      "required_skills": [
+        "copy",
+        "content"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Instagram carousel · Zara",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "design",
+        "art_direction"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "TV spot edit · Vodafone",
+      "hours": 8,
+      "priority": "high",
+      "required_skills": [
+        "video_editing",
+        "color"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Logo animation · Santander",
+      "hours": 4,
+      "priority": "medium",
+      "required_skills": [
+        "motion",
+        "animation"
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Product copy · Apple",
+      "hours": 3,
+      "priority": "high",
+      "required_skills": [
+        "copy"
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Key visual · Mercedes",
+      "hours": 5,
+      "priority": "high",
+      "required_skills": [
+        "art_direction",
+        "design"
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Video script · Vodafone",
+      "hours": 4,
+      "priority": "medium",
+      "required_skills": [
+        "copy",
+        "strategy"
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Shooting plan · BMW",
+      "hours": 3,
+      "priority": "medium",
+      "required_skills": [
+        "production",
+        "coordination"
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Social captions · Spotify",
+      "hours": 2,
+      "priority": "low",
+      "required_skills": [
+        "copy",
+        "content"
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Motion cutdown · Adidas",
+      "hours": 3,
+      "priority": "medium",
+      "required_skills": [
+        "motion",
+        "video_editing"
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Poster layout · Coca-Cola",
+      "hours": 3,
+      "priority": "low",
+      "required_skills": [
+        "design",
+        "art_direction"
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Final delivery · Mercedes",
+      "hours": 2,
+      "priority": "high",
+      "required_skills": [
+        "production",
+        "coordination"
+      ]
+    }
+  ]
+}

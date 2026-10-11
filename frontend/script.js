@@ -2,13 +2,13 @@
 
 const instancesConfig = {
     'logistics_delivery': {
-        name: 'Logistics - Agri-food Delivery',
+        name: 'Freight Routing - Fruit Export',
         problem_type: 'routing',
-        description: 'Delivery of agricultural products to platforms and markets.',
+        description: 'Long-haul fruit export from Murcia to Northern Europe.',
         parametric: {
             parameters: [
-                { name: 'num_vehiculos', label: 'Number of vehicles', type: 'slider', min: 1, max: 4, default: 4, unit: '' },
-                { name: 'num_clientes', label: 'Number of customers to visit', type: 'slider', min: 5, max: 14, default: 14, unit: '' }
+                { name: 'num_vehiculos', label: 'Number of vehicles', type: 'slider', min: 1, max: 3, default: 3, unit: '' },
+                { name: 'num_clientes', label: 'Number of destinations', type: 'slider', min: 5, max: 12, default: 12, unit: '' }
             ]
         },
         expert: {
@@ -17,18 +17,17 @@ const instancesConfig = {
         }
     },
     'proyectos_equipos': {
-        name: 'Assignment - Projects to Teams',
+        name: 'Assignment - Workload Balancing',
         problem_type: 'assignment',
-        description: 'Assign projects to specialized teams maximizing total value.',
+        description: 'Balance project workload across specialized agency teams.',
         parametric: {
             parameters: [
-                { name: 'capacidad_equipos', label: 'Team capacity (%)', type: 'slider', min: 50, max: 200, default: 100, unit: '%' },
-                { name: 'bonus_gran_empresa', label: 'Large company bonus (EUR)', type: 'slider', min: 0, max: 20000, default: 0, unit: 'EUR', step: 1000 }
+                { name: 'capacity_multiplier', label: 'Team capacity (%)', type: 'slider', min: 50, max: 200, default: 100, unit: '%' }
             ]
         },
         expert: {
-            expectedSchema: ['proyectos', 'equipos'],
-            example: 'assignment_consultora.json'
+            expectedSchema: ['teams', 'cases'],
+            example: 'assignment_agency_sample.json'
         }
     },
     'supermercado': {
@@ -60,6 +59,46 @@ const instancesConfig = {
         expert: {
             expectedSchema: ['capital_total', 'aversion_riesgo', 'activos', 'covarianzas'],
             example: 'portfolio_inversor.json'
+        }
+    },
+    'cash_transit': {
+        name: 'Routing - Cash-in-Transit Madrid',
+        problem_type: 'routing',
+        description: 'Cash-in-transit routing for bank branches and ATMs in Madrid.',
+        parametric: { parameters: [] },
+        expert: {
+            expectedSchema: ['vehicles', 'clients', 'depot'],
+            example: 'routing_cash_transit_sample.json'
+        }
+    },
+    'case_triage': {
+        name: 'Assignment - Bank Case Triage',
+        problem_type: 'assignment',
+        description: 'Assign incoming investigation cases to specialized teams.',
+        parametric: { parameters: [] },
+        expert: {
+            expectedSchema: ['teams', 'cases'],
+            example: 'assignment_case_triage_sample.json'
+        }
+    },
+    'media_planning': {
+        name: 'Portfolio - TV Media Planning',
+        problem_type: 'portfolio',
+        description: 'Allocate media budget across TV networks and dayparts.',
+        parametric: { parameters: [] },
+        expert: {
+            expectedSchema: ['assets', 'covariances'],
+            example: 'portfolio_media_planning_sample.json'
+        }
+    },
+    'marketing_budget': {
+        name: 'Portfolio - Marketing Budget Allocation',
+        problem_type: 'portfolio',
+        description: 'Allocate marketing budget across channels.',
+        parametric: { parameters: [] },
+        expert: {
+            expectedSchema: ['assets', 'covariances'],
+            example: 'portfolio_marketing_budget_sample.json'
         }
     }
 };
@@ -278,10 +317,11 @@ function attachOptimizeEvent(isParametric, isExpert) {
                     html += '</div>';
                     html += '<div id="map" style="height: 450px; margin-top: 20px; border-radius: 12px; background: #e2e8f0;"></div>';
                 } else if (config.problem_type === 'assignment') {
-                    html += '<div style="background: #f0f9ff; padding: 20px; border-radius: 12px; margin-bottom: 20px;"><div style="font-size: 1.2rem; color: #1e293b;">Total assigned value</div><div style="font-size: 2.5rem; font-weight: 700; color: #2C7DA0; margin: 10px 0;">' + data.objective_value.toLocaleString('en-US') + ' EUR</div></div>';
-                    html += '<h4 style="color: #1e293b; margin-bottom: 15px;">Assignments</h4><table style="width: 100%; border-collapse: collapse;"><tr style="background: #e2e8f0; font-weight: 600;"><th style="padding: 10px; text-align: left;">Project</th><th style="padding: 10px; text-align: left;">Team</th><th style="padding: 10px; text-align: right;">Hours</th><th style="padding: 10px; text-align: right;">Value</th></tr>';
-                    data.asignaciones.forEach(a => {
-                        html += '<tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 10px;">' + a.proyecto + '</td><td style="padding: 10px;">' + a.equipo + '</td><td style="padding: 10px; text-align: right;">' + a.horas + '</td><td style="padding: 10px; text-align: right; color: #2C7DA0; font-weight: 600;">' + a.valor.toLocaleString('en-US') + ' EUR</td></tr>';
+                    const maxBacklog = data.teams.reduce((m, t) => Math.max(m, t.backlog_days), 0);
+                    html += '<div style="background: #f0f9ff; padding: 20px; border-radius: 12px; margin-bottom: 20px;"><div style="font-size: 1.2rem; color: #1e293b;">Max backlog</div><div style="font-size: 2.5rem; font-weight: 700; color: #2C7DA0; margin: 10px 0;">' + maxBacklog + ' days</div></div>';
+                    html += '<h4 style="color: #1e293b; margin-bottom: 15px;">Team load</h4><table style="width: 100%; border-collapse: collapse;"><tr style="background: #e2e8f0; font-weight: 600;"><th style="padding: 10px; text-align: left;">Team</th><th style="padding: 10px; text-align: right;">Assigned</th><th style="padding: 10px; text-align: right;">Hours</th><th style="padding: 10px; text-align: right;">Backlog</th></tr>';
+                    data.teams.forEach(t => {
+                        html += '<tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 10px;">' + t.name + '</td><td style="padding: 10px; text-align: right;">' + t.assigned + '</td><td style="padding: 10px; text-align: right;">' + t.raw_hours + 'h</td><td style="padding: 10px; text-align: right; color: #2C7DA0; font-weight: 600;">' + t.backlog_days + ' days</td></tr>';
                     });
                     html += '</table>';
                 } else if (config.problem_type === 'inventory') {
