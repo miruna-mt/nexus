@@ -111,5 +111,6 @@
   "avg_speed_kmh": 70,
   "driving_hours_per_day": 9,
   "max_route_days": 10,
-  "return_to_depot": false
+  "return_to_depot": false,
+  "subject": "Fruit export · Northern Europe"
 }

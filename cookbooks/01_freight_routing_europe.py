@@ -1,10 +1,10 @@
 """
-Cookbook 01 - Vehicle Routing for Last-Mile Delivery
+Cookbook 01 - Freight Routing across Europe
 =====================================================
 
 Problem type : Routing
 Industry     : FMCG
-Scenario     : Agri-food distribution (Murcia, Spain)
+Scenario     : Fruit export from Murcia to Northern Europe (long-haul)
 
 Uses the same Nexus RoutingModel that powers every routing scenario.
 Same math, different data.
@@ -20,7 +20,7 @@ from cookbooks._common import load_json, banner, print_narrative
 
 
 def main():
-    banner("Cookbook 01 - Vehicle Routing for Last-Mile Delivery")
+    banner("Cookbook 01 - Freight Routing across Europe")
 
     # 1. Load a real-world instance: 4 trucks, 14 delivery points in Murcia
     data = load_json("data/logistics/routing/logistics_murcia_europe.json")

@@ -46,6 +46,7 @@ def _normalize_data(data):
         "driving_hours_per_day": data.get("driving_hours_per_day", 9.0),
         "max_route_days":        data.get("max_route_days", 5),
         "return_to_depot":       data.get("return_to_depot", True),
+        "subject":               data.get("subject", ""),
     }
 
 
@@ -97,6 +98,7 @@ class RoutingModel:
         self.driving_hours_per_day = data.get("driving_hours_per_day", 9.0)
         self.max_route_days = data.get("max_route_days", 5)
         self.return_to_depot = data.get("return_to_depot", True)
+        self.subject = data.get("subject", "")
 
         puntos = [(data["deposito"]["x"], data["deposito"]["y"])]
         for cliente in clientes:
@@ -248,8 +250,9 @@ class RoutingModel:
         if max_days > self.max_route_days:
             warning = f"\u26A0 {max_days_vehiculo}'s route is ~{max_days} days \u2014 exceeds the {self.max_route_days}-day limit. Consider splitting or adding vehicles."
 
+        subject_part = f" \u00B7 {self.subject}" if self.subject else ""
         narrative = {
-            "titular": f"Optimal route \u00B7 {num_clientes_visitados} stops \u00B7 {total_distance_km} km \u00B7 {max_days} days (longest route)",
+            "titular": f"Optimal route{subject_part} \u00B7 {num_clientes_visitados} stops \u00B7 {total_distance_km} km \u00B7 {max_days} days (longest route)",
             "comparacion": f"Serving each stop as a separate round trip: ~{round(2 * total_distance_km, 1)} km.",
             "insight": insight,
             "warning": warning
