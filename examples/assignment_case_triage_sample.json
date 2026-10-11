@@ -1,0 +1,283 @@
+{
+  "unit_name": "trade",
+  "subject": "Investment bank · Trade settlement",
+  "teams": [
+    {
+      "id": "T1",
+      "name": "Equities Settlement",
+      "specialties": [
+        "equities",
+        "exchange"
+      ],
+      "members": 5
+    },
+    {
+      "id": "T2",
+      "name": "Fixed Income Settlement",
+      "specialties": [
+        "fixed_income",
+        "bonds"
+      ],
+      "members": 4
+    },
+    {
+      "id": "T3",
+      "name": "FX Settlement",
+      "specialties": [
+        "fx",
+        "cross_border"
+      ],
+      "members": 3
+    },
+    {
+      "id": "T4",
+      "name": "Derivatives Settlement",
+      "specialties": [
+        "derivatives",
+        "otc"
+      ],
+      "members": 4
+    },
+    {
+      "id": "T5",
+      "name": "Corporate Actions",
+      "specialties": [
+        "corporate_actions",
+        "equities"
+      ],
+      "members": 3
+    }
+  ],
+  "cases": [
+    {
+      "id": 1,
+      "name": "BUY AAPL 10k shares",
+      "hours": 2,
+      "priority": "high",
+      "required_skills": [
+        "equities",
+        "exchange"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "SELL TSLA 5k shares",
+      "hours": 2,
+      "priority": "high",
+      "required_skills": [
+        "equities",
+        "exchange"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "BUY ASML 2k shares",
+      "hours": 2,
+      "priority": "medium",
+      "required_skills": [
+        "equities",
+        "exchange"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "SELL BBVA 50k shares",
+      "hours": 3,
+      "priority": "medium",
+      "required_skills": [
+        "equities",
+        "exchange"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "BUY SAN 80k shares",
+      "hours": 3,
+      "priority": "high",
+      "required_skills": [
+        "equities",
+        "exchange"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "BUY Bund 10Y EUR 5M",
+      "hours": 3,
+      "priority": "medium",
+      "required_skills": [
+        "fixed_income",
+        "bonds"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "SELL OAT 5Y EUR 2M",
+      "hours": 3,
+      "priority": "medium",
+      "required_skills": [
+        "fixed_income",
+        "bonds"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "BUY BTP 10Y EUR 8M",
+      "hours": 4,
+      "priority": "high",
+      "required_skills": [
+        "fixed_income",
+        "bonds"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "BUY Corp Bond IG EUR 1M",
+      "hours": 2,
+      "priority": "low",
+      "required_skills": [
+        "fixed_income",
+        "bonds"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "SELL Treasury 30Y USD 3M",
+      "hours": 4,
+      "priority": "high",
+      "required_skills": [
+        "fixed_income",
+        "bonds"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "FX EUR/USD 10M spot",
+      "hours": 2,
+      "priority": "high",
+      "required_skills": [
+        "fx",
+        "cross_border"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "FX GBP/EUR 5M spot",
+      "hours": 2,
+      "priority": "high",
+      "required_skills": [
+        "fx",
+        "cross_border"
+      ]
+    },
+    {
+      "id": 13,
+      "name": "FX JPY/USD 100M spot",
+      "hours": 3,
+      "priority": "medium",
+      "required_skills": [
+        "fx",
+        "cross_border"
+      ]
+    },
+    {
+      "id": 14,
+      "name": "FX CHF/EUR 2M spot",
+      "hours": 2,
+      "priority": "medium",
+      "required_skills": [
+        "fx",
+        "cross_border"
+      ]
+    },
+    {
+      "id": 15,
+      "name": "IRS EUR 5Y notional 20M",
+      "hours": 5,
+      "priority": "high",
+      "required_skills": [
+        "derivatives",
+        "otc"
+      ]
+    },
+    {
+      "id": 16,
+      "name": "CDS iTraxx 5Y 10M",
+      "hours": 4,
+      "priority": "medium",
+      "required_skills": [
+        "derivatives",
+        "otc"
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Option SPX call 100k",
+      "hours": 3,
+      "priority": "medium",
+      "required_skills": [
+        "derivatives",
+        "otc"
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Future Bund 50 lots",
+      "hours": 3,
+      "priority": "high",
+      "required_skills": [
+        "derivatives",
+        "otc"
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Dividend AAPL reinvestment",
+      "hours": 3,
+      "priority": "medium",
+      "required_skills": [
+        "corporate_actions",
+        "equities"
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Rights issue SAN",
+      "hours": 5,
+      "priority": "high",
+      "required_skills": [
+        "corporate_actions",
+        "equities"
+      ]
+    },
+    {
+      "id": 21,
+      "name": "Stock split NVDA 10:1",
+      "hours": 4,
+      "priority": "high",
+      "required_skills": [
+        "corporate_actions",
+        "equities"
+      ]
+    },
+    {
+      "id": 22,
+      "name": "Merger settlement AB InBev",
+      "hours": 6,
+      "priority": "high",
+      "required_skills": [
+        "corporate_actions",
+        "equities"
+      ]
+    },
+    {
+      "id": 23,
+      "name": "Coupon payment Bund",
+      "hours": 2,
+      "priority": "low",
+      "required_skills": [
+        "corporate_actions",
+        "equities"
+      ]
+    }
+  ]
+}

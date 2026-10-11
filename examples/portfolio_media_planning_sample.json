@@ -1,0 +1,125 @@
+{
+  "unit_name": "slot",
+  "narrative_domain": "media_planning",
+  "subject": "Sports cars",
+  "target_audience": "Men 30-55 · Urban · High income",
+  "return_unit": "GRP",
+  "total_capital": 500000,
+  "risk_aversion": 3.0,
+  "assets": [
+    {
+      "id": "C01",
+      "name": "LaLigaTV · Movistar+",
+      "expected_return": 0.82,
+      "risk": 0.12,
+      "max_weight": 0.3
+    },
+    {
+      "id": "C02",
+      "name": "DAZN LaLiga",
+      "expected_return": 0.78,
+      "risk": 0.14,
+      "max_weight": 0.3
+    },
+    {
+      "id": "C03",
+      "name": "Movistar+ Deportes",
+      "expected_return": 0.65,
+      "risk": 0.11,
+      "max_weight": 0.25
+    },
+    {
+      "id": "C04",
+      "name": "Movistar+ Champions",
+      "expected_return": 0.55,
+      "risk": 0.13,
+      "max_weight": 0.2
+    },
+    {
+      "id": "C05",
+      "name": "Eurosport",
+      "expected_return": 0.42,
+      "risk": 0.16,
+      "max_weight": 0.15
+    },
+    {
+      "id": "C06",
+      "name": "Teledeporte",
+      "expected_return": 0.35,
+      "risk": 0.18,
+      "max_weight": 0.15
+    },
+    {
+      "id": "C07",
+      "name": "Real Madrid TV",
+      "expected_return": 0.3,
+      "risk": 0.2,
+      "max_weight": 0.1
+    }
+  ],
+  "covariances": [
+    [
+      0.0144,
+      0.00924,
+      0.00858,
+      0.01014,
+      0.00768,
+      0.00432,
+      0.0048
+    ],
+    [
+      0.00924,
+      0.0196,
+      0.00847,
+      0.01001,
+      0.00784,
+      0.00504,
+      0.0056
+    ],
+    [
+      0.00858,
+      0.00847,
+      0.0121,
+      0.0093,
+      0.00704,
+      0.00396,
+      0.0044
+    ],
+    [
+      0.01014,
+      0.01001,
+      0.0093,
+      0.0169,
+      0.00832,
+      0.00468,
+      0.0052
+    ],
+    [
+      0.00768,
+      0.00784,
+      0.00704,
+      0.00832,
+      0.0256,
+      0.00864,
+      0.0096
+    ],
+    [
+      0.00432,
+      0.00504,
+      0.00396,
+      0.00468,
+      0.00864,
+      0.0324,
+      0.018
+    ],
+    [
+      0.0048,
+      0.0056,
+      0.0044,
+      0.0052,
+      0.0096,
+      0.018,
+      0.04
+    ]
+  ]
+}

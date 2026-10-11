@@ -1,0 +1,64 @@
+{
+  "unit_name": "channel",
+  "narrative_domain": "marketing",
+  "subject": "SaaS B2B",
+  "return_unit": "%",
+  "total_capital": 250000,
+  "risk_aversion": 3.0,
+  "assets": [
+    {
+      "id": "C1",
+      "name": "LinkedIn Ads",
+      "expected_return": 1.21,
+      "risk": 0.18,
+      "max_weight": 0.35
+    },
+    {
+      "id": "C2",
+      "name": "Google Ads",
+      "expected_return": 0.67,
+      "risk": 0.22,
+      "max_weight": 0.3
+    },
+    {
+      "id": "C3",
+      "name": "Webinars",
+      "expected_return": 2.13,
+      "risk": 0.12,
+      "max_weight": 0.25
+    },
+    {
+      "id": "C4",
+      "name": "Content & SEO",
+      "expected_return": 4.2,
+      "risk": 0.15,
+      "max_weight": 0.3
+    }
+  ],
+  "covariances": [
+    [
+      0.0324,
+      0.01782,
+      0.01188,
+      0.00945
+    ],
+    [
+      0.01782,
+      0.0484,
+      0.01056,
+      0.01815
+    ],
+    [
+      0.01188,
+      0.01056,
+      0.0144,
+      0.009
+    ],
+    [
+      0.00945,
+      0.01815,
+      0.009,
+      0.0225
+    ]
+  ]
+}

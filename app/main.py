@@ -28,6 +28,22 @@ MODEL_REGISTRY = {
         "class": PortfolioModel,
         "data": "data/portfolio/cartera_markowitz.json",
     },
+    ("routing", "cash_transit"): {
+        "class": RoutingModel,
+        "data": "data/routing/routing_cash_transit.json",
+    },
+    ("assignment", "case_triage"): {
+        "class": AssignmentModel,
+        "data": "data/assignment/assignment_case_triage.json",
+    },
+    ("portfolio", "media_planning"): {
+        "class": PortfolioModel,
+        "data": "data/portfolio/portfolio_media_planning.json",
+    },
+    ("portfolio", "marketing_budget"): {
+        "class": PortfolioModel,
+        "data": "data/portfolio/portfolio_marketing_budget.json",
+    },
 }
 
 app = FastAPI()
