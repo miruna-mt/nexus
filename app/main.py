@@ -101,8 +101,13 @@ async def optimize(request: Request):
             modelo.cargar_datos(filename=data_file)
 
         if not modelo.build():
+            if hasattr(modelo, "get_infeasible_narrative"):
+                return JSONResponse(content=modelo.get_infeasible_narrative())
             return JSONResponse(status_code=500, content={"error": "Error construyendo el modelo"})
         if not modelo.solve():
+            # El modelo puede explicar por que no hay solucion
+            if hasattr(modelo, "get_infeasible_narrative"):
+                return JSONResponse(content=modelo.get_infeasible_narrative())
             return JSONResponse(status_code=500, content={"error": "No se encontro solucion"})
 
         return JSONResponse(content=modelo.get_results())

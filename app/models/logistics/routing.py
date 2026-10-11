@@ -187,6 +187,47 @@ class RoutingModel:
     def solve(self):
         return self.solution is not None
 
+    def get_infeasible_narrative(self):
+        """Explain why no feasible solution was found."""
+        total_demand = sum(self.demandas)
+        total_capacity = sum(self.capacidades)
+        shortfall = total_demand - total_capacity
+
+        # Maximo numero de clientes que se pueden servir con la capacidad actual
+        sorted_demand = sorted(self.demandas[1:], reverse=True)
+        acumulado = 0
+        max_servibles = 0
+        for d in sorted_demand:
+            if acumulado + d <= total_capacity:
+                acumulado += d
+                max_servibles += 1
+
+        needed_vehicles = 1
+        acumulado_cap = self.capacidades[0] if self.capacidades else 0
+        while acumulado_cap < total_demand and needed_vehicles < 20:
+            if needed_vehicles < len(self.capacidades):
+                acumulado_cap += self.capacidades[needed_vehicles]
+            else:
+                acumulado_cap += self.capacidades[-1] if self.capacidades else 0
+            needed_vehicles += 1
+
+        if shortfall > 0:
+            insight = f"Increase vehicles to {needed_vehicles} or reduce stops to {max_servibles} to make it feasible."
+            warning = f"\u26A0 Shortfall: {shortfall} units."
+        else:
+            insight = "The model could not find a feasible assignment with the current parameters."
+            warning = None
+
+        return {
+            "status": "infeasible",
+            "narrative": {
+                "titular": f"No feasible route \u00B7 {self.num_vehiculos} vehicles \u00B7 {self.num_clientes} stops",
+                "comparacion": f"Total demand: {total_demand} units. Available capacity: {total_capacity} units.",
+                "insight": insight,
+                "warning": warning,
+            }
+        }
+
     def get_results(self):
         if self.solution is None:
             return {"status": "error", "message": "No solution found"}

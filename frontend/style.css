@@ -549,3 +549,14 @@ body {
 .result-hero-warning .result-hero-label {
     color: rgba(255, 220, 120, 0.95);
 }
+
+
+/* Hero para estado infeasible */
+.result-hero-infeasible {
+    background: linear-gradient(135deg, #F57C00 0%, #E65100 100%);
+}
+
+.result-hero-infeasible .result-hero-warning {
+    background: rgba(255, 255, 255, 0.2);
+    border-left-color: rgba(255, 255, 255, 0.85);
+}

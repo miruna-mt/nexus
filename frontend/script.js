@@ -65,7 +65,12 @@ const instancesConfig = {
         name: 'Routing - Cash-in-Transit Madrid',
         problem_type: 'routing',
         description: 'Cash-in-transit routing for bank branches and ATMs in Madrid.',
-        parametric: { parameters: [] },
+        parametric: {
+            parameters: [
+                { name: 'num_vehiculos', label: 'Number of vehicles', type: 'slider', min: 1, max: 4, default: 4, unit: '' },
+                { name: 'num_clientes', label: 'Number of stops', type: 'slider', min: 5, max: 24, default: 24, unit: '' }
+            ]
+        },
         expert: {
             expectedSchema: ['vehicles', 'clients', 'depot'],
             example: 'routing_cash_transit_sample.json'
@@ -75,7 +80,11 @@ const instancesConfig = {
         name: 'Assignment - Bank Case Triage',
         problem_type: 'assignment',
         description: 'Assign incoming investigation cases to specialized teams.',
-        parametric: { parameters: [] },
+        parametric: {
+            parameters: [
+                { name: 'capacity_multiplier', label: 'Team capacity (%)', type: 'slider', min: 50, max: 200, default: 100, unit: '%' }
+            ]
+        },
         expert: {
             expectedSchema: ['teams', 'cases'],
             example: 'assignment_case_triage_sample.json'
@@ -85,7 +94,11 @@ const instancesConfig = {
         name: 'Portfolio - TV Media Planning',
         problem_type: 'portfolio',
         description: 'Allocate media budget across TV networks and dayparts.',
-        parametric: { parameters: [] },
+        parametric: {
+            parameters: [
+                { name: 'aversion_riesgo', label: 'Risk aversion', type: 'slider', min: 0, max: 10, default: 3, unit: '' }
+            ]
+        },
         expert: {
             expectedSchema: ['assets', 'covariances'],
             example: 'portfolio_media_planning_sample.json'
@@ -95,7 +108,11 @@ const instancesConfig = {
         name: 'Portfolio - Marketing Budget Allocation',
         problem_type: 'portfolio',
         description: 'Allocate marketing budget across channels.',
-        parametric: { parameters: [] },
+        parametric: {
+            parameters: [
+                { name: 'aversion_riesgo', label: 'Risk aversion', type: 'slider', min: 0, max: 10, default: 3, unit: '' }
+            ]
+        },
         expert: {
             expectedSchema: ['assets', 'covariances'],
             example: 'portfolio_marketing_budget_sample.json'
@@ -341,6 +358,19 @@ function attachOptimizeEvent(isParametric, isExpert) {
                 if (config.problem_type === 'routing' && data.rutas && data.rutas.length > 0) {
                     setTimeout(() => dibujarMapa(data.rutas), 100);
                 }
+            } else if (data.status === 'infeasible' && data.narrative) {
+                let html = '';
+                html += '<div class="result-hero result-hero-infeasible">';
+                html += buildContextBadge(isParametric, isExpert);
+                html += '<div class="result-hero-title">' + data.narrative.titular + '</div>';
+                html += '<div class="result-hero-divider">';
+                html += '<div class="result-hero-line"><span class="result-hero-label">Comparison</span>' + data.narrative.comparacion + '</div>';
+                html += '<div class="result-hero-line"><span class="result-hero-label">Insight</span>' + data.narrative.insight + '</div>';
+                if (data.narrative.warning) {
+                    html += '<div class="result-hero-line result-hero-warning"><span class="result-hero-label">Warning</span>' + data.narrative.warning + '</div>';
+                }
+                html += '</div></div>';
+                output.innerHTML = html;
             } else {
                 output.innerHTML = '<div style="color: #dc2626;">Error: ' + (data.error || 'Optimization failed') + '</div>';
             }
