@@ -24,7 +24,7 @@ def main():
     banner("Cookbook 08 - Marketing Budget Allocation")
 
     # 1. Load a real-world instance: EUR 1M across 6 marketing channels
-    data = load_json("examples/portfolio_marketing_budget.json")
+    data = load_json("data/portfolio/portfolio_marketing_budget.json")
 
     # 2. Build and solve with the SAME engine used by financial portfolios
     model = PortfolioModel()

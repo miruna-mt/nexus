@@ -24,7 +24,7 @@ def main():
     banner("Cookbook 06 - Case Triage in Banking")
 
     # 1. Load a realistic backlog: 200 cases, 6 teams
-    data = load_json("examples/assignment_case_triage.json")
+    data = load_json("data/assignment/assignment_case_triage.json")
 
     # 2. Build and solve with the SAME engine used by workload balancing
     model = AssignmentModel()

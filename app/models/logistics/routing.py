@@ -251,8 +251,9 @@ class RoutingModel:
             warning = f"\u26A0 {max_days_vehiculo}'s route is ~{max_days} days \u2014 exceeds the {self.max_route_days}-day limit. Consider splitting or adding vehicles."
 
         subject_part = f" \u00B7 {self.subject}" if self.subject else ""
+        day_label = "day" if max_days == 1 else "days"
         narrative = {
-            "titular": f"Optimal route{subject_part} \u00B7 {num_clientes_visitados} stops \u00B7 {total_distance_km} km \u00B7 {max_days} days (longest route)",
+            "titular": f"Optimal route{subject_part} \u00B7 {num_clientes_visitados} stops \u00B7 {total_distance_km} km \u00B7 {max_days} {day_label} (longest route)",
             "comparacion": f"Serving each stop as a separate round trip: ~{round(2 * total_distance_km, 1)} km.",
             "insight": insight,
             "warning": warning

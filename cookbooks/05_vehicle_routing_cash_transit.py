@@ -24,7 +24,7 @@ def main():
     banner("Cookbook 05 - Cash-in-Transit Routing")
 
     # 1. Load a real-world instance: 4 armored trucks, 24 stops across Madrid
-    data = load_json("examples/routing_cash_transit.json")
+    data = load_json("data/routing/routing_cash_transit.json")
 
     # 2. Build and solve with the SAME engine used by agri-food routing
     model = RoutingModel()

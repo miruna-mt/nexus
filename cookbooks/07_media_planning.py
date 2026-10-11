@@ -26,7 +26,7 @@ def main():
     banner("Cookbook 07 - Media Planning across TV Networks")
 
     # 1. Load a real-world instance: 12 network x daypart combinations
-    data = load_json("examples/portfolio_media_planning.json")
+    data = load_json("data/portfolio/portfolio_media_planning.json")
 
     # 2. Build and solve with the SAME engine used by financial portfolios
     model = PortfolioModel()
