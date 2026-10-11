@@ -23,7 +23,7 @@ def main():
     banner("Cookbook 01 - Vehicle Routing for Last-Mile Delivery")
 
     # 1. Load a real-world instance: 4 trucks, 14 delivery points in Murcia
-    data = load_json("data/logistics/routing/logistics_murcia.json")
+    data = load_json("data/logistics/routing/logistics_murcia_europe.json")
 
     # 2. Build and solve with the same engine used by every routing scenario
     model = RoutingModel()

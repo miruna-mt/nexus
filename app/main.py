@@ -14,7 +14,7 @@ except Exception as e:
 MODEL_REGISTRY = {
     ("routing", "logistics_delivery"): {
         "class": RoutingModel,
-        "data": "data/logistics/routing/logistics_murcia.json",
+        "data": "data/logistics/routing/logistics_murcia_europe.json",
     },
     ("assignment", "proyectos_equipos"): {
         "class": AssignmentModel,

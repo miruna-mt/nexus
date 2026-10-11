@@ -1,0 +1,115 @@
+{
+  "vehiculos": [
+    {
+      "id": "V1",
+      "capacidad": 500,
+      "costo_km": 1.8
+    },
+    {
+      "id": "V2",
+      "capacidad": 500,
+      "costo_km": 1.8
+    },
+    {
+      "id": "V3",
+      "capacidad": 500,
+      "costo_km": 1.8
+    }
+  ],
+  "clientes": [
+    {
+      "id": 1,
+      "nombre": "Mercamadrid",
+      "demanda": 120,
+      "x": 40.3593,
+      "y": -3.6616
+    },
+    {
+      "id": 2,
+      "nombre": "Mercabarna",
+      "demanda": 130,
+      "x": 41.3311,
+      "y": 2.1155
+    },
+    {
+      "id": 3,
+      "nombre": "Plataforma Zaragoza",
+      "demanda": 90,
+      "x": 41.6488,
+      "y": -0.8891
+    },
+    {
+      "id": 4,
+      "nombre": "Toulouse",
+      "demanda": 70,
+      "x": 43.6047,
+      "y": 1.4442
+    },
+    {
+      "id": 5,
+      "nombre": "Lyon",
+      "demanda": 80,
+      "x": 45.764,
+      "y": 4.8357
+    },
+    {
+      "id": 6,
+      "nombre": "Rungis (Paris)",
+      "demanda": 100,
+      "x": 48.749,
+      "y": 2.3498
+    },
+    {
+      "id": 7,
+      "nombre": "Milan",
+      "demanda": 110,
+      "x": 45.4642,
+      "y": 9.19
+    },
+    {
+      "id": 8,
+      "nombre": "Frankfurt",
+      "demanda": 100,
+      "x": 50.1109,
+      "y": 8.6821
+    },
+    {
+      "id": 9,
+      "nombre": "Munich",
+      "demanda": 90,
+      "x": 48.1351,
+      "y": 11.582
+    },
+    {
+      "id": 10,
+      "nombre": "Brussels",
+      "demanda": 85,
+      "x": 50.8503,
+      "y": 4.3517
+    },
+    {
+      "id": 11,
+      "nombre": "Amsterdam",
+      "demanda": 75,
+      "x": 52.3676,
+      "y": 4.9041
+    },
+    {
+      "id": 12,
+      "nombre": "Berlin",
+      "demanda": 80,
+      "x": 52.52,
+      "y": 13.405
+    }
+  ],
+  "deposito": {
+    "id": 0,
+    "nombre": "Cooperativa Murcia (El Palmar)",
+    "x": 37.9858,
+    "y": -1.1368
+  },
+  "avg_speed_kmh": 70,
+  "driving_hours_per_day": 9,
+  "max_route_days": 10,
+  "return_to_depot": false
+}

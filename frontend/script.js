@@ -13,7 +13,7 @@ const instancesConfig = {
         },
         expert: {
             expectedSchema: ['vehiculos', 'clientes', 'deposito'],
-            example: 'routing_madrid.json'
+            example: 'routing_europe.json'
         }
     },
     'proyectos_equipos': {

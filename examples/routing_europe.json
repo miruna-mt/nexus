@@ -1,0 +1,68 @@
+{
+  "vehiculos": [
+    {
+      "id": "V1",
+      "capacidad": 500,
+      "costo_km": 1.8
+    },
+    {
+      "id": "V2",
+      "capacidad": 500,
+      "costo_km": 1.8
+    }
+  ],
+  "clientes": [
+    {
+      "id": 1,
+      "nombre": "Calais Distribution Hub",
+      "demanda": 120,
+      "x": 50.9513,
+      "y": 1.8587
+    },
+    {
+      "id": 2,
+      "nombre": "London (New Spitalfields)",
+      "demanda": 140,
+      "x": 51.5074,
+      "y": -0.1278
+    },
+    {
+      "id": 3,
+      "nombre": "Manchester Market",
+      "demanda": 110,
+      "x": 53.4808,
+      "y": -2.2426
+    },
+    {
+      "id": 4,
+      "nombre": "Copenhagen (GASA)",
+      "demanda": 100,
+      "x": 55.6761,
+      "y": 12.5683
+    },
+    {
+      "id": 5,
+      "nombre": "Stockholm (Årsta)",
+      "demanda": 90,
+      "x": 59.3293,
+      "y": 18.0686
+    },
+    {
+      "id": 6,
+      "nombre": "Oslo (Grønland)",
+      "demanda": 80,
+      "x": 59.9139,
+      "y": 10.7522
+    }
+  ],
+  "deposito": {
+    "id": 0,
+    "nombre": "Cooperativa Murcia (El Palmar)",
+    "x": 37.9858,
+    "y": -1.1368
+  },
+  "avg_speed_kmh": 70,
+  "driving_hours_per_day": 9,
+  "max_route_days": 10,
+  "return_to_depot": false
+}

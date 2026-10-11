@@ -42,6 +42,10 @@ def _normalize_data(data):
             "x":      pick(depot_src, "lat", "x"),
             "y":      pick(depot_src, "lon", "y"),
         },
+        "avg_speed_kmh":         data.get("avg_speed_kmh", 70.0),
+        "driving_hours_per_day": data.get("driving_hours_per_day", 9.0),
+        "max_route_days":        data.get("max_route_days", 5),
+        "return_to_depot":       data.get("return_to_depot", True),
     }
 
 
@@ -89,6 +93,10 @@ class RoutingModel:
         self.clientes = clientes
         self.deposito_lat = data["deposito"]["x"]
         self.deposito_lon = data["deposito"]["y"]
+        self.avg_speed_kmh = data.get("avg_speed_kmh", 70.0)
+        self.driving_hours_per_day = data.get("driving_hours_per_day", 9.0)
+        self.max_route_days = data.get("max_route_days", 5)
+        self.return_to_depot = data.get("return_to_depot", True)
 
         puntos = [(data["deposito"]["x"], data["deposito"]["y"])]
         for cliente in clientes:
@@ -114,14 +122,42 @@ class RoutingModel:
                     self.distancias[i][j] = int(dist * 1000)
 
         self.num_clientes = num_puntos - 1
+        self.num_real_nodes = num_puntos
         self.demandas = [0]
         for cliente in clientes:
             self.demandas.append(cliente["demanda"])
         self.capacidades = [v["capacidad"] for v in vehiculos]
 
+        # Open VRP: anadir nodos finales virtuales (uno por vehiculo)
+        # Asi el solver sabe que no hace falta volver al deposito
+        self.virtual_end_start = None
+        if not self.return_to_depot:
+            M = self.num_vehiculos
+            old_size = num_puntos
+            new_size = num_puntos + M
+            new_matrix = [[0] * new_size for _ in range(new_size)]
+            for i in range(old_size):
+                for j in range(old_size):
+                    new_matrix[i][j] = self.distancias[i][j]
+            for i in range(old_size):
+                for k in range(M):
+                    new_matrix[i][old_size + k] = 0
+            for k in range(M):
+                for j in range(new_size):
+                    new_matrix[old_size + k][j] = 10**9
+            self.distancias = new_matrix
+            self.virtual_end_start = old_size
+            for _ in range(M):
+                self.demandas.append(0)
+
     def build(self):
         print("Construyendo modelo de rutas...")
-        self.manager = pywrapcp.RoutingIndexManager(len(self.distancias), self.num_vehiculos, self.deposito)
+        starts = [self.deposito] * self.num_vehiculos
+        if self.return_to_depot:
+            ends = [self.deposito] * self.num_vehiculos
+        else:
+            ends = [self.virtual_end_start + k for k in range(self.num_vehiculos)]
+        self.manager = pywrapcp.RoutingIndexManager(len(self.distancias), self.num_vehiculos, starts, ends)
         self.routing = pywrapcp.RoutingModel(self.manager)
 
         def distance_callback(from_index, to_index):
@@ -163,10 +199,12 @@ class RoutingModel:
 
             ruta = {"vehiculo": f"Vehiculo {vehicle_id+1}", "paradas": [], "coordenadas": []}
             route_distance = 0
+            last_customer_node = None
 
             while not self.routing.IsEnd(index):
                 node_index = self.manager.IndexToNode(index)
                 if node_index != self.deposito:
+                    last_customer_node = node_index
                     nombre_cliente = self.clientes[node_index - 1]["nombre"]
                     ruta["paradas"].append(nombre_cliente)
                     lat = self.clientes[node_index - 1]["x"]
@@ -196,20 +234,22 @@ class RoutingModel:
         num_clientes_visitados = sum(len(r["paradas"]) for r in rutas)
         vehiculos_str = f"{num_vehiculos_usados} of {self.num_vehiculos}"
 
+        km_per_day = self.avg_speed_kmh * self.driving_hours_per_day
+        max_days = 0
+        max_days_vehiculo = None
+        for r in rutas:
+            days = math.ceil(r["distancia"] / km_per_day) if km_per_day > 0 else 0
+            if days > max_days:
+                max_days = days
+                max_days_vehiculo = r["vehiculo"]
+
         insight = "Stops grouped geographically to minimize travel."
         warning = None
-        max_hours = 0.0
-        max_vehiculo = None
-        for r in rutas:
-            h = r["distancia"] / 60.0
-            if h > max_hours:
-                max_hours = h
-                max_vehiculo = r["vehiculo"]
-        if max_hours > 8:
-            warning = f"\u26A0 {max_vehiculo}'s route is ~{round(max_hours, 1)}h \u2014 exceeds a single driving day. Consider multi-day scheduling or additional vehicles."
+        if max_days > self.max_route_days:
+            warning = f"\u26A0 {max_days_vehiculo}'s route is ~{max_days} days \u2014 exceeds the {self.max_route_days}-day limit. Consider splitting or adding vehicles."
 
         narrative = {
-            "titular": f"Optimal route \u00B7 {total_distance_km} km \u00B7 {vehiculos_str} vehicles \u00B7 {num_clientes_visitados} stops",
+            "titular": f"Optimal route \u00B7 {num_clientes_visitados} stops \u00B7 {total_distance_km} km \u00B7 {max_days} days (longest route)",
             "comparacion": f"Serving each stop as a separate round trip: ~{round(2 * total_distance_km, 1)} km.",
             "insight": insight,
             "warning": warning
