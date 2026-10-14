@@ -1,100 +1,123 @@
 {
-  "unit_name": "channel",
+  "unit_name": "budget line",
+  "narrative_domain": "marketing",
+  "subject": "Consumer electronics · Annual 2026",
+  "return_unit": "%",
   "total_capital": 1000000,
   "risk_aversion": 3.0,
   "assets": [
     {
-      "id": "C1",
-      "name": "TV",
-      "expected_return": 0.08,
-      "risk": 0.15,
-      "max_weight": 0.4
+      "id": "B1",
+      "name": "Performance Media",
+      "expected_return": 2.31,
+      "risk": 0.18,
+      "max_weight": 0.3
     },
     {
-      "id": "C2",
-      "name": "Digital",
-      "expected_return": 0.12,
-      "risk": 0.2,
-      "max_weight": 0.5
+      "id": "B2",
+      "name": "Brand Media",
+      "expected_return": 4.9,
+      "risk": 0.14,
+      "max_weight": 0.25
     },
     {
-      "id": "C3",
-      "name": "OOH",
-      "expected_return": 0.06,
+      "id": "B3",
+      "name": "Content & SEO",
+      "expected_return": 6.02,
       "risk": 0.12,
       "max_weight": 0.25
     },
     {
-      "id": "C4",
-      "name": "Influencers",
-      "expected_return": 0.15,
-      "risk": 0.35,
-      "max_weight": 0.2
-    },
-    {
-      "id": "C5",
-      "name": "Radio",
-      "expected_return": 0.05,
+      "id": "B4",
+      "name": "Web & CRO",
+      "expected_return": 3.5,
       "risk": 0.1,
       "max_weight": 0.2
     },
     {
-      "id": "C6",
-      "name": "Email",
-      "expected_return": 0.18,
-      "risk": 0.08,
+      "id": "B5",
+      "name": "PR & Events",
+      "expected_return": 2.0,
+      "risk": 0.25,
       "max_weight": 0.15
+    },
+    {
+      "id": "B6",
+      "name": "Creative Production",
+      "expected_return": 3.2,
+      "risk": 0.16,
+      "max_weight": 0.2
     }
   ],
   "covariances": [
     [
-      0.0225,
-      0.009,
+      0.0324,
+      0.00756,
+      0.01188,
       0.0108,
-      0.0105,
-      0.006,
-      0.0012
+      0.009,
+      0.01152
     ],
     [
-      0.009,
-      0.04,
-      0.006,
-      0.0385,
-      0.003,
-      0.0032
+      0.00756,
+      0.0196,
+      0.00588,
+      0.0028,
+      0.0175,
+      0.01008
     ],
     [
-      0.0108,
-      0.006,
+      0.01188,
+      0.00588,
       0.0144,
-      0.0063,
-      0.0042,
-      0.0005
+      0.0072,
+      0.0075,
+      0.01056
     ],
     [
-      0.0105,
-      0.0385,
-      0.0063,
-      0.1225,
-      0.0035,
-      0.0042
-    ],
-    [
-      0.006,
-      0.003,
-      0.0042,
-      0.0035,
+      0.0108,
+      0.0028,
+      0.0072,
       0.01,
-      0.0008
+      0.005,
+      0.0064
     ],
     [
-      0.0012,
-      0.0032,
-      0.0005,
-      0.0042,
-      0.0008,
-      0.0064
+      0.009,
+      0.0175,
+      0.0075,
+      0.005,
+      0.0625,
+      0.022
+    ],
+    [
+      0.01152,
+      0.01008,
+      0.01056,
+      0.0064,
+      0.022,
+      0.0256
     ]
   ],
-  "subject": "Consumer electronics · Q1"
+  "correlation_notes": {
+    "method": "Correlations are reasoned defaults based on business logic, not audited data. Replace with your own historical data for production use.",
+    "rationale": [
+      "Performance Media ↔ Web & CRO: 0.60 — both optimise direct conversion in the same funnel",
+      "Content & SEO ↔ Web & CRO: 0.60 — both are inbound-driven, content feeds web",
+      "Content & SEO ↔ Creative Production: 0.55 — creativity fuels content output",
+      "Performance Media ↔ Content & SEO: 0.55 — both digital, shared audience",
+      "PR & Events ↔ Creative Production: 0.55 — events require creative assets",
+      "Brand Media ↔ PR & Events: 0.50 — both build awareness",
+      "Brand Media ↔ Creative Production: 0.45 — brand built through creativity",
+      "Performance Media ↔ Creative Production: 0.40 — creative enables paid performance",
+      "Brand Media ↔ Content & SEO: 0.35 — medium synergy",
+      "Performance Media ↔ Brand Media: 0.30 — different natures",
+      "Content & SEO ↔ PR & Events: 0.25 — limited overlap",
+      "Performance Media ↔ PR & Events: 0.20 — minimal overlap",
+      "Brand Media ↔ Web & CRO: 0.20 — minimal overlap",
+      "Web & CRO ↔ PR & Events: 0.20 — minimal overlap",
+      "Web & CRO ↔ Creative Production: 0.40 — creative assets feed web",
+      "Brand Media ↔ Web & CRO: 0.20 — minimal overlap"
+    ]
+  }
 }

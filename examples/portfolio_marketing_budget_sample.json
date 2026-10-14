@@ -1,64 +1,121 @@
 {
-  "unit_name": "channel",
+  "unit_name": "budget line",
   "narrative_domain": "marketing",
-  "subject": "SaaS B2B",
+  "subject": "B2B SaaS · Annual 2026",
   "return_unit": "%",
   "total_capital": 250000,
   "risk_aversion": 3.0,
   "assets": [
     {
-      "id": "C1",
-      "name": "LinkedIn Ads",
-      "expected_return": 1.21,
-      "risk": 0.18,
-      "max_weight": 0.35
-    },
-    {
-      "id": "C2",
-      "name": "Google Ads",
-      "expected_return": 0.67,
-      "risk": 0.22,
+      "id": "S1",
+      "name": "Paid Acquisition",
+      "expected_return": 2.31,
+      "risk": 0.2,
       "max_weight": 0.3
     },
     {
-      "id": "C3",
-      "name": "Webinars",
-      "expected_return": 2.13,
+      "id": "S2",
+      "name": "Content & SEO",
+      "expected_return": 7.02,
       "risk": 0.12,
       "max_weight": 0.25
     },
     {
-      "id": "C4",
-      "name": "Content & SEO",
-      "expected_return": 4.2,
+      "id": "S3",
+      "name": "Webinars & Events",
+      "expected_return": 2.13,
+      "risk": 0.14,
+      "max_weight": 0.2
+    },
+    {
+      "id": "S4",
+      "name": "Product-Led Growth",
+      "expected_return": 3.5,
+      "risk": 0.16,
+      "max_weight": 0.2
+    },
+    {
+      "id": "S5",
+      "name": "Brand & Community",
+      "expected_return": 3.0,
       "risk": 0.15,
-      "max_weight": 0.3
+      "max_weight": 0.15
+    },
+    {
+      "id": "S6",
+      "name": "Creative Production",
+      "expected_return": 3.2,
+      "risk": 0.16,
+      "max_weight": 0.2
     }
   ],
   "covariances": [
     [
-      0.0324,
-      0.01782,
-      0.01188,
-      0.00945
+      0.04,
+      0.0108,
+      0.0126,
+      0.0176,
+      0.0075,
+      0.0128
     ],
     [
-      0.01782,
-      0.0484,
-      0.01056,
-      0.01815
-    ],
-    [
-      0.01188,
-      0.01056,
+      0.0108,
       0.0144,
-      0.009
+      0.00588,
+      0.01152,
+      0.0099,
+      0.01056
     ],
     [
-      0.00945,
-      0.01815,
-      0.009,
-      0.0225
+      0.0126,
+      0.00588,
+      0.0196,
+      0.00896,
+      0.0105,
+      0.0112
+    ],
+    [
+      0.0176,
+      0.01152,
+      0.00896,
+      0.0256,
+      0.0108,
+      0.01024
+    ],
+    [
+      0.0075,
+      0.0099,
+      0.0105,
+      0.0108,
+      0.0225,
+      0.0108
+    ],
+    [
+      0.0128,
+      0.01056,
+      0.0112,
+      0.01024,
+      0.0108,
+      0.0256
     ]
-  ]
+  ],
+  "correlation_notes": {
+    "method": "Correlations are reasoned defaults based on B2B SaaS business logic, not audited data. Replace with your own historical data for production use.",
+    "rationale": [
+      "Paid Acquisition ↔ Product-Led Growth: 0.55 — paid drives traffic to free trial",
+      "Content & SEO ↔ Product-Led Growth: 0.60 — content fuels onboarding",
+      "Content & SEO ↔ Brand & Community: 0.55 — content builds brand",
+      "Content & SEO ↔ Creative Production: 0.55 — creativity fuels content",
+      "Webinars & Events ↔ Creative Production: 0.50 — events need assets",
+      "Webinars & Events ↔ Brand & Community: 0.50 — events build community",
+      "Webinars & Events ↔ Paid Acquisition: 0.45 — both feed pipeline",
+      "Product-Led Growth ↔ Brand & Community: 0.45 — product is brand in SaaS",
+      "Content & SEO ↔ Paid Acquisition: 0.45 — retargeting on content",
+      "Product-Led Growth ↔ Creative Production: 0.40 — product assets",
+      "Paid Acquisition ↔ Creative Production: 0.40 — creative enables ads",
+      "Webinars & Events ↔ Product-Led Growth: 0.40 — demo-driven funnel",
+      "Webinars & Events ↔ Content & SEO: 0.35 — webinars are content",
+      "Paid Acquisition ↔ Brand & Community: 0.25 — limited overlap"
+    ]
+  }
 }

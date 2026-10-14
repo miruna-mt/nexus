@@ -183,7 +183,7 @@ class PortfolioModel:
                 "insight": f"Top pick: {top_str}.",
             }
         elif self.narrative_domain == "marketing":
-            parts = ["Optimal media mix"]
+            parts = ["Optimal marketing budget allocation"]
             if self.subject:
                 parts.append(self.subject)
             parts.append(metric)
@@ -192,7 +192,7 @@ class PortfolioModel:
 
             narrative = {
                 "titular": titular,
-                "comparacion": "Quadratic optimization accounts for correlations between channels \u2014 a more diversified mix than a flat allocation.",
+                "comparacion": "Quadratic optimization accounts for correlations between blocks \u2014 a more diversified mix than a flat allocation. Optimal results may deviate from the standard 70-20-10 framework when ROI differences are strong.",
                 "insight": f"Top pick: {top_str}.",
             }
         else:  # finance (default)
