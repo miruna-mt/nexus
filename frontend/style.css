@@ -50,21 +50,9 @@
     --shadow-panel: 0 20px 40px rgba(0,0,0,0.35);
 }
 
-/* Escala tipografica responsive: todos los rem crecen en pantallas grandes */
+/* Escala tipografica base */
 html {
-    font-size: 16px;
-}
-
-@media (min-width: 1600px) {
-    html {
-        font-size: 17px;
-    }
-}
-
-@media (min-width: 1920px) {
-    html {
-        font-size: 18px;
-    }
+    font-size: 15px;
 }
 
 /* ============================================================ */
@@ -83,43 +71,61 @@ body {
     font-family: var(--font-body);
     background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
     margin: 0;
-    padding: 20px;
+    padding: 32px;
     min-height: 100vh;
 }
 
-/* Contenedor principal de dos columnas */
+/* Contenedor principal */
 .app-container {
     display: flex;
-    gap: 24px;
-    max-width: 1400px;
+    gap: 20px;
+    max-width: 94vw;
     margin: 0 auto;
     align-items: stretch;
-    min-height: calc(100vh - 40px);
+    min-height: calc(100vh - 64px);
 }
 
 /* Panel izquierdo (controles) */
-.controls-panel {
-    flex: 1.2;
+.nav-panel {
+    width: 280px;
+    flex-shrink: 0;
     background: white;
     border-radius: 24px;
     padding: 20px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+    max-height: calc(100vh - 64px);
+}
+
+.context-panel {
+    width: 420px;
+    flex-shrink: 0;
+    background: white;
+    border-radius: 24px;
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
     display: flex;
     flex-direction: column;
     gap: 16px;
     overflow-y: auto;
+    max-height: calc(100vh - 64px);
 }
 
 /* Panel derecho (resultados) */
 .results-panel {
-    flex: 2;
+    flex: 1;
+    min-width: 0;
     background: white;
     border-radius: 24px;
     padding: 20px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    max-height: calc(100vh - 64px);
 }
 
 /* Logo y título */
@@ -135,7 +141,7 @@ body {
 
 .subtitle {
     font-family: var(--font-heading);
-    font-size: 0.9rem;
+    font-size: var(--text-sm);
     color: #2c7da0 !important;
     text-align: center;
     margin-bottom: 16px;
@@ -154,7 +160,7 @@ body {
     border: 1px solid #e2e8f0;
     padding: 6px 12px;
     border-radius: 100px;
-    font-size: 0.8rem;
+    font-size: var(--text-sm);
     font-weight: 500;
     color: #475569;
     cursor: pointer;
@@ -181,7 +187,7 @@ body {
 .selector label {
     font-family: var(--font-heading);
     display: block;
-    font-size: 0.65rem;
+    font-size: var(--text-xs);
     font-weight: 600;
     color: #333;
     text-transform: uppercase;
@@ -194,7 +200,7 @@ body {
     padding: 8px 12px;
     border: 1px solid #e2e8f0;
     border-radius: 12px;
-    font-size: 0.85rem;
+    font-size: var(--text-sm);
     background: white;
     font-family: var(--font-body);
 }
@@ -210,7 +216,7 @@ body {
     color: white;
     border: none;
     padding: 8px 16px;
-    font-size: 0.85rem;
+    font-size: var(--text-sm);
     font-weight: 500;
     border-radius: 100px;
     cursor: pointer;
@@ -230,7 +236,7 @@ body {
     background: #f8fafc;
     padding: 16px;
     border-radius: 12px;
-    font-size: 0.82rem;
+    font-size: var(--text-sm);
     color: #475569;
     margin-top: 8px;
     line-height: 1.5;
@@ -239,7 +245,7 @@ body {
 .scenario-description h4 {
     font-family: var(--font-heading);
     margin: 16px 0 8px 0;
-    font-size: 0.88rem;
+    font-size: var(--text-sm);
     font-weight: 700;
     color: #2c7da0;
     letter-spacing: 0.01em;
@@ -270,13 +276,13 @@ body {
 /* Panel de resultados */
 .results-panel h3 {
     margin: 0 0 12px 0;
-    font-size: 1.1rem;
+    font-size: var(--text-lg);
     font-weight: 600;
     color: #2c7da0;
 }
 
 .output {
-    font-size: 0.85rem;
+    font-size: var(--text-sm);
     line-height: 1.5;
     color: #0f172a;
     overflow-y: auto;
@@ -294,13 +300,13 @@ body {
 
 .ruta-card h4 {
     margin: 0 0 6px 0;
-    font-size: 0.9rem;
+    font-size: var(--text-sm);
     font-weight: 600;
 }
 
 .ruta-card p {
     margin: 4px 0;
-    font-size: 0.8rem;
+    font-size: var(--text-sm);
 }
 
 /* Modo experto: subida de archivos */
@@ -331,12 +337,12 @@ body {
 
 .upload-text {
     color: #475569;
-    font-size: 0.85rem;
+    font-size: var(--text-sm);
 }
 
 .upload-hint {
     color: #94a3b8;
-    font-size: 0.75rem;
+    font-size: var(--text-xs);
     margin-top: 6px;
 }
 
@@ -346,7 +352,7 @@ body {
     padding: 8px;
     border-radius: 8px;
     margin: 10px 0;
-    font-size: 0.8rem;
+    font-size: var(--text-sm);
 }
 
 .format-error {
@@ -355,7 +361,7 @@ body {
     padding: 8px;
     border-radius: 8px;
     margin: 10px 0;
-    font-size: 0.8rem;
+    font-size: var(--text-sm);
 }
 
 /* Parámetros y sliders (modo paramétrico) */
@@ -370,7 +376,7 @@ body {
     display: flex;
     justify-content: space-between;
     margin-bottom: 6px;
-    font-size: 0.8rem;
+    font-size: var(--text-sm);
     font-weight: 600;
     color: #1e293b;
 }
@@ -399,14 +405,23 @@ body {
 }
 
 /* Ajustes responsivos */
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
+    body {
+        padding: 16px;
+    }
+
     .app-container {
         flex-direction: column;
+        gap: 16px;
         min-height: auto;
+        max-width: 100%;
     }
-    
-    .controls-panel, .results-panel {
-        min-height: auto;
+
+    .nav-panel,
+    .context-panel,
+    .results-panel {
+        width: 100%;
+        max-height: none;
     }
 }
 
@@ -421,12 +436,12 @@ body {
     padding: 15px;
     margin: 15px 0;
     border: 1px solid #e2e8f0;
-    font-size: 0.85rem;
+    font-size: var(--text-sm);
 }
 
 .info-card h4 {
     margin: 0 0 10px 0;
-    font-size: 0.9rem;
+    font-size: var(--text-sm);
     font-weight: 600;
     color: #1e293b;
 }
@@ -459,20 +474,20 @@ body {
 
 .stat-value {
     font-family: var(--font-heading);
-    font-size: 1.6rem;
+    font-size: var(--text-2xl);
     font-weight: 700;
     color: #2C7DA0;
 }
 
 .stat-label {
     font-family: var(--font-heading);
-    font-size: 0.75rem;
+    font-size: var(--text-xs);
     color: #64748b;
     margin-top: 4px;
 }
 .instance-counter {
     color: #64748b;
-    font-size: 0.8rem;
+    font-size: var(--text-sm);
     margin-top: 4px;
     text-align: right;
 }
@@ -494,7 +509,7 @@ body {
 
 .context-badge-label {
     font-family: var(--font-heading);
-    font-size: 0.68rem;
+    font-size: var(--text-xs);
     letter-spacing: 0.1em;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.98);
@@ -503,14 +518,14 @@ body {
 }
 
 .context-badge-details {
-    font-size: 0.75rem;
+    font-size: var(--text-xs);
     color: rgba(255, 255, 255, 0.85);
     font-weight: 400;
 }
 
 .privacy-note {
     color: #64748b;
-    font-size: 0.75rem;
+    font-size: var(--text-xs);
     text-align: center;
     margin-top: 12px;
     line-height: 1.4;
@@ -550,7 +565,7 @@ body {
 
 .result-hero-title {
     font-family: var(--font-heading);
-    font-size: 1.4rem;
+    font-size: var(--text-xl);
     font-weight: 700;
     line-height: 1.35;
     margin-bottom: 18px;
@@ -565,7 +580,7 @@ body {
 }
 
 .result-hero-line {
-    font-size: 0.92rem;
+    font-size: var(--text-sm);
     line-height: 1.55;
     margin-bottom: 10px;
 }
@@ -577,7 +592,7 @@ body {
 .result-hero-label {
     font-family: var(--font-heading);
     display: inline-block;
-    font-size: 0.68rem;
+    font-size: var(--text-xs);
     font-weight: 700;
     letter-spacing: 0.12em;
     color: rgba(255, 255, 255, 0.6);
@@ -599,7 +614,7 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 12px 0;
-    font-size: 0.9rem;
+    font-size: var(--text-sm);
     color: #475569;
     border-bottom: 1px solid #f1f5f9;
 }
@@ -644,17 +659,3 @@ body {
     border-left-color: rgba(255, 255, 255, 0.85);
 }
 
-
-/* Pantallas grandes: aprovechar el ancho */
-@media (min-width: 1400px) {
-    .app-container {
-        max-width: 92vw;
-    }
-}
-
-@media (min-width: 1800px) {
-    .app-container {
-        max-width: 94vw;
-        gap: 32px;
-    }
-}

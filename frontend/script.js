@@ -519,37 +519,15 @@ function buildExpertDescription(data) {
 }
 
 function buildContextBadge(isParametric, isExpert) {
-    let label, details = [];
+    let label;
 
     if (isExpert && window.userData) {
         label = 'YOUR DATA';
-        const entries = Object.entries(window.userData).slice(0, 5);
-        for (const [key, value] of entries) {
-            if (Array.isArray(value)) {
-                details.push(value.length + ' ' + key);
-            } else if (typeof value === 'object' && value !== null) {
-                details.push(key);
-            } else {
-                const display = typeof value === 'number' && Math.abs(value) >= 1000
-                    ? value.toLocaleString('en-US')
-                    : value;
-                details.push(key + ' ' + display);
-            }
-        }
     } else if (isParametric) {
         label = 'PARAMETRIC';
-        document.querySelectorAll('.parameter-slider').forEach(slider => {
-            const raw = String(slider.value).trim();
-            const num = Number(raw);
-            const display = isNaN(num) ? raw : (num > 0 ? '+' + num : String(num));
-            details.push(slider.dataset.param + ' ' + display);
-        });
     } else {
         label = 'DEMO SCENARIO';
     }
 
-    const detailsStr = details.length > 0
-        ? '<span class="context-badge-details">' + details.join(' \u00B7 ') + '</span>'
-        : '';
-    return '<div class="context-badge"><span class="context-badge-label">' + label + '</span>' + detailsStr + '</div>';
+    return '<div class="context-badge"><span class="context-badge-label">' + label + '</span></div>';
 }

@@ -15,21 +15,19 @@
 </head>
 <body>
     <div class="app-container">
-        <!-- Left column: controls -->
-        <aside class="controls-panel">
+        <!-- Column 1: navigation -->
+        <aside class="nav-panel">
             <div class="logo-container">
                 <img src="/assets/logo.png" alt="Nexus" class="logo">
             </div>
-            <p class="subtitle" style="color: #2c7da0; font-weight: bold;">Multi-industry Optimization Engine</p>
+            <p class="subtitle">Multi-industry Optimization Engine</p>
 
-            <!-- Level selector -->
             <div class="level-selector">
                 <button class="level-btn active" data-level="demo">Demo</button>
                 <button class="level-btn" data-level="parametric">Parametric</button>
                 <button class="level-btn" data-level="expert">Expert</button>
             </div>
 
-            <!-- Problem type selector -->
             <div class="selector">
                 <label for="problemType">Select a problem type</label>
                 <select id="problemType">
@@ -41,7 +39,6 @@
                 </select>
             </div>
 
-            <!-- Instance selector -->
             <div class="selector">
                 <label for="instance">Select a scenario</label>
                 <select id="instance" disabled>
@@ -49,8 +46,10 @@
                 </select>
                 <div id="instance-counter" class="instance-counter"></div>
             </div>
+        </aside>
 
-            <!-- Problem info card -->
+        <!-- Column 2: context -->
+        <aside class="context-panel">
             <div id="info-card" class="info-card" style="display: none;">
                     <h4>📦 Problem Data</h4>
                     <div id="info-content">
@@ -58,22 +57,16 @@
                     </div>
             </div>
 
-            <!-- Dynamic container for level content -->
-            <div id="level-content" class="level-content">
-                <!-- Demo/Parametric/Expert HTML will be injected here -->
-            </div>
+            <div id="level-content" class="level-content"></div>
 
-            <!-- Scenario description -->
             <div id="scenario-description" class="scenario-description"></div>
         </aside>
 
-
-        <!-- Right column: results -->
+        <!-- Column 3: results -->
         <main class="results-panel">
-                        <div id="output" class="output">Select a problem type to begin</div>
+            <div id="output" class="output">Select a problem type to begin</div>
             <div id="map" style="height: 400px; margin-top: 20px; border-radius: 12px; display: none;"></div>
         </main>
-
     </div>
 
     <script src="script.js"></script>
