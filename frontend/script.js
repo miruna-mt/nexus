@@ -107,10 +107,13 @@ const instancesConfig = {
     'marketing_budget': {
         name: 'Portfolio - Marketing Budget Allocation',
         problem_type: 'portfolio',
-        description: 'Allocate marketing budget across channels.',
+        description: 'Allocate marketing budget across strategic investment blocks.',
         parametric: {
             parameters: [
-                { name: 'aversion_riesgo', label: 'Risk aversion', type: 'slider', min: 0, max: 10, default: 3, unit: '' }
+                { name: 'aversion_riesgo', label: 'Risk aversion', type: 'slider', min: 0, max: 10, default: 3, unit: '' },
+                { name: 'max_exposure', label: 'Max exposure per block', type: 'slider', min: 10, max: 50, default: 50, unit: '%', step: 5 },
+                { name: 'content_seo_override', label: 'Content & SEO performance shift', type: 'slider', min: -80, max: 50, default: 0, unit: '%', step: 5 },
+                { name: 'diversification_floor', label: 'Diversification floor per block', type: 'slider', min: 0, max: 15, default: 0, unit: '%', step: 1 }
             ]
         },
         expert: {
@@ -536,7 +539,10 @@ function buildContextBadge(isParametric, isExpert) {
     } else if (isParametric) {
         label = 'PARAMETRIC';
         document.querySelectorAll('.parameter-slider').forEach(slider => {
-            details.push(slider.dataset.param + ' ' + slider.value);
+            const raw = String(slider.value).trim();
+            const num = Number(raw);
+            const display = isNaN(num) ? raw : (num > 0 ? '+' + num : String(num));
+            details.push(slider.dataset.param + ' ' + display);
         });
     } else {
         label = 'DEMO SCENARIO';

@@ -11,42 +11,42 @@
       "name": "Performance Media",
       "expected_return": 2.31,
       "risk": 0.18,
-      "max_weight": 0.3
+      "max_weight": 0.4
     },
     {
       "id": "B2",
       "name": "Brand Media",
       "expected_return": 4.9,
       "risk": 0.14,
-      "max_weight": 0.25
+      "max_weight": 0.4
     },
     {
       "id": "B3",
       "name": "Content & SEO",
       "expected_return": 6.02,
       "risk": 0.12,
-      "max_weight": 0.25
+      "max_weight": 0.4
     },
     {
       "id": "B4",
       "name": "Web & CRO",
       "expected_return": 3.5,
       "risk": 0.1,
-      "max_weight": 0.2
+      "max_weight": 0.4
     },
     {
       "id": "B5",
       "name": "PR & Events",
       "expected_return": 2.0,
       "risk": 0.25,
-      "max_weight": 0.15
+      "max_weight": 0.4
     },
     {
       "id": "B6",
       "name": "Creative Production",
       "expected_return": 3.2,
       "risk": 0.16,
-      "max_weight": 0.2
+      "max_weight": 0.4
     }
   ],
   "covariances": [
@@ -119,5 +119,6 @@
       "Web & CRO ↔ Creative Production: 0.40 — creative assets feed web",
       "Brand Media ↔ Web & CRO: 0.20 — minimal overlap"
     ]
-  }
+  },
+  "aversion_scale": 30
 }

@@ -11,42 +11,42 @@
       "name": "Paid Acquisition",
       "expected_return": 2.31,
       "risk": 0.2,
-      "max_weight": 0.3
+      "max_weight": 0.4
     },
     {
       "id": "S2",
       "name": "Content & SEO",
       "expected_return": 7.02,
       "risk": 0.12,
-      "max_weight": 0.25
+      "max_weight": 0.4
     },
     {
       "id": "S3",
       "name": "Webinars & Events",
       "expected_return": 2.13,
       "risk": 0.14,
-      "max_weight": 0.2
+      "max_weight": 0.4
     },
     {
       "id": "S4",
       "name": "Product-Led Growth",
       "expected_return": 3.5,
       "risk": 0.16,
-      "max_weight": 0.2
+      "max_weight": 0.4
     },
     {
       "id": "S5",
       "name": "Brand & Community",
       "expected_return": 3.0,
       "risk": 0.15,
-      "max_weight": 0.15
+      "max_weight": 0.4
     },
     {
       "id": "S6",
       "name": "Creative Production",
       "expected_return": 3.2,
       "risk": 0.16,
-      "max_weight": 0.2
+      "max_weight": 0.4
     }
   ],
   "covariances": [
@@ -117,5 +117,6 @@
       "Webinars & Events ↔ Content & SEO: 0.35 — webinars are content",
       "Paid Acquisition ↔ Brand & Community: 0.25 — limited overlap"
     ]
-  }
+  },
+  "aversion_scale": 30
 }

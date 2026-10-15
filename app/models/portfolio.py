@@ -29,6 +29,7 @@ def _normalize_data(data):
         "subject": data.get("subject", ""),
         "target_audience": data.get("target_audience", ""),
         "return_unit": data.get("return_unit", "%"),
+        "aversion_scale": data.get("aversion_scale", 1.0),
     }
 
 
@@ -64,6 +65,7 @@ class PortfolioModel:
         self.subject = data.get("subject", "")
         self.target_audience = data.get("target_audience", "")
         self.return_unit = data.get("return_unit", "%")
+        self.aversion_scale = data.get("aversion_scale", 1.0)
         print(f"Datos cargados: {self.num_activos} activos")
 
     def build(self):
@@ -75,6 +77,15 @@ class PortfolioModel:
             print(f"Aversion al riesgo: {aversion}")
 
         rentabilidades = [a["rentabilidad"] for a in self.activos]
+
+        if self.params and "content_seo_override" in self.params:
+            pct = float(self.params["content_seo_override"]) / 100.0
+            for i, a in enumerate(self.activos):
+                if a["nombre"] == "Content & SEO":
+                    rentabilidades[i] = rentabilidades[i] * (1 + pct)
+                    print(f"Content & SEO override: {pct*100:+.1f}%")
+                    break
+
         if self.params and "rentabilidad_tech" in self.params:
             nueva = float(self.params["rentabilidad_tech"]) / 100.0
             for i, a in enumerate(self.activos):
@@ -85,11 +96,19 @@ class PortfolioModel:
 
         self.model = mathopt.Model(name="markowitz")
 
+        max_exp = None
+        if self.params and "max_exposure" in self.params:
+            max_exp = float(self.params["max_exposure"]) / 100.0
+            print(f"Max exposure per block: {max_exp*100:.0f}%")
+
         self.w = []
         for i in range(self.num_activos):
+            ub = self.activos[i]["limite_max"]
+            if max_exp is not None:
+                ub = min(ub, max_exp)
             self.w.append(self.model.add_variable(
                 lb=0.0,
-                ub=self.activos[i]["limite_max"],
+                ub=ub,
                 name=f"w_{i}"
             ))
 
@@ -97,6 +116,16 @@ class PortfolioModel:
             mathopt.fast_sum(self.w) == 1.0,
             name="capital_total"
         )
+
+        if self.params and "diversification_floor" in self.params:
+            div_floor = float(self.params["diversification_floor"]) / 100.0
+            if div_floor > 0:
+                print(f"Diversification floor: {div_floor*100:.1f}%")
+                for i in range(self.num_activos):
+                    self.model.add_linear_constraint(
+                        self.w[i] >= div_floor,
+                        name=f"div_floor_{i}"
+                    )
 
         rendimiento = mathopt.fast_sum(
             self.w[i] * rentabilidades[i] for i in range(self.num_activos)
@@ -108,7 +137,8 @@ class PortfolioModel:
             for j in range(self.num_activos)
         )
 
-        self.model.maximize(rendimiento - aversion * varianza)
+        self.rentabilidades_efectivas = rentabilidades
+        self.model.maximize(rendimiento - aversion * self.aversion_scale * varianza)
 
         print(f"Modelo construido con aversion {aversion}")
         return True
@@ -144,10 +174,10 @@ class PortfolioModel:
                     "activo": activo["nombre"],
                     "peso_pct": round(pesos[i] * 100, 1),
                     "inversion": round(pesos[i] * self.capital_total, 0),
-                    "rentabilidad_pct": round(activo["rentabilidad"] * 100, 2),
+                    "rentabilidad_pct": round(self.rentabilidades_efectivas[i] * 100, 2),
                     "riesgo_pct": round(activo["riesgo"] * 100, 2)
                 })
-                rentabilidad_total += pesos[i] * activo["rentabilidad"]
+                rentabilidad_total += pesos[i] * self.rentabilidades_efectivas[i]
 
         for i in range(self.num_activos):
             for j in range(self.num_activos):
