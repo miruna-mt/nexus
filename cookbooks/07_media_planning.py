@@ -1,10 +1,10 @@
 """
-Cookbook 07 - Media Planning across TV Networks
+Cookbook 07 - Multi-Channel Media Planning
 ================================================
 
 Problem type : Portfolio
 Industry     : Media
-Scenario     : TV campaign for a luxury watch brand (EUR 500K)
+Scenario     : Multi-channel campaign for a luxury watch brand (EUR 2M)
 
 Same Markowitz engine used for financial portfolios, now applied to media
 planning: TV networks have different GRP efficiency and audience volatility,
@@ -23,7 +23,7 @@ from cookbooks._common import load_json, banner, print_narrative
 
 
 def main():
-    banner("Cookbook 07 - Media Planning across TV Networks")
+    banner("Cookbook 07 - Multi-Channel Media Planning")
 
     # 1. Load a real-world instance: 12 network x daypart combinations
     data = load_json("data/portfolio/portfolio_media_planning.json")
@@ -47,10 +47,10 @@ def main():
     print()
 
     # 5. Interpretation
-    total_grp = round(results["rentabilidad_esperada_pct"] / 100 * data["total_capital"] / 1000, 0)
+    roas = results["rentabilidad_esperada_pct"] / 100
     print("  Interpretation:")
-    print("    " + str(int(total_grp)) + " GRP delivered for EUR " + str(int(data["total_capital"])) + " budget")
-    print("    Concentrated on " + str(len(results["cartera"])) + " of " + str(len(data["assets"])) + " available networks")
+    print("    " + str(round(roas, 2)) + " ROAS for EUR " + str(int(data["total_capital"])) + " budget")
+    print("    Concentrated on " + str(len(results["cartera"])) + " of " + str(len(data["assets"])) + " available channels")
     print("    -> Raise risk_aversion to diversify; lower it to concentrate further.")
     print()
 

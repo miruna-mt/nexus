@@ -1,125 +1,130 @@
 {
-  "unit_name": "slot",
+  "unit_name": "channel",
   "narrative_domain": "media_planning",
-  "subject": "Sports cars",
-  "target_audience": "Adults 25-59",
-  "return_unit": "GRP",
-  "total_capital": 500000,
+  "subject": "Indie sci-fi · Theatrical release",
+  "target_audience": "Adults 18-45 · Urban",
+  "return_unit": "ROAS",
+  "total_capital": 5000000,
   "risk_aversion": 3.0,
+  "aversion_scale": 30,
   "assets": [
     {
-      "id": "C01",
-      "name": "LaLigaTV · Movistar+",
-      "expected_return": 0.82,
-      "risk": 0.12,
-      "max_weight": 0.3
+      "id": "F1",
+      "name": "Instagram / Facebook",
+      "expected_return": 7.91,
+      "risk": 0.22,
+      "max_weight": 0.3,
+      "min_weight": 0.2
     },
     {
-      "id": "C02",
-      "name": "DAZN LaLiga",
-      "expected_return": 0.78,
-      "risk": 0.14,
-      "max_weight": 0.3
-    },
-    {
-      "id": "C03",
-      "name": "Movistar+ Deportes",
-      "expected_return": 0.65,
-      "risk": 0.11,
-      "max_weight": 0.25
-    },
-    {
-      "id": "C04",
-      "name": "Movistar+ Champions",
-      "expected_return": 0.55,
-      "risk": 0.13,
-      "max_weight": 0.2
-    },
-    {
-      "id": "C05",
-      "name": "Eurosport",
-      "expected_return": 0.42,
-      "risk": 0.16,
-      "max_weight": 0.15
-    },
-    {
-      "id": "C06",
-      "name": "Teledeporte",
-      "expected_return": 0.35,
+      "id": "F2",
+      "name": "YouTube / OTT",
+      "expected_return": 4.0,
       "risk": 0.18,
-      "max_weight": 0.15
+      "max_weight": 0.3,
+      "min_weight": 0.15
     },
     {
-      "id": "C07",
-      "name": "Real Madrid TV",
-      "expected_return": 0.3,
+      "id": "F3",
+      "name": "Digital Display",
+      "expected_return": 3.5,
       "risk": 0.2,
-      "max_weight": 0.1
+      "max_weight": 0.2,
+      "min_weight": 0.05
+    },
+    {
+      "id": "F4",
+      "name": "TV",
+      "expected_return": 1.7,
+      "risk": 0.12,
+      "max_weight": 0.25,
+      "min_weight": 0.1
+    },
+    {
+      "id": "F5",
+      "name": "OOH",
+      "expected_return": 1.0,
+      "risk": 0.1,
+      "max_weight": 0.15,
+      "min_weight": 0.0
+    },
+    {
+      "id": "F6",
+      "name": "Radio",
+      "expected_return": 1.5,
+      "risk": 0.11,
+      "max_weight": 0.1,
+      "min_weight": 0.0
     }
   ],
   "covariances": [
     [
-      0.0144,
-      0.00924,
-      0.00858,
-      0.01014,
-      0.00768,
-      0.00432,
-      0.0048
+      0.0484,
+      0.02178,
+      0.0264,
+      0.0066,
+      0.0044,
+      0.00363
     ],
     [
-      0.00924,
-      0.0196,
-      0.00847,
-      0.01001,
-      0.00784,
-      0.00504,
-      0.0056
+      0.02178,
+      0.0324,
+      0.0198,
+      0.00648,
+      0.0045,
+      0.00396
     ],
     [
-      0.00858,
-      0.00847,
-      0.0121,
-      0.0093,
-      0.00704,
-      0.00396,
+      0.0264,
+      0.0198,
+      0.04,
+      0.006,
+      0.005,
       0.0044
     ],
     [
-      0.01014,
-      0.01001,
-      0.0093,
-      0.0169,
-      0.00832,
-      0.00468,
-      0.0052
+      0.0066,
+      0.00648,
+      0.006,
+      0.0144,
+      0.0054,
+      0.00528
     ],
     [
-      0.00768,
-      0.00784,
-      0.00704,
-      0.00832,
-      0.0256,
-      0.00864,
-      0.0096
-    ],
-    [
-      0.00432,
-      0.00504,
-      0.00396,
-      0.00468,
-      0.00864,
-      0.0324,
-      0.018
-    ],
-    [
-      0.0048,
-      0.0056,
       0.0044,
-      0.0052,
-      0.0096,
-      0.018,
-      0.04
+      0.0045,
+      0.005,
+      0.0054,
+      0.01,
+      0.0044
+    ],
+    [
+      0.00363,
+      0.00396,
+      0.0044,
+      0.00528,
+      0.0044,
+      0.0121
     ]
-  ]
+  ],
+  "correlation_notes": {
+    "method": "ROAS values based on Neustar 2018 study (70 films, $1.8B analyzed) - the most cited benchmark for film marketing. Risk and correlations are reasoned defaults.",
+    "rationale": [
+      "Instagram/Facebook ↔ YouTube/OTT: 0.55 — both digital video/social, shared younger audience",
+      "Instagram/Facebook ↔ Digital Display: 0.60 — both digital awareness",
+      "YouTube/OTT ↔ Digital Display: 0.55 — same digital funnel",
+      "TV ↔ OOH: 0.45 — both mass traditional awareness",
+      "TV ↔ Radio: 0.40 — traditional media",
+      "OOH ↔ Radio: 0.40 — traditional urban",
+      "Instagram/Facebook ↔ TV: 0.25 — different audiences",
+      "YouTube/OTT ↔ TV: 0.30 — awareness overlap",
+      "Digital Display ↔ TV: 0.25 — different funnel",
+      "Instagram/Facebook ↔ OOH: 0.20 — minimal overlap",
+      "YouTube/OTT ↔ OOH: 0.25 — limited overlap",
+      "Digital Display ↔ OOH: 0.25 — limited overlap",
+      "Instagram/Facebook ↔ Radio: 0.15 — minimal overlap",
+      "YouTube/OTT ↔ Radio: 0.20 — minimal overlap",
+      "Digital Display ↔ Radio: 0.20 — minimal overlap"
+    ]
+  }
 }

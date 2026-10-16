@@ -1,265 +1,159 @@
 {
-  "unit_name": "slot",
+  "unit_name": "channel",
   "narrative_domain": "media_planning",
   "subject": "Luxury watches",
-  "target_audience": "Adults 25-59",
-  "return_unit": "GRP",
-  "total_capital": 500000,
+  "target_audience": "Adults 30-60 · High income",
+  "return_unit": "ROAS",
+  "total_capital": 2000000,
   "risk_aversion": 3.0,
+  "aversion_scale": 30,
   "assets": [
     {
-      "id": "C01",
-      "name": "Antena 3 · Prime Time",
-      "expected_return": 0.85,
-      "risk": 0.12,
-      "max_weight": 0.3
+      "id": "M1",
+      "name": "TV / OTT",
+      "expected_return": 2.2,
+      "risk": 0.14,
+      "max_weight": 0.35,
+      "min_weight": 0.15
     },
     {
-      "id": "C02",
-      "name": "Antena 3 · Sobremesa",
-      "expected_return": 0.7,
+      "id": "M2",
+      "name": "Print",
+      "expected_return": 2.6,
       "risk": 0.1,
-      "max_weight": 0.2
+      "max_weight": 0.25,
+      "min_weight": 0.1
     },
     {
-      "id": "C03",
-      "name": "Antena 3 · Late Night",
-      "expected_return": 0.45,
-      "risk": 0.15,
-      "max_weight": 0.15
-    },
-    {
-      "id": "C04",
-      "name": "Telecinco · Prime Time",
-      "expected_return": 0.75,
-      "risk": 0.18,
-      "max_weight": 0.25
-    },
-    {
-      "id": "C05",
-      "name": "Telecinco · Daytime",
-      "expected_return": 0.55,
-      "risk": 0.14,
-      "max_weight": 0.15
-    },
-    {
-      "id": "C06",
-      "name": "La 1 · Prime Time",
-      "expected_return": 0.72,
-      "risk": 0.14,
-      "max_weight": 0.25
-    },
-    {
-      "id": "C07",
-      "name": "La 1 · Sobremesa",
-      "expected_return": 0.6,
-      "risk": 0.11,
-      "max_weight": 0.2
-    },
-    {
-      "id": "C08",
-      "name": "La Sexta · Prime Time",
-      "expected_return": 0.55,
-      "risk": 0.2,
-      "max_weight": 0.15
-    },
-    {
-      "id": "C09",
-      "name": "La Sexta · Late Night",
-      "expected_return": 0.4,
+      "id": "M3",
+      "name": "Social Paid",
+      "expected_return": 3.1,
       "risk": 0.22,
-      "max_weight": 0.12
+      "max_weight": 0.25,
+      "min_weight": 0.15
     },
     {
-      "id": "C10",
-      "name": "Cuatro · Prime Time",
-      "expected_return": 0.52,
-      "risk": 0.17,
-      "max_weight": 0.15
+      "id": "M4",
+      "name": "Digital Search",
+      "expected_return": 3.4,
+      "risk": 0.15,
+      "max_weight": 0.2,
+      "min_weight": 0.15
     },
     {
-      "id": "C11",
-      "name": "Movistar+ · Prime Time",
-      "expected_return": 0.65,
-      "risk": 0.09,
-      "max_weight": 0.15
+      "id": "M5",
+      "name": "Digital Display",
+      "expected_return": 2.8,
+      "risk": 0.18,
+      "max_weight": 0.2,
+      "min_weight": 0.05
     },
     {
-      "id": "C12",
-      "name": "Movistar+ · Daytime",
-      "expected_return": 0.42,
-      "risk": 0.08,
-      "max_weight": 0.1
+      "id": "M6",
+      "name": "OOH",
+      "expected_return": 2.3,
+      "risk": 0.12,
+      "max_weight": 0.2,
+      "min_weight": 0.1
+    },
+    {
+      "id": "M7",
+      "name": "Radio",
+      "expected_return": 1.8,
+      "risk": 0.1,
+      "max_weight": 0.15,
+      "min_weight": 0.0
     }
   ],
   "covariances": [
     [
-      0.0144,
-      0.0042,
-      0.0063,
-      0.00972,
-      0.0037,
+      0.0196,
+      0.0056,
+      0.00924,
+      0.00525,
+      0.00882,
       0.00756,
-      0.0029,
-      0.0108,
-      0.00581,
-      0.00918,
-      0.00162,
-      0.00144
+      0.0049
     ],
     [
-      0.0042,
+      0.0056,
       0.01,
-      0.00525,
-      0.00396,
-      0.00308,
-      0.00308,
-      0.00242,
-      0.0044,
-      0.00484,
-      0.00374,
-      0.00135,
-      0.0012
+      0.0055,
+      0.003,
+      0.0054,
+      0.0048,
+      0.003
     ],
     [
-      0.0063,
-      0.00525,
-      0.0225,
-      0.00594,
-      0.00462,
-      0.00462,
-      0.00363,
+      0.00924,
+      0.0055,
+      0.0484,
+      0.01485,
+      0.02178,
       0.0066,
-      0.00726,
-      0.00561,
-      0.00202,
-      0.0018
+      0.0044
     ],
     [
-      0.00972,
-      0.00396,
-      0.00594,
+      0.00525,
+      0.003,
+      0.01485,
+      0.0225,
+      0.0135,
+      0.0036,
+      0.00225
+    ],
+    [
+      0.00882,
+      0.0054,
+      0.02178,
+      0.0135,
       0.0324,
-      0.00882,
-      0.01134,
-      0.00436,
-      0.0162,
-      0.00871,
-      0.01377,
-      0.00243,
-      0.00216
-    ],
-    [
-      0.0037,
-      0.00308,
-      0.00462,
-      0.00882,
-      0.0196,
-      0.00431,
-      0.00339,
-      0.00616,
-      0.00678,
-      0.00524,
-      0.00189,
-      0.00168
+      0.00648,
+      0.0036
     ],
     [
       0.00756,
-      0.00308,
-      0.00462,
-      0.01134,
-      0.00431,
-      0.0196,
-      0.00539,
-      0.0126,
-      0.00678,
-      0.01071,
-      0.00189,
-      0.00168
-    ],
-    [
-      0.0029,
-      0.00242,
-      0.00363,
-      0.00436,
-      0.00339,
-      0.00539,
-      0.0121,
-      0.00484,
-      0.00532,
-      0.00411,
-      0.00148,
-      0.00132
-    ],
-    [
-      0.0108,
-      0.0044,
+      0.0048,
       0.0066,
-      0.0162,
-      0.00616,
-      0.0126,
-      0.00484,
-      0.04,
-      0.0154,
-      0.0153,
-      0.0027,
-      0.0024
+      0.0036,
+      0.00648,
+      0.0144,
+      0.0048
     ],
     [
-      0.00581,
-      0.00484,
-      0.00726,
-      0.00871,
-      0.00678,
-      0.00678,
-      0.00532,
-      0.0154,
-      0.0484,
-      0.00823,
-      0.00297,
-      0.00264
-    ],
-    [
-      0.00918,
-      0.00374,
-      0.00561,
-      0.01377,
-      0.00524,
-      0.01071,
-      0.00411,
-      0.0153,
-      0.00823,
-      0.0289,
-      0.0023,
-      0.00204
-    ],
-    [
-      0.00162,
-      0.00135,
-      0.00202,
-      0.00243,
-      0.00189,
-      0.00189,
-      0.00148,
-      0.0027,
-      0.00297,
-      0.0023,
-      0.0081,
-      0.00396
-    ],
-    [
-      0.00144,
-      0.0012,
-      0.0018,
-      0.00216,
-      0.00168,
-      0.00168,
-      0.00132,
-      0.0024,
-      0.00264,
-      0.00204,
-      0.00396,
-      0.0064
+      0.0049,
+      0.003,
+      0.0044,
+      0.00225,
+      0.0036,
+      0.0048,
+      0.01
     ]
-  ]
+  ],
+  "correlation_notes": {
+    "method": "Correlations are reasoned defaults based on media planning logic, not audited data. Replace with your own historical data for production use.",
+    "rationale": [
+      "TV/OTT ↔ OOH: 0.45 — both mass-awareness, broad-reach traditional",
+      "Print ↔ OOH: 0.40 — both premium, prestige-driven",
+      "Social Paid ↔ Digital Display: 0.55 — both digital awareness",
+      "Digital Display ↔ Digital Search: 0.50 — same digital funnel",
+      "Social Paid ↔ Digital Search: 0.45 — both in digital funnel",
+      "TV/OTT ↔ Print: 0.40 — both brand-building",
+      "OOH ↔ Radio: 0.40 — both traditional, urban",
+      "TV/OTT ↔ Digital Display: 0.35 — both awareness",
+      "TV/OTT ↔ Radio: 0.35 — traditional media",
+      "Print ↔ Digital Display: 0.30 — moderate overlap",
+      "TV/OTT ↔ Social Paid: 0.30 — different audiences",
+      "Digital Display ↔ OOH: 0.30 — moderate overlap",
+      "TV/OTT ↔ Digital Search: 0.25 — different funnel stages",
+      "Print ↔ Social Paid: 0.25 — different nature",
+      "Social Paid ↔ OOH: 0.25 — limited overlap",
+      "Print ↔ Radio: 0.30 — traditional media",
+      "Search ↔ OOH: 0.20 — minimal overlap",
+      "Search ↔ Radio: 0.15 — minimal overlap",
+      "Print ↔ Search: 0.20 — different funnel",
+      "Social Paid ↔ Radio: 0.20 — minimal overlap",
+      "Digital Display ↔ Radio: 0.20 — minimal overlap"
+    ]
+  }
 }

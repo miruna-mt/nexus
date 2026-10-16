@@ -18,6 +18,7 @@ def _normalize_data(data):
             "rentabilidad": pick(a, "expected_return", "rentabilidad"),
             "riesgo": pick(a, "risk", "riesgo"),
             "limite_max": pick(a, "max_weight", "limite_max"),
+            "limite_min": a.get("min_weight", 0.0),
         }
 
     return {
@@ -101,13 +102,24 @@ class PortfolioModel:
             max_exp = float(self.params["max_exposure"]) / 100.0
             print(f"Max exposure per block: {max_exp*100:.0f}%")
 
+        # Minimo global (override del slider) o min_weight por activo
+        global_min = None
+        if self.params and "min_per_channel" in self.params:
+            global_min = float(self.params["min_per_channel"]) / 100.0
+            print(f"Minimo global por canal: {global_min*100:.1f}%")
+
         self.w = []
         for i in range(self.num_activos):
             ub = self.activos[i]["limite_max"]
             if max_exp is not None:
                 ub = min(ub, max_exp)
+
+            lb = self.activos[i].get("limite_min", 0.0)
+            if global_min is not None:
+                lb = max(lb, global_min)
+
             self.w.append(self.model.add_variable(
-                lb=0.0,
+                lb=lb,
                 ub=ub,
                 name=f"w_{i}"
             ))
@@ -197,20 +209,24 @@ class PortfolioModel:
 
         # Narrativa por dominio
         if self.narrative_domain == "media_planning":
-            parts = ["Media plan"]
+            parts = ["Media mix"]
             if self.subject:
                 parts.append(self.subject)
             if self.target_audience:
                 parts.append(self.target_audience)
             context_line = " \u00B7 ".join(parts)
-            total_reach = round(rentabilidad_total * self.capital_total / 1000, 0)
-            metric_line = f"{int(total_reach)} {self.return_unit} \u00B7 {round(riesgo_portfolio*100, 2)}% volatility"
+            if self.return_unit == "GRP":
+                total_reach = round(rentabilidad_total * self.capital_total / 1000, 0)
+                metric_value = f"{int(total_reach)} GRP"
+            else:
+                metric_value = f"{round(rentabilidad_total, 2)} {self.return_unit}"
+            metric_line = f"{metric_value} \u00B7 {round(riesgo_portfolio*100, 2)}% volatility"
             titular = f"{context_line}<br><span class='hero-metrics'>{metric_line}</span>"
 
             narrative = {
                 "titular": titular,
-                "comparacion": f"Concentrated in the {len(cartera)} most efficient networks. Raising risk aversion would diversify further but reduce total reach.",
-                "insight": f"Top pick: {top_str}.",
+                "comparacion": f"Concentrated in the {len(cartera)} most efficient media. Raising risk aversion would diversify further but reduce total reach.",
+                "insight": f"Largest allocation: {top_str}.",
             }
         elif self.narrative_domain == "marketing":
             parts = ["Annual marketing budget"]

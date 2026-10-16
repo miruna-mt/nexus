@@ -140,7 +140,7 @@ class AssignmentModel:
             warning = f"\u26A0 {busiest['name']} is {busiest['backlog_days']} days behind. Consider rebalancing or adding capacity."
 
         narrative = {
-            "titular": f"{self.num_cases} {self.unit_name if self.num_cases == 1 else self.unit_name + 's'}{(' \u00B7 ' + self.subject) if self.subject else ''}<br><span class=\'hero-metrics\'>max backlog {max_backlog} days ({busiest['name'] if busiest else 'n/a'})</span>",
+            "titular": f"{self.subject if self.subject else (str(self.num_cases) + ' ' + self.unit_name + ('s' if self.num_cases != 1 else ''))}<br><span class=\'hero-metrics\'>{self.num_cases} {self.unit_name if self.num_cases == 1 else self.unit_name + 's'} \u00B7 max backlog {max_backlog} days</span>",
             "comparacion": f"Average backlog across teams: {avg_backlog} days.",
             "insight": insight,
             "warning": warning,

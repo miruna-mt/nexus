@@ -91,12 +91,13 @@ const instancesConfig = {
         }
     },
     'media_planning': {
-        name: 'Portfolio - TV Media Planning',
+        name: 'Portfolio - Media Mix',
         problem_type: 'portfolio',
-        description: 'Allocate media budget across TV networks and dayparts.',
+        description: 'Allocate media budget across TV, digital, print, OOH and radio.',
         parametric: {
             parameters: [
-                { name: 'aversion_riesgo', label: 'Risk aversion', type: 'slider', min: 0, max: 10, default: 3, unit: '' }
+                { name: 'aversion_riesgo', label: 'Risk aversion', type: 'slider', min: 0, max: 10, default: 3, unit: '' },
+                { name: 'min_per_channel', label: 'Minimum per channel', type: 'slider', min: 0, max: 10, default: 0, unit: '%', step: 1 }
             ]
         },
         expert: {
