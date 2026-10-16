@@ -29,6 +29,7 @@ def _normalize_data(data):
         "unit_name": data.get("unit_name", "unit"),
         "narrative_domain": data.get("narrative_domain", "retail"),
         "subject": data.get("subject", ""),
+        "service_level": data.get("service_level", 0.95),
     }
 
 
@@ -57,12 +58,14 @@ class InventoryModel:
 
         self.horizonte = data["horizonte_semanas"]
         self.capacidad_almacen = data["capacidad_almacen"]
+        self.capacity_multiplier = 1.0
         self.productos = data["productos"]
         self.num_productos = len(self.productos)
         print(f"Datos cargados: {self.num_productos} productos, {self.horizonte} semanas")
         self.unit_name = data.get("unit_name", "unit")
         self.narrative_domain = data.get("narrative_domain", "retail")
         self.subject = data.get("subject", "")
+        self.service_level = data.get("service_level", 0.95)
 
     def build(self):
         print("Construyendo modelo de inventario...")
@@ -81,26 +84,49 @@ class InventoryModel:
                 coste_rotura = float(self.params["coste_rotura"])
                 print(f"Coste rotura: {coste_rotura}")
 
+        if self.params and "storage_capacity_multiplier" in self.params:
+            self.capacity_multiplier = float(self.params["storage_capacity_multiplier"]) / 100.0
+            print(f"Capacidad de almacen: {self.capacity_multiplier*100:.0f}%")
+
+        if self.params and "service_level" in self.params:
+            self.service_level = float(self.params["service_level"]) / 100.0
+            print(f"Nivel de servicio: {self.service_level*100:.0f}%")
+
         self.solver = pywraplp.Solver.CreateSolver("SCIP")
         if not self.solver:
             return False
 
         self.pedido = {}
+        self.llegada = {}
         self.stock = {}
         self.rotura = {}
+        self.servida = {}
         self.hacer_pedido = {}
 
         for p in range(self.num_productos):
             self.pedido[p] = {}
+            self.llegada[p] = {}
             self.stock[p] = {}
             self.rotura[p] = {}
+            self.servida[p] = {}
             self.hacer_pedido[p] = {}
             for t in range(self.horizonte):
                 self.pedido[p][t] = self.solver.IntVar(0, self.solver.infinity(), f"pedido_{p}_{t}")
+                self.llegada[p][t] = self.solver.NumVar(0, self.solver.infinity(), f"llegada_{p}_{t}")
                 self.stock[p][t] = self.solver.NumVar(0, self.solver.infinity(), f"stock_{p}_{t}")
                 self.rotura[p][t] = self.solver.NumVar(0, self.solver.infinity(), f"rotura_{p}_{t}")
+                self.servida[p][t] = self.solver.NumVar(0, self.solver.infinity(), f"servida_{p}_{t}")
                 self.hacer_pedido[p][t] = self.solver.IntVar(0, 1, f"hacer_pedido_{p}_{t}")
 
+        # Lead time: lo que pides en t llega en t+1. Semana 0 no hay pedido previo.
+        for p in range(self.num_productos):
+            for t in range(self.horizonte):
+                if t == 0:
+                    self.solver.Add(self.llegada[p][t] == 0)
+                else:
+                    self.solver.Add(self.llegada[p][t] == self.pedido[p][t-1])
+
+        # Balance de stock con lead time
         for p in range(self.num_productos):
             for t in range(self.horizonte):
                 demanda = self.productos[p]["demanda_semanal"][t]
@@ -108,19 +134,46 @@ class InventoryModel:
                     stock_anterior = self.productos[p]["stock_inicial"]
                 else:
                     stock_anterior = self.stock[p][t-1]
-                self.solver.Add(
-                    self.stock[p][t] == stock_anterior + self.pedido[p][t] - demanda + self.rotura[p][t]
-                )
+
+                # Stock disponible esta semana = lo que tenias + lo que llega
+                disponible = stock_anterior + self.llegada[p][t]
+
+                # No puedes servir mas de lo disponible
+                self.solver.Add(self.servida[p][t] <= disponible)
+                # No puedes servir mas de lo que piden
+                self.solver.Add(self.servida[p][t] <= demanda)
+                # Lo que no sirves, es rotura
+                self.solver.Add(self.rotura[p][t] == demanda - self.servida[p][t])
+                # El stock final es lo disponible menos lo servido
+                self.solver.Add(self.stock[p][t] == disponible - self.servida[p][t])
 
         M = 10000
         for p in range(self.num_productos):
             for t in range(self.horizonte):
                 self.solver.Add(self.pedido[p][t] <= M * self.hacer_pedido[p][t])
 
+        capacidad_efectiva = int(self.capacidad_almacen * self.capacity_multiplier)
+        # La capacidad limita el pico durante la semana: lo que ya tenias + lo que llega
         for t in range(self.horizonte):
+            if t == 0:
+                stock_anterior_expr = [self.productos[p]["stock_inicial"] for p in range(self.num_productos)]
+            else:
+                stock_anterior_expr = [self.stock[p][t-1] for p in range(self.num_productos)]
             self.solver.Add(
-                sum(self.stock[p][t] for p in range(self.num_productos)) <= self.capacidad_almacen
+                sum(stock_anterior_expr[p] + self.llegada[p][t] for p in range(self.num_productos)) <= capacidad_efectiva
             )
+
+        # Service level: roturas totales <= (1 - service_level) * demanda total
+        total_demand = sum(
+            self.productos[p]["demanda_semanal"][t]
+            for p in range(self.num_productos)
+            for t in range(self.horizonte)
+        )
+        max_stockout = int(total_demand * (1 - self.service_level))
+        self.solver.Add(
+            sum(self.rotura[p][t] for p in range(self.num_productos) for t in range(self.horizonte)) <= max_stockout
+        )
+        print(f"Max roturas permitidas: {max_stockout} (service level {self.service_level*100:.0f}%)")
 
         objective = self.solver.Objective()
         objective.SetMinimization()
@@ -146,6 +199,34 @@ class InventoryModel:
         else:
             print(f"No se encontro solucion. Status: {status}")
             return False
+
+    def get_infeasible_narrative(self):
+        """Explain why no feasible solution was found."""
+        total_inicial = sum(p["stock_inicial"] for p in self.productos)
+        capacidad_efectiva = int(self.capacidad_almacen * self.capacity_multiplier)
+        total_demand = sum(
+            self.productos[p]["demanda_semanal"][t]
+            for p in range(self.num_productos)
+            for t in range(self.horizonte)
+        )
+        max_stockout = int(total_demand * (1 - self.service_level))
+
+        if total_inicial > capacidad_efectiva:
+            insight = f"Initial stock ({total_inicial} {self.unit_name}s) exceeds warehouse capacity ({capacidad_efectiva}). Reduce initial stock or raise capacity."
+            warning = f"\u26A0 Over capacity by {total_inicial - capacidad_efectiva} {self.unit_name}s at week 0."
+        else:
+            insight = f"Cannot meet {int(self.service_level*100)}% service level with the current capacity. Raise warehouse capacity or lower the service level target."
+            warning = f"\u26A0 Max allowed stockouts: {max_stockout} {self.unit_name}s — not achievable with this capacity."
+
+        return {
+            "status": "infeasible",
+            "narrative": {
+                "titular": f"No feasible ordering plan<br><span class=\'hero-metrics\'>{self.num_productos} products \u00B7 {self.horizonte} weeks \u00B7 check capacity and service level</span>",
+                "comparacion": f"Warehouse capacity: {capacidad_efectiva} {self.unit_name}s. Target service level: {int(self.service_level*100)}%.",
+                "insight": insight,
+                "warning": warning,
+            }
+        }
 
     def get_results(self):
         coste_total = self.solver.Objective().Value()

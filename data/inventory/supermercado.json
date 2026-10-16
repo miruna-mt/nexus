@@ -136,5 +136,6 @@
       ]
     }
   ],
-  "subject": "Supermarket perishables"
+  "subject": "Supermarket perishables",
+  "service_level": 0.95
 }

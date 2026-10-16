@@ -38,7 +38,9 @@ const instancesConfig = {
             parameters: [
                 { name: 'coste_pedido', label: 'Order cost (EUR)', type: 'slider', min: 10, max: 200, default: 50, unit: 'EUR', step: 5 },
                 { name: 'coste_almacenaje', label: 'Storage cost (EUR/unit/week)', type: 'slider', min: 0.01, max: 0.20, default: 0.05, unit: 'EUR', step: 0.01 },
-                { name: 'coste_rotura', label: 'Out-of-stock cost (EUR/unit)', type: 'slider', min: 0.5, max: 5.0, default: 2.0, unit: 'EUR', step: 0.1 }
+                { name: 'coste_rotura', label: 'Out-of-stock cost (EUR/unit)', type: 'slider', min: 0.5, max: 5.0, default: 2.0, unit: 'EUR', step: 0.1 },
+                { name: 'storage_capacity_multiplier', label: 'Warehouse capacity (%)', type: 'slider', min: 10, max: 200, default: 100, unit: '%', step: 5 },
+                { name: 'service_level', label: 'Service level (%)', type: 'slider', min: 70, max: 100, default: 95, unit: '%', step: 1 }
             ]
         },
         expert: {
@@ -348,6 +350,26 @@ function attachOptimizeEvent(isParametric, isExpert) {
                 } else if (config.problem_type === 'inventory') {
                     html += '<div style="background: #f0f9ff; padding: 20px; border-radius: 12px; margin-bottom: 20px;"><div style="font-size: 1.2rem; color: #1e293b;">Total inventory cost</div><div style="font-size: 2.5rem; font-weight: 700; color: #2C7DA0; margin: 10px 0;">' + data.objective_value.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' EUR</div></div>';
                     html += '<h4 style="color: #1e293b; margin-bottom: 15px;">Cost breakdown</h4><div class="cost-breakdown"><div class="cost-line"><span>Ordering</span><span>€' + data.cost_breakdown.ordering.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</span></div><div class="cost-line"><span>Storage</span><span>€' + data.cost_breakdown.storage.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</span></div><div class="cost-line"><span>Out-of-stock</span><span>€' + data.cost_breakdown.stockout.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</span></div></div>';
+
+                    if (data.pedidos && data.pedidos.length > 0) {
+                        const weeks = [...new Set(data.pedidos.map(p => p.semana))].sort((a,b) => a-b);
+                        const products = [...new Set(data.pedidos.map(p => p.producto))];
+                        html += '<h4 style="color: #1e293b; margin: 25px 0 15px 0;">Weekly order plan</h4>';
+                        html += '<div style="overflow-x: auto;"><table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">';
+                        html += '<tr style="background: #e2e8f0; font-weight: 600;"><th style="padding: 8px; text-align: left;">Product</th>';
+                        weeks.forEach(w => { html += '<th style="padding: 8px; text-align: right;">W' + w + '</th>'; });
+                        html += '</tr>';
+                        products.forEach(prod => {
+                            html += '<tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 8px; font-weight: 600;">' + prod + '</td>';
+                            weeks.forEach(w => {
+                                const p = data.pedidos.find(x => x.producto === prod && x.semana === w);
+                                const val = p ? p.cantidad : '—';
+                                html += '<td style="padding: 8px; text-align: right; color: ' + (p ? '#2C7DA0' : '#94a3b8') + ';">' + val + '</td>';
+                            });
+                            html += '</tr>';
+                        });
+                        html += '</table></div>';
+                    }
                 } else if (config.problem_type === 'portfolio') {
                     html += '<div style="background: #f0f9ff; padding: 20px; border-radius: 12px; margin-bottom: 20px;"><div style="font-size: 1.2rem; color: #1e293b;">Expected portfolio return</div><div style="font-size: 2.5rem; font-weight: 700; color: #2C7DA0; margin: 10px 0;">' + data.rentabilidad_esperada_pct + ' %</div><div style="font-size: 0.9rem; color: #64748b;">with an estimated risk of ' + data.riesgo_estimado_pct + '%</div></div>';
                     html += '<h4 style="color: #1e293b; margin-bottom: 15px;">Portfolio composition</h4><table style="width: 100%; border-collapse: collapse;"><tr style="background: #e2e8f0; font-weight: 600;"><th style="padding: 10px; text-align: left;">Asset</th><th style="padding: 10px; text-align: right;">Weight</th><th style="padding: 10px; text-align: right;">Investment</th><th style="padding: 10px; text-align: right;">Return</th><th style="padding: 10px; text-align: right;">Risk</th></tr>';
