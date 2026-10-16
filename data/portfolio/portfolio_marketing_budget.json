@@ -1,7 +1,7 @@
 {
   "unit_name": "budget line",
   "narrative_domain": "marketing",
-  "subject": "Consumer electronics · Annual 2026",
+  "subject": "Consumer electronics",
   "return_unit": "%",
   "total_capital": 1000000,
   "risk_aversion": 3.0,

@@ -2,7 +2,7 @@
   "unit_name": "slot",
   "narrative_domain": "media_planning",
   "subject": "Sports cars",
-  "target_audience": "Men 30-55 · Urban · High income",
+  "target_audience": "Adults 25-59",
   "return_unit": "GRP",
   "total_capital": 500000,
   "risk_aversion": 3.0,

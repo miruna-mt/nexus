@@ -197,15 +197,15 @@ class PortfolioModel:
 
         # Narrativa por dominio
         if self.narrative_domain == "media_planning":
-            parts = ["Optimal media plan"]
+            parts = ["Media plan"]
             if self.subject:
                 parts.append(self.subject)
             if self.target_audience:
                 parts.append(self.target_audience)
+            context_line = " \u00B7 ".join(parts)
             total_reach = round(rentabilidad_total * self.capital_total / 1000, 0)
-            parts.append(f"{int(total_reach)} {self.return_unit}")
-            parts.append(f"{round(riesgo_portfolio*100, 2)}% volatility")
-            titular = " \u00B7 ".join(parts)
+            metric_line = f"{int(total_reach)} {self.return_unit} \u00B7 {round(riesgo_portfolio*100, 2)}% volatility"
+            titular = f"{context_line}<br><span class='hero-metrics'>{metric_line}</span>"
 
             narrative = {
                 "titular": titular,
@@ -213,12 +213,12 @@ class PortfolioModel:
                 "insight": f"Top pick: {top_str}.",
             }
         elif self.narrative_domain == "marketing":
-            parts = ["Optimal marketing budget allocation"]
+            parts = ["Annual marketing budget"]
             if self.subject:
                 parts.append(self.subject)
-            parts.append(metric)
-            parts.append(f"{round(riesgo_portfolio*100, 2)}% volatility")
-            titular = " \u00B7 ".join(parts)
+            context_line = " \u00B7 ".join(parts)
+            metric_line = f"{metric} \u00B7 {round(riesgo_portfolio*100, 2)}% volatility"
+            titular = f"{context_line}<br><span class='hero-metrics'>{metric_line}</span>"
 
             narrative = {
                 "titular": titular,
@@ -226,12 +226,12 @@ class PortfolioModel:
                 "insight": f"Top pick: {top_str}.",
             }
         else:  # finance (default)
-            parts = ["Optimal portfolio"]
+            parts = ["Portfolio"]
             if self.subject:
                 parts.append(self.subject)
-            parts.append(metric)
-            parts.append(f"{round(riesgo_portfolio*100, 2)}% volatility")
-            titular = " \u00B7 ".join(parts)
+            context_line = " \u00B7 ".join(parts)
+            metric_line = f"{metric} \u00B7 {round(riesgo_portfolio*100, 2)}% volatility"
+            titular = f"{context_line}<br><span class='hero-metrics'>{metric_line}</span>"
 
             narrative = {
                 "titular": titular,

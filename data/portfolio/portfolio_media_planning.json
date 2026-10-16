@@ -2,7 +2,7 @@
   "unit_name": "slot",
   "narrative_domain": "media_planning",
   "subject": "Luxury watches",
-  "target_audience": "Adults 25-59 · Urban · High income",
+  "target_audience": "Adults 25-59",
   "return_unit": "GRP",
   "total_capital": 500000,
   "risk_aversion": 3.0,

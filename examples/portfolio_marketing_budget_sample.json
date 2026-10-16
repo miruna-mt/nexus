@@ -1,7 +1,7 @@
 {
   "unit_name": "budget line",
   "narrative_domain": "marketing",
-  "subject": "B2B SaaS · Annual 2026",
+  "subject": "B2B SaaS",
   "return_unit": "%",
   "total_capital": 250000,
   "risk_aversion": 3.0,

@@ -28,6 +28,7 @@ def _normalize_data(data):
         "productos": [norm_product(p) for p in pick(data, "products", "productos")],
         "unit_name": data.get("unit_name", "unit"),
         "narrative_domain": data.get("narrative_domain", "retail"),
+        "subject": data.get("subject", ""),
     }
 
 
@@ -61,6 +62,7 @@ class InventoryModel:
         print(f"Datos cargados: {self.num_productos} productos, {self.horizonte} semanas")
         self.unit_name = data.get("unit_name", "unit")
         self.narrative_domain = data.get("narrative_domain", "retail")
+        self.subject = data.get("subject", "")
 
     def build(self):
         print("Construyendo modelo de inventario...")
@@ -234,8 +236,9 @@ class InventoryModel:
             else:
                 insight_roturas = f"{worst['producto']} had {worst['total_rotura']} unfilled {self.unit_name}s in {weeks_str} \u2014 demand exceeded stock."
 
+        context_line = self.subject if self.subject else "Order plan"
         narrative = {
-            "titular": f"Optimal ordering \u00B7 \u20AC{coste_total:,.2f} over {self.horizonte} weeks \u00B7 {num_pedidos} orders",
+            "titular": f"{context_line}<br><span class='hero-metrics'>\u20AC{coste_total:,.2f} \u00B7 {num_pedidos} orders</span>",
             "comparacion": f"Ordering weekly on demand: \u20AC{coste_naive:,.2f}. Savings: \u20AC{ahorro:,.2f} ({ahorro_pct}%). EOQ model (MIT Sloan).",
             "insight": insight_roturas
         }

@@ -31,6 +31,7 @@ class AssignmentModel:
         self.num_teams = len(self.teams)
         self.num_cases = len(self.cases)
         self.unit_name = data.get("unit_name", "case")
+        self.subject = data.get("subject", "")
         print(f"Datos cargados: {self.num_cases} casos, {self.num_teams} equipos")
 
     def build(self):
@@ -139,7 +140,7 @@ class AssignmentModel:
             warning = f"\u26A0 {busiest['name']} is {busiest['backlog_days']} days behind. Consider rebalancing or adding capacity."
 
         narrative = {
-            "titular": f"{self.num_cases} {self.unit_name if self.num_cases == 1 else self.unit_name + 's'} assigned \u00B7 max backlog {max_backlog} days ({busiest['name'] if busiest else 'n/a'})",
+            "titular": f"{self.num_cases} {self.unit_name if self.num_cases == 1 else self.unit_name + 's'}{(' \u00B7 ' + self.subject) if self.subject else ''}<br><span class=\'hero-metrics\'>max backlog {max_backlog} days ({busiest['name'] if busiest else 'n/a'})</span>",
             "comparacion": f"Average backlog across teams: {avg_backlog} days.",
             "insight": insight,
             "warning": warning,

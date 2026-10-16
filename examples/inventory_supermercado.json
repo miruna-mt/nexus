@@ -1,4 +1,4 @@
-﻿{
+{
   "horizonte_semanas": 12,
   "capacidad_almacen": 3000,
   "productos": [
@@ -9,7 +9,20 @@
       "coste_almacenaje": 0.04,
       "coste_rotura": 1.8,
       "stock_inicial": 120,
-      "demanda_semanal": [220, 230, 240, 250, 260, 270, 260, 250, 240, 230, 220, 210]
+      "demanda_semanal": [
+        220,
+        230,
+        240,
+        250,
+        260,
+        270,
+        260,
+        250,
+        240,
+        230,
+        220,
+        210
+      ]
     },
     {
       "id": "P002",
@@ -18,7 +31,20 @@
       "coste_almacenaje": 0.05,
       "coste_rotura": 2.0,
       "stock_inicial": 80,
-      "demanda_semanal": [160, 165, 170, 175, 180, 185, 180, 175, 170, 165, 160, 155]
+      "demanda_semanal": [
+        160,
+        165,
+        170,
+        175,
+        180,
+        185,
+        180,
+        175,
+        170,
+        165,
+        160,
+        155
+      ]
     },
     {
       "id": "P003",
@@ -27,7 +53,20 @@
       "coste_almacenaje": 0.06,
       "coste_rotura": 2.5,
       "stock_inicial": 100,
-      "demanda_semanal": [280, 290, 300, 310, 320, 330, 320, 310, 300, 290, 280, 270]
+      "demanda_semanal": [
+        280,
+        290,
+        300,
+        310,
+        320,
+        330,
+        320,
+        310,
+        300,
+        290,
+        280,
+        270
+      ]
     },
     {
       "id": "P004",
@@ -36,7 +75,20 @@
       "coste_almacenaje": 0.03,
       "coste_rotura": 1.5,
       "stock_inicial": 90,
-      "demanda_semanal": [110, 115, 120, 125, 130, 135, 130, 125, 120, 115, 110, 105]
+      "demanda_semanal": [
+        110,
+        115,
+        120,
+        125,
+        130,
+        135,
+        130,
+        125,
+        120,
+        115,
+        110,
+        105
+      ]
     },
     {
       "id": "P005",
@@ -45,7 +97,21 @@
       "coste_almacenaje": 0.04,
       "coste_rotura": 2.2,
       "stock_inicial": 70,
-      "demanda_semanal": [180, 185, 190, 195, 200, 205, 200, 195, 190, 185, 180, 175]
+      "demanda_semanal": [
+        180,
+        185,
+        190,
+        195,
+        200,
+        205,
+        200,
+        195,
+        190,
+        185,
+        180,
+        175
+      ]
     }
-  ]
+  ],
+  "subject": "Supermarket perishables"
 }
