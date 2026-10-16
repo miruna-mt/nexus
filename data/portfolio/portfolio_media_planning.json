@@ -2,7 +2,7 @@
   "unit_name": "channel",
   "narrative_domain": "media_planning",
   "subject": "Luxury watches",
-  "target_audience": "Adults 30-60 · High income",
+  "target_audience": "Men 30-60 · Urban · High income",
   "return_unit": "ROAS",
   "total_capital": 2000000,
   "risk_aversion": 3.0,

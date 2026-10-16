@@ -158,7 +158,12 @@ class PortfolioModel:
     def solve(self):
         print("Resolviendo modelo de Markowitz...")
         params = mathopt.SolveParameters(enable_output=False)
-        self.result = mathopt.solve(self.model, mathopt.SolverType.GSCIP, params=params)
+        try:
+            self.result = mathopt.solve(self.model, mathopt.SolverType.GSCIP, params=params)
+        except Exception as e:
+            print(f"No se encontro solucion: {e}")
+            self.result = None
+            return False
 
         if self.result.termination.reason == mathopt.TerminationReason.OPTIMAL:
             print("Solucion optima!")
@@ -166,6 +171,55 @@ class PortfolioModel:
         else:
             print(f"No se encontro solucion: {self.result.termination}")
             return False
+
+    def get_infeasible_narrative(self):
+        """Explain why no feasible solution was found."""
+        # Calcular minimos y maximos efectivos
+        global_min = None
+        if self.params and "min_per_channel" in self.params:
+            global_min = float(self.params["min_per_channel"]) / 100.0
+
+        max_exp = None
+        if self.params and "max_exposure" in self.params:
+            max_exp = float(self.params["max_exposure"]) / 100.0
+
+        total_min = 0.0
+        total_max = 0.0
+        conflicts = []
+        for a in self.activos:
+            lb = a.get("limite_min", 0.0)
+            if global_min is not None:
+                lb = max(lb, global_min)
+            ub = a["limite_max"]
+            if max_exp is not None:
+                ub = min(ub, max_exp)
+            if lb > ub:
+                conflicts.append(a["nombre"])
+            total_min += lb
+            total_max += ub
+
+        if conflicts:
+            insight = f"Some channels have minimum > maximum: {', '.join(conflicts)}. Reduce the minimum or raise the channel cap."
+            warning = f"\u26A0 {len(conflicts)} channel(s) with conflicting bounds."
+        elif total_min > 1.0:
+            insight = f"Sum of minimums ({round(total_min*100, 0)}%) exceeds 100%. Lower the minimum per channel or reduce the number of channels."
+            warning = f"\u26A0 Minimum allocation exceeds total budget by {round((total_min - 1.0)*100, 0)} points."
+        elif total_max < 1.0:
+            insight = f"Sum of maximums ({round(total_max*100, 0)}%) is below 100%. Raise the channel caps."
+            warning = f"\u26A0 Maximum allocation is {round((1.0 - total_max)*100, 0)} points short of 100%."
+        else:
+            insight = "The model could not find a feasible allocation with the current constraints."
+            warning = None
+
+        return {
+            "status": "infeasible",
+            "narrative": {
+                "titular": f"No feasible allocation<br><span class=\'hero-metrics\'>{len(self.activos)} channels \u00B7 check the constraints</span>",
+                "comparacion": f"Total minimum required: {round(total_min*100, 0)}%. Total maximum allowed: {round(total_max*100, 0)}%.",
+                "insight": insight,
+                "warning": warning,
+            }
+        }
 
     def get_results(self):
         valores = self.result.variable_values()
