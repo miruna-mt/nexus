@@ -1,16 +1,16 @@
 """
-Cookbook 02 - Workload Balancing
+Cookbook 02 - Team Capacity Planning
 =================================
 
 Problem type : Assignment
 Industry     : Media
-Scenario     : Marketing agency project allocation
+Scenario     : Marketing agency team capacity planning
 
 Same engine that powers every assignment scenario, now solving it as a
 workload-balancing problem: distribute projects across teams so that the
 busiest team is as unloaded as possible.
 
-Run: python cookbooks/02_workload_balancing.py
+Run: python cookbooks/02_team_capacity_planning.py
 """
 import sys
 import os
@@ -21,7 +21,7 @@ from cookbooks._common import load_json, banner, print_narrative
 
 
 def main():
-    banner("Cookbook 02 - Workload Balancing")
+    banner("Cookbook 02 - Team Capacity Planning")
 
     # 1. Load a real-world instance: 5 projects, 3 teams
     data = load_json("data/assignment/proyectos_equipos.json")

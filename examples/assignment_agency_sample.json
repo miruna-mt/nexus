@@ -1,6 +1,6 @@
 {
   "unit_name": "deliverable",
-  "subject": "Workload · Creative studio",
+  "subject": "Team capacity · Creative studio",
   "teams": [
     {
       "id": "T1",
@@ -251,5 +251,6 @@
         "coordination"
       ]
     }
-  ]
+  ],
+  "warning_threshold_days": 45
 }

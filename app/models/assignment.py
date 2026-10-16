@@ -32,6 +32,7 @@ class AssignmentModel:
         self.num_cases = len(self.cases)
         self.unit_name = data.get("unit_name", "case")
         self.subject = data.get("subject", "")
+        self.warning_threshold_days = data.get("warning_threshold_days", 15)
         print(f"Datos cargados: {self.num_cases} casos, {self.num_teams} equipos")
 
     def build(self):
@@ -99,6 +100,41 @@ class AssignmentModel:
             print(f"No se encontro solucion. Status: {status}")
             return False
 
+    def get_infeasible_narrative(self):
+        """Explain why no feasible solution was found."""
+        # Casos sin equipo compatible
+        impossible_cases = []
+        for i in range(self.num_cases):
+            req = set(self.cases[i]["required_skills"])
+            has_team = False
+            for j in range(self.num_teams):
+                if req.issubset(set(self.teams[j]["specialties"])):
+                    has_team = True
+                    break
+            if not has_team:
+                impossible_cases.append(self.cases[i]["name"])
+
+        total_hours = sum(self.cases[i]["hours"] for i in range(self.num_cases))
+
+        if impossible_cases:
+            sample = ", ".join(impossible_cases[:3])
+            extra = f" (+{len(impossible_cases) - 3} more)" if len(impossible_cases) > 3 else ""
+            insight = f"No team has the required skills for: {sample}{extra}. Add a team with those skills, or remove those cases."
+            warning = f"\u26A0 {len(impossible_cases)} case(s) with no compatible team."
+        else:
+            insight = "The model could not find a feasible assignment with the current constraints."
+            warning = None
+
+        return {
+            "status": "infeasible",
+            "narrative": {
+                "titular": f"No feasible assignment<br><span class=\'hero-metrics\'>{self.num_cases} {self.unit_name}s \u00B7 {self.num_teams} teams \u00B7 check the constraints</span>",
+                "comparacion": f"Total demand: {int(total_hours)}h across {self.num_cases} {self.unit_name}s.",
+                "insight": insight,
+                "warning": warning,
+            }
+        }
+
     def get_results(self):
         team_stats = []
         for j in range(self.num_teams):
@@ -136,8 +172,10 @@ class AssignmentModel:
         ) if busiest and lightest else "No team data."
 
         warning = None
-        if max_backlog > 5 and busiest:
-            warning = f"\u26A0 {busiest['name']} is {busiest['backlog_days']} days behind. Consider rebalancing or adding capacity."
+        if max_backlog > self.warning_threshold_days * 2 and busiest:
+            warning = f"\u26A0 {busiest['name']} has {busiest['backlog_days']} days of queued work \u2014 well above the {self.warning_threshold_days}-day threshold."
+        elif max_backlog > self.warning_threshold_days and busiest:
+            warning = f"\u26A0 {busiest['name']} has {busiest['backlog_days']} days of queued work \u2014 above the {self.warning_threshold_days}-day threshold."
 
         narrative = {
             "titular": f"{self.subject if self.subject else (str(self.num_cases) + ' ' + self.unit_name + ('s' if self.num_cases != 1 else ''))}<br><span class=\'hero-metrics\'>{self.num_cases} {self.unit_name if self.num_cases == 1 else self.unit_name + 's'} \u00B7 max backlog {max_backlog} days</span>",

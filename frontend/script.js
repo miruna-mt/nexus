@@ -17,12 +17,12 @@ const instancesConfig = {
         }
     },
     'proyectos_equipos': {
-        name: 'Assignment - Workload Balancing',
+        name: 'Assignment - Team Capacity Planning',
         problem_type: 'assignment',
         description: 'Balance project workload across specialized agency teams.',
         parametric: {
             parameters: [
-                { name: 'capacity_multiplier', label: 'Team capacity (%)', type: 'slider', min: 50, max: 200, default: 100, unit: '%' }
+                { name: 'capacity_multiplier', label: 'Team capacity (%)', type: 'slider', min: 10, max: 200, default: 100, unit: '%' }
             ]
         },
         expert: {
@@ -82,7 +82,7 @@ const instancesConfig = {
         description: 'Assign incoming investigation cases to specialized teams.',
         parametric: {
             parameters: [
-                { name: 'capacity_multiplier', label: 'Team capacity (%)', type: 'slider', min: 50, max: 200, default: 100, unit: '%' }
+                { name: 'capacity_multiplier', label: 'Team capacity (%)', type: 'slider', min: 10, max: 200, default: 100, unit: '%' }
             ]
         },
         expert: {

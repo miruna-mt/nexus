@@ -2018,5 +2018,6 @@
       ]
     }
   ],
-  "subject": "Bank investigations · Case triage"
+  "subject": "Bank investigations · Case triage",
+  "warning_threshold_days": 15
 }

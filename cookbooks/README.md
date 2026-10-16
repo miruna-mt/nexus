@@ -17,7 +17,7 @@ the same engine powers radically different scenarios with only a JSON swap.
 | # | File | Problem | Industry |
 |---|------|---------|----------|
 | 01 | `01_freight_routing_europe.py` | Routing | FMCG |
-| 02 | `02_workload_balancing.py` | Assignment | Media |
+| 02 | `02_team_capacity_planning.py` | Assignment | Media |
 | 03 | `03_inventory_optimization.py` | Inventory | FMCG |
 | 04 | `04_portfolio_optimization_markowitz.py` | Portfolio | Banking |
 

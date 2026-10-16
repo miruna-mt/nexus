@@ -196,5 +196,6 @@
       ]
     }
   ],
-  "subject": "Workload · Marketing agency"
+  "subject": "Team capacity · Marketing agency",
+  "warning_threshold_days": 45
 }
